@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Domain\Natal\L18n\En;
+
+return [
+    'aries' => 'Овен',
+    'taurus' => 'Телец',
+    'gemini' => 'Близнецы',
+    'cancer' => 'Рак',
+    'leo' => 'Лев',
+    'virgo' => 'Дева',
+    'libra' => 'Весы',
+    'scorpio' => 'Скорпион',
+    'sagittarius' => 'Стрелец',
+    'capricorn' => 'Козерог',
+    'aquarius' => 'Водолей',
+    'pisces' => 'Рыбы',
+];
