@@ -20,6 +20,18 @@
 
 `docker-compose up`
 
+После чего добавить в `hosts`:
+```
+front.loc
+laravel.loc
+flask.loc
+```
+
+Теперь доступные следующие URL:
+- http://front.loc/ для фронта
+- http://laravel.loc/ для API Laravel
+- http://flask.loc/ для API Flask
+
 ## Какая инфраструктура?
 
 - `apps` - здесь все микросервисы, пока их лишь три, и вряд ли планируется больше.

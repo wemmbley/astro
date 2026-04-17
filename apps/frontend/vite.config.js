@@ -17,6 +17,8 @@ export default defineConfig({
         },
     },
     server: {
+        host: true,
+        allowedHosts: ["localhost", "frontend"],
         open: './public/index.html',
     },
 });
