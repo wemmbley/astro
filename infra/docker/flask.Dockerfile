@@ -9,4 +9,4 @@ COPY ./apps/flask/ ./
 
 EXPOSE 5000
 
-CMD ["python", "Bootstrap/Bootstrap.py"]
+CMD ["python", "server.py"]
