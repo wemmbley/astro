@@ -1,0 +1,109 @@
+<?php
+
+namespace App\Modules\Matrix\Domain\VO;
+
+use App\Modules\Matrix\Domain\DTO\Chakras\Ajna;
+use App\Modules\Matrix\Domain\DTO\Chakras\Anahata;
+use App\Modules\Matrix\Domain\DTO\Chakras\Chackra;
+use App\Modules\Matrix\Domain\DTO\Chakras\Manipura;
+use App\Modules\Matrix\Domain\DTO\Chakras\Muladhara;
+use App\Modules\Matrix\Domain\DTO\Chakras\Sahasrara;
+use App\Modules\Matrix\Domain\DTO\Chakras\Svadhisthana;
+use App\Modules\Matrix\Domain\DTO\Chakras\Vishuddha;
+
+final readonly class ChakrasBag
+{
+    public function __construct(
+        public Muladhara $muladhara,
+        public Svadhisthana $svadhisthana,
+        public Manipura $manipura,
+        public Anahata $anahata,
+        public Vishuddha $vishuddha,
+        public Ajna $ajna,
+        public Sahasrara $sahasrara,
+    ) {}
+
+    public function all(): array
+    {
+        return [
+            'muladhara'    => $this->muladhara,
+            'svadhisthana' => $this->svadhisthana,
+            'manipura'     => $this->manipura,
+            'anahata'      => $this->anahata,
+            'vishuddha'    => $this->vishuddha,
+            'ajna'         => $this->ajna,
+            'sahasrara'    => $this->sahasrara,
+        ];
+    }
+
+    public function toArray(): array
+    {
+        return [
+            1 => $this->muladhara,
+            2 => $this->svadhisthana,
+            3 => $this->manipura,
+            4 => $this->anahata,
+            5 => $this->vishuddha,
+            6 => $this->ajna,
+            7 => $this->sahasrara,
+        ];
+    }
+
+    public function muladhara(): Muladhara
+    {
+        return $this->muladhara;
+    }
+
+    public function svadhisthana(): Svadhisthana
+    {
+        return $this->svadhisthana;
+    }
+
+    public function manipura(): Manipura
+    {
+        return $this->manipura;
+    }
+
+    public function anahata(): Anahata
+    {
+        return $this->anahata;
+    }
+
+    public function vishuddha(): Vishuddha
+    {
+        return $this->vishuddha;
+    }
+
+    public function ajna(): Ajna
+    {
+        return $this->ajna;
+    }
+
+    public function sahasrara(): Sahasrara
+    {
+        return $this->sahasrara;
+    }
+
+    public function byNumber(int $number): Chackra
+    {
+        return match ($number) {
+            1 => $this->muladhara,
+            2 => $this->svadhisthana,
+            3 => $this->manipura,
+            4 => $this->anahata,
+            5 => $this->vishuddha,
+            6 => $this->ajna,
+            7 => $this->sahasrara,
+            default => throw new \InvalidArgumentException(
+                sprintf('Chakra number must be between 1 and 7, %d given', $number)
+            ),
+        };
+    }
+
+    public function byName(string $name): Chackra
+    {
+        return $this->all()[$name] ?? throw new \InvalidArgumentException(
+            sprintf('Unknown chakra name: %s', $name)
+        );
+    }
+}
