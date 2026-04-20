@@ -76,3 +76,7 @@
 Эзотерик
 Поэт
 Танцор
+
+# Гимн
+[![Описание видео](https://img.youtube.com/vi/FZ0rlskJPDs/sddefault.jpg)](https://www.youtube.com/watch?v=FZ0rlskJPDs&list=RDU0QuEpg4V4U&index=2)
+[![Описание видео](https://img.youtube.com/vi/lzqHF2pUKBA/maxresdefault.jpg)](https://www.youtube.com/watch?v=lzqHF2pUKBA&list=RDOkR0EgSpTxg&index=42)

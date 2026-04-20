@@ -86,3 +86,6 @@
 Инжинер
 Стратег
 Генерал
+
+# Гимн
+[![Описание видео](https://img.youtube.com/vi/U0QuEpg4V4U/mqdefault.jpg)](https://www.youtube.com/watch?v=U0QuEpg4V4U&list=RDU0QuEpg4V4U&start_radio=1)

@@ -79,3 +79,7 @@
 Идеолог
 Коуч
 Вдохновитель
+
+# Гимн
+
+[![Описание видео](https://img.youtube.com/vi/spn9hW3PQnw/maxresdefault.jpg)](https://www.youtube.com/watch?v=spn9hW3PQnw&list=PLy_myAZQ5kLl9zgeUfD65KjUxqZtFyscX)

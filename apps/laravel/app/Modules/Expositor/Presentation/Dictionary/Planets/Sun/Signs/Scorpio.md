@@ -4,7 +4,7 @@
 Полярность: Инь.
 Крест: Фиксированный.
 Управитель: Плутон.
-Архетип: Палач.
+Архетип: Некромант.
 
 # Описание
 
@@ -86,3 +86,8 @@
 Патологоанатом
 Хирург
 Палач
+
+# Гимн
+
+[![Описание видео](https://img.youtube.com/vi/UeE48U2kmXY/maxresdefault.jpg)](https://youtu.be/UeE48U2kmXY?si=xuZYwADRBNlLpoDD)
+[![Описание видео](https://img.youtube.com/vi/LznXC4EM2Z0/mqdefault.jpg)](https://www.youtube.com/watch?v=LznXC4EM2Z0&list=RDLznXC4EM2Z0&start_radio=1)
