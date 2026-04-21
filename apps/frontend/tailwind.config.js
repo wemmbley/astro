@@ -3,10 +3,13 @@ export default {
     content: [
         "./index.html",
         "./public/index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
+        "./resources/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
         extend: {},
+    },
+    corePlugins: {
+        preflight: false,
     },
     plugins: [],
 };

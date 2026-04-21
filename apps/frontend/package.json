@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "Wiki for documentations.",
   "main": "src/Bootstrap/App.tsx",
+  "type": "module",
   "scripts": {
     "dev": "tsx server/serve.ts",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:client && npm run build:server && npm run build:serve",
     "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
-    "start": "NODE_ENV=production node server.js"
+    "build:server": "vite build --ssr bootstrap/Server.tsx --outDir dist/server --mode ssr",
+    "build:serve": "esbuild server/serve.ts --bundle --platform=node --format=esm --outfile=server.mjs --external:vite --external:express --external:react --external:react-dom --external:react-router",
+    "start": "cross-env NODE_ENV=production node server.mjs"
   },
   "keywords": [
     "wiki"
@@ -17,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^5.2.1",
+    "primereact": "^10.9.7",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router": "^7.13.2",
@@ -28,6 +31,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.5.0",
+    "cross-env": "^10.1.0",
     "postcss": "^8.5.10",
     "tailwindcss": "^3.4.19",
     "tsx": "^4.21.0",

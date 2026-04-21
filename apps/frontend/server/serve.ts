@@ -2,9 +2,10 @@ import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
+import { fileURLToPath, pathToFileURL } from 'url'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const isProd = process.env.NODE_ENV === 'production'
 
 async function bootstrap() {
@@ -15,7 +16,6 @@ async function bootstrap() {
     let render
 
     if (!isProd) {
-
         vite = await createViteServer({
             server: { middlewareMode: true },
             appType: 'custom'
@@ -26,33 +26,33 @@ async function bootstrap() {
         app.use(/.*/, async (req, res) => {
             try {
                 template = fs.readFileSync(
-                    path.resolve(__dirname, '../public/index.html'), 'utf-8'
+                    path.resolve(__dirname, 'index.html'), 'utf-8'
                 )
                 template = await vite.transformIndexHtml(req.originalUrl, template)
 
-                const module = await vite.ssrLoadModule('/bootstrap/Server.jsx')
+                const module = await vite.ssrLoadModule('/bootstrap/Server.tsx')
                 render = module.render
 
                 const { appHtml, headData, context } = render(req.originalUrl)
 
                 if (context.notFound) {
-                    const notFoundHtml = template
-                        .replace('%ssr%', appHtml)
-                        .replace('%metaTags%', buildMeta(headData))
-                    return res.status(404).end(notFoundHtml)
+                    return res.status(404).end(
+                        template
+                            .replace('<!--ssr-outlet-->', appHtml)
+                            .replace('<!--metaTags-outlet-->', buildMeta(headData))
+                    )
                 }
 
                 if (context.url) {
                     return res.redirect(301, context.url)
                 }
 
-                const html = template
-                    .replace('%ssr%', appHtml)
-                    .replace('%metaTags%', buildMeta(headData))
-
                 res.status(200)
                     .set({ 'Content-Type': 'text/html' })
-                    .end(html)
+                    .end(template
+                        .replace('<!--ssr-outlet-->', appHtml)
+                        .replace('<!--metaTags-outlet-->', buildMeta(headData))
+                    )
 
             } catch (e) {
                 vite.ssrFixStacktrace(e)
@@ -64,20 +64,39 @@ async function bootstrap() {
     } else {
         app.use(express.static(path.resolve(__dirname, 'dist/client')))
 
-        template = fs.readFileSync(path.resolve(__dirname, 'dist/client/index.html'), 'utf-8')
-        render = (await import('../bootstrap/Server')).render
+        template = fs.readFileSync(
+            path.resolve(__dirname, 'dist/client/index.html'), 'utf-8'  // ← было dist/client/public/index.html
+        )
+
+        try {
+            const serverEntry = pathToFileURL(
+                path.resolve(__dirname, 'dist/server/Server.js')
+            ).href
+            render = (await import(serverEntry)).render
+        } catch (e) {
+            console.error('Failed to load SSR module:', e)
+            process.exit(1)
+        }
 
         app.get(/.*/, (req, res) => {
-            const appHtml = render(req.url)
-            const html = template.replace('<!--ssr-outlet-->', appHtml)
-            res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+            const { appHtml, headData, context } = render(req.url)
+            if (context?.url) return res.redirect(301, context.url)
+            const status = context?.notFound ? 404 : 200
+            res.status(status)
+                .set({ 'Content-Type': 'text/html' })
+                .end(template
+                    .replace('<!--ssr-outlet-->', appHtml)
+                    .replace('<!--metaTags-outlet-->', buildMeta(headData))
+                )
         })
     }
 
-    app.listen(3000, () => {
-        console.log(
-            `SSR server: http://localhost:3000 [${isProd ? 'prod' : 'dev'}]`
-        )
+    const server = app.listen(3000, () => {
+        console.log(`SSR server: http://localhost:3000 [${isProd ? 'prod' : 'dev'}]`)
+    })
+
+    server.on('error', (err) => {
+        console.error('SERVER ERROR:', err)
     })
 }
 
@@ -119,4 +138,4 @@ const escapeHtml = (str: string) =>
         .replace(/</g,'&lt;')
         .replace(/>/g,'&gt;')
 
-bootstrap()
+bootstrap().catch(console.error)
