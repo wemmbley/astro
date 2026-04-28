@@ -4,7 +4,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('geo_countries', function (Blueprint $table) {
@@ -21,5 +22,10 @@ return new class extends Migration {
             $table->index(['country_code']);
             $table->index(['geo']);
         });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('geo_countries');
     }
 };

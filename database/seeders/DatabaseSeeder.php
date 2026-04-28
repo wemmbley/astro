@@ -27,6 +27,11 @@ class DatabaseSeeder extends Seeder
         $navItems = [];
         $navItems[] = [
             'name' => 'navbar_main',
+            'link' => '/',
+            'label' => 'Главная',
+        ];
+        $navItems[] = [
+            'name' => 'navbar_main',
             'link' => '/matrix',
             'label' => 'Матрица',
         ];
