@@ -40,6 +40,11 @@ class DatabaseSeeder extends Seeder
             'link' => '/natal',
             'label' => 'Натал',
         ];
+        $navItems[] = [
+            'name' => 'navbar_main',
+            'link' => '/feed',
+            'label' => 'Лента',
+        ];
 
         Navbar::insert($navItems);
     }

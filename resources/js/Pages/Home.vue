@@ -1,5 +1,6 @@
 <script setup>
 import Navbar from '../Components/Navbar/Navbar.vue';
+import MainLayout from "@/Layouts/MainLayout.vue";
 
 const props = defineProps({
     navbar: Array
@@ -7,5 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Navbar :navbar="navbar" />
+    <MainLayout :navbar="navbar">
+
+    </MainLayout>
 </template>

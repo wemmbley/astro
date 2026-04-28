@@ -50,7 +50,7 @@ function logout() {
             >
 
                 <Link
-                    href="/"
+                    href="/profile"
                     class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
                     @click="close"
                 >

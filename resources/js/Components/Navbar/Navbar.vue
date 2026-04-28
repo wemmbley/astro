@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-    <header class="bg-surface-700 border-b border-surface-500 text-gray-300">
+    <header class="bg-surface-700 border-b border-surface-600 text-cream">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center">
             <NavbarLogo />
             <NavbarItems :navbar="navbar" />
