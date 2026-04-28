@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('country_code', 10)->nullable();
             $table->timestamps();
             $table->index(['country_code']);
-            $table->index(['locale']);
+            $table->index(['geo']);
         });
     }
 };
