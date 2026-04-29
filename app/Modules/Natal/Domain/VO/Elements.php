@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Modules\Natal\Domain\VO;
+namespace App\Modules\Natal\Domain\VO;
 
 final readonly class Elements
 {

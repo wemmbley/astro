@@ -15,11 +15,6 @@ ZODIAC = [
     "Sagittarius", "Capricorn", "Aquarius", "Pisces",
 ]
 
-EXTRA_POINTS = [
-    "Ascendant",
-    "Midheaven",
-]
-
 PLANETS = [
     "Sun",
     "Moon",

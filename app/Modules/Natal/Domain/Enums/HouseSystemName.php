@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Modules\Natal\Domain\Enums;
+namespace App\Modules\Natal\Domain\Enums;
 
 enum HouseSystemName: string
 {

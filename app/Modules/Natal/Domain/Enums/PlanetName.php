@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Modules\Natal\Domain\Enums;
+namespace App\Modules\Natal\Domain\Enums;
 
 enum PlanetName: string
 {
@@ -18,4 +18,6 @@ enum PlanetName: string
     case Lilith = 'lilith';
     case Chiron = 'chiron';
     case Fortuna = 'fortuna';
+    case Midheaven = 'midheaven';
+    case Ascendant = 'ascendant';
 }

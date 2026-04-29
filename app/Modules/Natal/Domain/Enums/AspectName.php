@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Modules\Natal\Domain\Enums;
+namespace App\Modules\Natal\Domain\Enums;
 
 enum AspectName: string
 {
@@ -10,6 +10,11 @@ enum AspectName: string
     case Quintile = 'quintile';
     case Quincunx = 'quincunx';
     case Opposition = 'opposition';
+    case Parallel = 'parallel';
     case Conjunction = 'conjunction';
     case Biquintile = 'biquintile';
+    case Semisquare = 'semisquare';
+    case Contraparallel = 'contraparallel';
+    case Semisextile = 'semisextile';
+    case Sesquiquadrate = 'sesquiquadrate';
 }

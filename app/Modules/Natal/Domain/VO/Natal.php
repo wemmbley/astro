@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Modules\Natal\Domain\VO;
+namespace App\Modules\Natal\Domain\VO;
 
-use app\Modules\Natal\Domain\Enums\HouseSystemName;
-use app\Modules\Natal\Domain\Enums\SignName;
+use App\Modules\Natal\Domain\Enums\HouseSystemName;
+use App\Modules\Natal\Domain\Enums\SignName;
 
 final readonly class Natal
 {

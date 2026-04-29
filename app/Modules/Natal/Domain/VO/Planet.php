@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Modules\Natal\Domain\VO;
+namespace App\Modules\Natal\Domain\VO;
 
-use app\Modules\Natal\Domain\Enums\HouseName;
-use app\Modules\Natal\Domain\Enums\PlanetName;
-use app\Modules\Natal\Domain\Enums\SignName;
+use App\Modules\Natal\Domain\Enums\HouseName;
+use App\Modules\Natal\Domain\Enums\PlanetName;
+use App\Modules\Natal\Domain\Enums\SignName;
 
 final readonly class Planet
 {
@@ -12,6 +12,7 @@ final readonly class Planet
         public PlanetName $name,
         public SignName $sign,
         public HouseName $house,
+        public AspectCollection $aspects,
         public float $longitude,
         public float $degree,
         public bool $retrograde,
@@ -28,6 +29,7 @@ final readonly class Planet
             name:       PlanetName::from($data['name']),
             sign:       SignName::from($data['sign']),
             house:      HouseName::from($data['house']),
+            aspects:    $data['aspects'],
             longitude:  (float) $data['longitude'],
             degree:     (float) $data['degree'],
             retrograde: (bool) ($data['retrograde'] ?? false),

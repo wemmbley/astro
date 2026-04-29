@@ -1,20 +1,19 @@
 <?php
 
-namespace app\Modules\Natal\Domain\VO;
+namespace App\Modules\Natal\Domain\VO;
 
-use app\Modules\Natal\Domain\Enums\HouseName;
-use app\Modules\Natal\Domain\Enums\SignName;
+use App\Modules\Natal\Domain\Enums\HouseName;
+use App\Modules\Natal\Domain\Enums\SignName;
 
 final readonly class House
 {
     public function __construct(
-        public HouseName $house,
-        public SignName  $sign,
-        public float     $degree,
-        public float     $longitude,
-    )
-    {
-    }
+        public HouseName        $house,
+        public SignName         $sign,
+        public AspectCollection $aspects,
+        public float            $degree,
+        public float            $longitude,
+    ) {}
 
     public function getName(): HouseName
     {
@@ -26,6 +25,7 @@ final readonly class House
         return new self(
             house:     HouseName::from($data['house']),
             sign:      SignName::from($data['sign']),
+            aspects:   $data['aspects'],
             degree:    (float) $data['degree'],
             longitude: (float) $data['longitude'],
         );

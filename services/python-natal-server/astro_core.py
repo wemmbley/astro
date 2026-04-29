@@ -4,7 +4,7 @@ import math
 
 from config import (
     EPHE_PATH, UTC_OFFSET, PARALLEL_ORB,
-    ZODIAC, EXTRA_POINTS,
+    ZODIAC,
     PLANETS, ASPECTS,
 )
 
@@ -57,6 +57,22 @@ _ASPECT_DEGREES: dict[str, float] = {
 
 _LUMINARIES: frozenset[str] = frozenset({"Sun", "Moon"})
 
+# Элементы знаков зодиака
+_SIGN_ELEMENTS: dict[str, str] = {
+    "Aries":       "Fire",
+    "Taurus":      "Earth",
+    "Gemini":      "Air",
+    "Cancer":      "Water",
+    "Leo":         "Fire",
+    "Virgo":       "Earth",
+    "Libra":       "Air",
+    "Scorpio":     "Water",
+    "Sagittarius": "Fire",
+    "Capricorn":   "Earth",
+    "Aquarius":    "Air",
+    "Pisces":      "Water",
+}
+
 # Active aspects ordered as defined in config
 _active_aspects: dict[str, float] = {
     name: _ASPECT_DEGREES[name]
@@ -65,7 +81,7 @@ _active_aspects: dict[str, float] = {
 }
 
 # Validation sets (for server.py)
-VALID_PLANETS = set(PLANETS) | set(EXTRA_POINTS)
+VALID_PLANETS = set(PLANETS)
 VALID_ASPECTS  = set(ASPECTS)
 
 
@@ -151,6 +167,39 @@ def _calc_parallels(decl1, decl2, name1, name2, decl_speed) -> list:
     return [(asp, round(diff, 2), "applying" if applying else "separating")]
 
 
+def _calc_house_aspects(house_lon: float, house_num: int,
+                        lons: dict, speeds: dict,
+                        override: dict | None = None) -> list:
+    """Аспекты куспида дома к планетам (орбы фиксированные — как у минорных)."""
+    table = override if override is not None else _active_aspects
+    results = []
+    house_name = f"House{house_num}"
+    for planet_name, planet_lon in lons.items():
+        for asp_name, asp_angle in table.items():
+            orb = _get_orb(asp_name, house_name, planet_name)
+            delta = min(
+                abs(house_lon - planet_lon) % 360,
+                360 - abs(house_lon - planet_lon) % 360,
+            )
+            if abs(delta - asp_angle) <= orb:
+                diff = (planet_lon - house_lon) % 360
+                if diff > 180:
+                    diff -= 360
+                orb_exact = abs(abs(diff) - asp_angle)
+                applying = _is_applying(
+                    house_lon, planet_lon,
+                    0, speeds.get(planet_name, 0),
+                    asp_angle,
+                )
+                results.append({
+                    "type":     asp_name,
+                    "target":   planet_name,
+                    "orb":      round(orb_exact, 2),
+                    "applying": "applying" if applying else "separating",
+                })
+    return results
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def calculate_chart(
@@ -170,16 +219,15 @@ def calculate_chart(
 
     cusps, ascmc = swe.houses(jd, lat, lon)
     house_cusps = cusps[:12]
-    asc, mc = ascmc[0], ascmc[1]
 
     # Which planets to compute
     want_planets = set(requested_planets) if requested_planets else set(PLANETS)
-    want_extra   = set(requested_planets) if requested_planets else set(EXTRA_POINTS)
 
     lons:       dict[str, float] = {}
     speeds:     dict[str, float] = {}
     decls:      dict[str, float] = {}
     decl_spds:  dict[str, float] = {}
+    retrogrades: dict[str, bool] = {}
 
     for name in PLANETS:
         if name not in want_planets or name not in _PLANET_CODES:
@@ -187,8 +235,10 @@ def calculate_chart(
         try:
             r     = swe.calc_ut(jd,      _PLANET_CODES[name], swe.FLG_SWIEPH)
             r_nxt = swe.calc_ut(jd_next, _PLANET_CODES[name], swe.FLG_SWIEPH)
-            lons[name]  = r[0][0]
-            decls[name] = r[0][1]
+            lons[name]        = r[0][0]
+            decls[name]       = r[0][1]
+            # speed[3] — скорость по долготе; отрицательная → ретроград
+            retrogrades[name] = r[0][3] < 0
             spd = r_nxt[0][0] - r[0][0]
             if spd >  180: spd -= 360
             if spd < -180: spd += 360
@@ -196,14 +246,6 @@ def calculate_chart(
             decl_spds[name] = r_nxt[0][1] - r[0][1]
         except Exception:
             pass
-
-    if "Ascendant" in want_extra:
-        lons["Ascendant"]  = asc
-        decls["Ascendant"] = _ecliptic_to_equatorial(asc, year)
-
-    if "Midheaven" in want_extra:
-        lons["Midheaven"]  = mc
-        decls["Midheaven"] = _ecliptic_to_equatorial(mc, year)
 
     # Aspect table override from request
     asp_override = None
@@ -214,13 +256,10 @@ def calculate_chart(
             if name in _ASPECT_DEGREES
         }
 
-    # Output order: EXTRA_POINTS first (as listed), then PLANETS (as listed)
-    output_order = [p for p in EXTRA_POINTS if p in lons] + \
-                   [p for p in PLANETS      if p in lons]
+    # ── Planets ───────────────────────────────────────────────────────────────
+    planets_result: dict = {}
 
-    result: dict = {}
-
-    for planet_name in output_order:
+    for planet_name in [p for p in PLANETS if p in lons]:
         deg = lons[planet_name]
         sign, deg_in_sign = _get_sign(deg)
 
@@ -230,8 +269,9 @@ def calculate_chart(
                 "degree": round(deg_in_sign, 2),
                 "formatted": _format_angle(deg_in_sign),
             },
-            "house": _get_house(deg, house_cusps),
-            "aspects": [],
+            "house":      _get_house(deg, house_cusps),
+            "retrograde": retrogrades.get(planet_name, False),
+            "aspects":    [],
         }
 
         for other_name, other_deg in lons.items():
@@ -245,9 +285,9 @@ def calculate_chart(
                 asp_override,
             ):
                 planet_data["aspects"].append({
-                    "type":    asp_name,
-                    "target":  other_name,
-                    "orb":     orb_exact,
+                    "type":     asp_name,
+                    "target":   other_name,
+                    "orb":      orb_exact,
                     "applying": direction,
                 })
 
@@ -257,12 +297,55 @@ def calculate_chart(
                     planet_name, other_name, decl_spds,
                 ):
                     planet_data["aspects"].append({
-                        "type":    asp_name,
-                        "target":  other_name,
-                        "orb":     orb_exact,
+                        "type":     asp_name,
+                        "target":   other_name,
+                        "orb":      orb_exact,
                         "applying": direction,
                     })
 
-        result[planet_name] = planet_data
+        planets_result[planet_name] = planet_data
 
-    return result
+    # ── Houses ────────────────────────────────────────────────────────────────
+    houses_result: dict = {}
+
+    for i, cusp_lon in enumerate(house_cusps):
+        house_num  = i + 1
+        sign, deg_in_sign = _get_sign(cusp_lon)
+        house_aspects = _calc_house_aspects(cusp_lon, house_num, lons, speeds, asp_override)
+
+        houses_result[f"House{house_num}"] = {
+            "cusp_longitude": round(cusp_lon, 4),
+            "sign": {
+                "name":      sign,
+                "degree":    round(deg_in_sign, 2),
+                "formatted": _format_angle(deg_in_sign),
+            },
+            "aspects": house_aspects,
+        }
+
+    # ── Alchemy ───────────────────────────────────────────────────────────────
+    element_counts: dict[str, int] = {"Fire": 0, "Earth": 0, "Air": 0, "Water": 0}
+    sign_counts:    dict[str, int] = {}
+
+    for planet_name in lons:
+        deg  = lons[planet_name]
+        sign = _get_sign(deg)[0]
+        element = _SIGN_ELEMENTS[sign]
+        element_counts[element] = element_counts.get(element, 0) + 1
+        sign_counts[sign]       = sign_counts.get(sign, 0) + 1
+
+    dominant_element = max(element_counts, key=lambda e: element_counts[e])
+    dominant_sign    = max(sign_counts,    key=lambda s: sign_counts[s])
+
+    alchemy_result = {
+        "elements":         element_counts,
+        "dominant_element": dominant_element,
+        "signs":            sign_counts,
+        "dominant_sign":    dominant_sign,
+    }
+
+    return {
+        "planets": planets_result,
+        "houses":  houses_result,
+        "alchemy": alchemy_result,
+    }
