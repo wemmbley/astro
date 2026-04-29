@@ -29,8 +29,6 @@ class NatalController
 
         $natal = $pythonClient->getNatalChart($birthday);
 
-        dd($natal);
-
         return Inertia::render('NatalSingle', [
             'navbar' => $navbar->execute(GetNavbar::MAIN_NAVBAR),
         ]);

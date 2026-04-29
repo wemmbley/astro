@@ -29,7 +29,7 @@ PLANETS = [
     "Chiron",
     "Lilith",
     # "TrueLilith",
-    # "MeanNode",
+    "MeanNode",
     # "TrueNode",
     # "Pholus",
     # "Ceres",
@@ -50,10 +50,10 @@ ASPECTS = [
     "Square",            # 90°
     "Trine",             # 120°
     "Sextile",           # 60°
-    "Semisextile",       # 30°
-    "Quincunx",          # 150°
-    "Semisquare",        # 45°
-    "Sesquiquadrate",    # 135°
-    "Quintile",          # 72°
-    "Biquintile",        # 144°
+    #"Semisextile",       # 30°
+    #"Quincunx",          # 150°
+    #"Semisquare",        # 45°
+    #"Sesquiquadrate",    # 135°
+    #"Quintile",          # 72°
+    #"Biquintile",        # 144°
 ]

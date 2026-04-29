@@ -233,11 +233,10 @@ def calculate_chart(
         if name not in want_planets or name not in _PLANET_CODES:
             continue
         try:
-            r     = swe.calc_ut(jd,      _PLANET_CODES[name], swe.FLG_SWIEPH)
-            r_nxt = swe.calc_ut(jd_next, _PLANET_CODES[name], swe.FLG_SWIEPH)
+            r     = swe.calc_ut(jd,      _PLANET_CODES[name], swe.FLG_SWIEPH | swe.FLG_SPEED)
+            r_nxt = swe.calc_ut(jd_next, _PLANET_CODES[name], swe.FLG_SWIEPH | swe.FLG_SPEED)
             lons[name]        = r[0][0]
             decls[name]       = r[0][1]
-            # speed[3] — скорость по долготе; отрицательная → ретроград
             retrogrades[name] = r[0][3] < 0
             spd = r_nxt[0][0] - r[0][0]
             if spd >  180: spd -= 360
