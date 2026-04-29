@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Application\UseCases\Landing\GetNavbar;
+use App\Modules\Natal\Application\UseCases\GenerateNatal;
 use App\Modules\Natal\Domain\VO\Birthday;
 use App\Modules\Natal\Infrastructure\NatalApiClient\PythonClient;
 use Inertia\Inertia;
@@ -18,7 +19,7 @@ class NatalController
         ]);
     }
 
-    public function single(PythonClient $pythonClient, GetNavbar $navbar)
+    public function single(GenerateNatal $natal, GetNavbar $navbar)
     {
         $birthday = new Birthday()->fromRoute(
             lat: (float) request('lat'),
@@ -27,7 +28,7 @@ class NatalController
             time: (string) request('time'),
         );
 
-        $natal = $pythonClient->getNatalChart($birthday);
+        $natal = $natal->execute($birthday);
 
         return Inertia::render('NatalSingle', [
             'navbar' => $navbar->execute(GetNavbar::MAIN_NAVBAR),
