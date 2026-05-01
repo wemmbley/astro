@@ -4,8 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Interpretations\InterpretRepository;
 use App\Models\Navbar;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,8 +16,20 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        $this->seedAdmin();
         $this->seedNavbars();
         $this->seedInterpretations();
+    }
+
+    private function seedAdmin(): void
+    {
+        User::create([
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => Hash::make(Str::random()),
+            'remember_token' => Str::random(10),
+        ]);
     }
 
     private function seedInterpretations(): void
@@ -27,8 +42,7 @@ class DatabaseSeeder extends Seeder
 
         InterpretRepository::create([
             'name' => 'default',
-            'url' => '',
-            'version' => '',
+            'version' => '1.0.0',
             'last_cached_date' => now(),
         ]);
     }

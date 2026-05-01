@@ -23,11 +23,18 @@ class InterpretRepository extends Authenticatable
 
     #[Rules(['required', 'string'])]
     #[Fillable]
-    public string $url;
+    public string $key;
 
     #[Rules(['required', 'string'])]
     #[Fillable]
     public string $version;
+
+    #[Rules(['required', 'integer'])]
+    #[Fillable]
+    public int $stars;
+
+    #[Fillable]
+    public int $author_id;
 
     #[Fillable]
     public ?string $last_cached_date;
