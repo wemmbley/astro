@@ -18,6 +18,4 @@ enum PlanetName: string
     case Lilith = 'lilith';
     case Chiron = 'chiron';
     case Fortuna = 'fortuna';
-    case Midheaven = 'midheaven';
-    case Ascendant = 'ascendant';
 }

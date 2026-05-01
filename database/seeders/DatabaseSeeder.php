@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Interpretations\InterpretRepository;
 use App\Models\Navbar;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +14,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->seedNavbars();
+        $this->seedInterpretations();
+    }
+
+    private function seedInterpretations(): void
+    {
+        $isRepoExists = InterpretRepository::where('name', 'default')->exists();
+
+        if($isRepoExists) {
+            return;
+        }
+
+        InterpretRepository::create([
+            'name' => 'default',
+            'url' => '',
+            'version' => '',
+            'last_cached_date' => now(),
+        ]);
     }
 
     private function seedNavbars(): void

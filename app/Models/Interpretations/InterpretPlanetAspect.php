@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Interpretations;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +9,7 @@ use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Rules;
 use WendellAdriel\Lift\Lift;
 
-class Navbar extends Authenticatable
+class InterpretPlanetAspect extends Authenticatable
 {
     use HasFactory, Lift;
 
@@ -18,16 +18,25 @@ class Navbar extends Authenticatable
 
     #[Rules(['required', 'string'])]
     #[Fillable]
-    public string $name;
+    public string $repository_key;
 
     #[Rules(['required', 'string'])]
     #[Fillable]
-    public string $link;
+    public string $planet;
 
     #[Rules(['required', 'string'])]
     #[Fillable]
-    public string $label;
+    public string $aspect;
 
+    #[Rules(['required', 'string'])]
     #[Fillable]
-    public ?string $icon;
+    public string $to_planet;
+
+    #[Rules(['required', 'string'])]
+    #[Fillable]
+    public string $content;
+
+    #[Rules(['required', 'string'])]
+    #[Fillable]
+    public string $lang;
 }
