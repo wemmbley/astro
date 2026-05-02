@@ -2,6 +2,10 @@
 import MainLayout from "@/Layouts/MainLayout.vue";
 import DefaultBanner from "@/../img/Profile/default_banner.jpg";
 import DefaultAvatarMan from "@/../img/Profile/no_avatar_man_xs.jpg";
+import {Mail, ShieldBan} from 'lucide-vue-next'
+import Modal from "@/Utils/Modal.vue";
+import { ref } from 'vue'
+const showBlockModal = ref(false)
 
 const props = defineProps({
     navbar: Array
@@ -9,6 +13,12 @@ const props = defineProps({
 </script>
 
 <template>
+    <Modal title="Блокировка" v-model:show="showBlockModal">
+        <p>Вы действительно хотите заблокировать данного пользователя? </p>
+        <p>Вы всегда сможете отменить данное действие. </p>
+        <p class="pt-2">Так же вы можете отправить на данный аккаунт <a href="#" class="text-accent hover:underline">жалобу</a>,</p>
+        <p>если считаете его контент общественно-неприемлимым.</p>
+    </Modal>
     <MainLayout :navbar="navbar">
         <div class="w-full flex flex-col gap-4">
             <div class="relative w-full">
@@ -33,24 +43,16 @@ const props = defineProps({
                         </p>
                     </div>
                 </div>
-            </div>
-
-            <div class="text-cream px-1">
-                <details class="group rounded-xl border border-surface-600 bg-surface-700/40 p-4">
-                    <summary class="cursor-pointer font-medium select-none hover:text-white transition">
-                        Показать подробную информацию
-                    </summary>
-                    <div class="mt-4 space-y-2 text-sm text-gray-300">
-                        <p>
-                            Персональная натальная карта:
-                            <a href="#" class="text-blue-300 hover:text-blue-200">ссылка</a>
-                        </p>
-                        <p>
-                            Персональная матрица судьбы:
-                            <a href="#" class="text-blue-300 hover:text-blue-200">ссылка</a>
-                        </p>
+                <div class="absolute bottom-5 right-6 flex items-end
+                gap-2 z-10 text-surface-200 bg-surface-700">
+                    <div class="border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer
+                hover:text-accent">
+                        <Mail size="20" />
                     </div>
-                </details>
+                    <div @click="showBlockModal = !showBlockModal" class="border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer hover:text-accent">
+                        <ShieldBan size="20" />
+                    </div>
+                </div>
             </div>
         </div>
     </MainLayout>
