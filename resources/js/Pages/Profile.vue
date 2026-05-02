@@ -2,9 +2,13 @@
 import MainLayout from "@/Layouts/MainLayout.vue";
 import DefaultBanner from "@/../img/Profile/default_banner.jpg";
 import DefaultAvatarMan from "@/../img/Profile/no_avatar_man_xs.jpg";
-import {Mail, ShieldBan} from 'lucide-vue-next'
+import { Mail, ShieldBan, UserRoundPlus, ZodiacCapricorn } from 'lucide-vue-next'
 import Modal from "@/Utils/Modal.vue";
 import { ref } from 'vue'
+import Tooltip from "@/Utils/Tooltip.vue";
+import Posts from "@/Components/Profile/Posts.vue";
+import Friends from "@/Components/Profile/Friends.vue";
+import Subscriptions from "@/Components/Profile/Subscriptions.vue";
 const showBlockModal = ref(false)
 
 const props = defineProps({
@@ -36,23 +40,41 @@ const props = defineProps({
                     />
                     <div class="pb-1">
                         <h2 class="text-white text-2xl font-semibold tracking-wide">
-                            Holiev Rustam
+                            <div class="flex">
+                                <ZodiacCapricorn size="30" />
+                                <span class="ms-1">Holiev Rustam</span>
+                            </div>
                         </h2>
                         <p class="text-gray-200 text-sm italic">
                             Потомственный маг и экстрасенс
                         </p>
                     </div>
                 </div>
-                <div class="absolute bottom-5 right-6 flex items-end
-                gap-2 z-10 text-surface-200 bg-surface-700">
-                    <div class="border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer
-                hover:text-accent">
+                <div class="absolute bottom-5 right-6 flex items-end gap-2 z-10 text-surface-200 bg-surface-700">
+                    <div class="relative group border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer hover:text-accent">
                         <Mail size="20" />
+                        <Tooltip>Написать сообщение</Tooltip>
                     </div>
-                    <div @click="showBlockModal = !showBlockModal" class="border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer hover:text-accent">
+
+                    <div @click="showBlockModal = !showBlockModal"
+                         class="relative group border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer hover:text-accent">
                         <ShieldBan size="20" />
+                        <Tooltip>Пожаловаться или заблокировать</Tooltip>
+                    </div>
+
+                    <div class="relative group border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer hover:text-accent">
+                        <UserRoundPlus size="20" />
+                        <Tooltip>Добавить человека в друзья</Tooltip>
                     </div>
                 </div>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <Friends />
+                    <Subscriptions />
+                </div>
+                <Posts />
             </div>
         </div>
     </MainLayout>

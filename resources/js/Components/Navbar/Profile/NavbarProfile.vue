@@ -22,8 +22,6 @@ function logout() {
 
 <template>
     <div class="relative">
-
-        <!-- Button -->
         <button
             @click="toggle"
             class="p-2 rounded-lg transition-all
@@ -33,7 +31,6 @@ function logout() {
             <User size="20" />
         </button>
 
-        <!-- Dropdown -->
         <transition
             enter-active-class="transition ease-out duration-150"
             enter-from-class="opacity-0 translate-y-1"
@@ -44,11 +41,10 @@ function logout() {
         >
             <div
                 v-if="isOpen"
-                class="absolute right-0 mt-2 w-48
+                class="absolute right-0 mt-2 w-48 z-10
                        bg-surface-600 border border-surface-500
                        rounded-lg shadow-lg overflow-hidden"
             >
-
                 <Link
                     href="/profile"
                     class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
@@ -65,9 +61,7 @@ function logout() {
                     <LogOut size="16" />
                     Выйти
                 </button>
-
             </div>
         </transition>
-
     </div>
 </template>
