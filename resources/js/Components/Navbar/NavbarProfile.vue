@@ -2,8 +2,10 @@
 import { ref } from 'vue'
 import { Link, useForm } from '@inertiajs/vue3'
 import { User, LogOut } from 'lucide-vue-next'
+import {onClickOutside} from "@vueuse/core";
 
 const isOpen = ref(false)
+const containerRef = ref(null)
 
 function toggle() {
     isOpen.value = !isOpen.value
@@ -18,10 +20,12 @@ const form = useForm()
 function logout() {
 
 }
+
+onClickOutside(containerRef, () => (isOpen.value = false))
 </script>
 
 <template>
-    <div class="relative">
+    <div class="relative" ref="containerRef">
         <button
             @click="toggle"
             class="p-2 rounded-lg transition-all
@@ -41,7 +45,7 @@ function logout() {
         >
             <div
                 v-if="isOpen"
-                class="absolute right-0 mt-2 w-48 z-10
+                class="absolute right-0 mt-2 w-48 z-20
                        bg-surface-600 border border-surface-500
                        rounded-lg shadow-lg overflow-hidden"
             >

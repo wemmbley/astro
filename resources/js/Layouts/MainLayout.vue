@@ -1,9 +1,10 @@
 <script setup>
 import Navbar from "@/Components/Navbar/Navbar.vue";
 
-const props = defineProps({
+const { hasContainer = true } = defineProps({
     navbar: Array,
     background: String,
+    hasContainer: Boolean,
 });
 </script>
 
@@ -22,7 +23,12 @@ const props = defineProps({
 
         <Navbar :navbar="navbar" />
 
-        <div class="max-w-4xl mx-auto min-h-screen flex justify-center pt-10">
+        <div v-if="hasContainer">
+            <div class="max-w-4xl mx-auto min-h-screen flex justify-center pt-10">
+                <slot />
+            </div>
+        </div>
+        <div v-else>
             <slot />
         </div>
     </div>

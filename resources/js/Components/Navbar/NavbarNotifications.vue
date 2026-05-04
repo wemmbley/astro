@@ -83,7 +83,7 @@ onClickOutside(containerRef, () => (open.value = false))
                     <button
                         v-if="unreadCount > 0"
                         @click="markAllRead"
-                        class="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                        class="cursor-pointer text-xs text-blue-400 hover:text-blue-300 transition-colors"
                     >
                         Прочитать все
                     </button>
