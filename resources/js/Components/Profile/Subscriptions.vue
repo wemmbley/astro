@@ -14,7 +14,7 @@ const subscriptions = ref([
 </script>
 
 <template>
-    <div class="bg-surface-card border border-surface-border/60 rounded-xl p-4 shadow-sm">
+    <div class="bg-surface-700 border border-surface-border/60 rounded-xl p-4 shadow-sm">
         <div class="flex items-center justify-between mb-4 px-1">
             <span class="text-[11px] font-bold uppercase tracking-[0.1em] text-cream/40">Подписки</span>
             <span class="text-[10px] font-medium text-accent bg-accent/10 px-2 py-0.5 rounded-md ring-1 ring-accent/20">

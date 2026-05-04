@@ -2,13 +2,15 @@
 import MainLayout from "@/Layouts/MainLayout.vue";
 import DefaultBanner from "@/../img/Profile/default_banner.jpg";
 import DefaultAvatarMan from "@/../img/Profile/no_avatar_man_xs.jpg";
-import { Mail, ShieldBan, UserRoundPlus, ZodiacCapricorn } from 'lucide-vue-next'
+import { Mail, ShieldBan, UserRoundPlus } from 'lucide-vue-next'
 import Modal from "@/Utils/Modal.vue";
 import { ref } from 'vue'
 import Tooltip from "@/Utils/Tooltip.vue";
 import Posts from "@/Components/Profile/Posts.vue";
 import Friends from "@/Components/Profile/Friends.vue";
 import Subscriptions from "@/Components/Profile/Subscriptions.vue";
+import MiniProfileAstro from "@/Components/Profile/MiniProfileAstro.vue";
+
 const showBlockModal = ref(false)
 
 const props = defineProps({
@@ -69,11 +71,14 @@ const props = defineProps({
                 </div>
             </div>
 
+            <MiniProfileAstro />
+
             <div class="flex flex-col gap-6">
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-4 mt-2">
                     <Friends />
                     <Subscriptions />
                 </div>
+                <h2 class="text-white text-xl mt-2">Посты</h2>
                 <Posts />
             </div>
         </div>

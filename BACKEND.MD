@@ -10,6 +10,12 @@ composer setup
 composer dev
 ```
 
+В дополнение Вам понадобится Reverb, чтобы фронт корректно загрузился.
+
+```bash
+php artisan reverb:start
+```
+
 ## Модули.
 
 | Имя модуля | Предназначение                                       |

@@ -23,3 +23,7 @@
     --color-dagner: #f92b35;
     --color-cream: #dedacd;
 }
+
+body {
+    color: white;
+}
