@@ -8,19 +8,31 @@
 
 ## Бэкенд
 
+### Стек
+- Redis
+- Laravel
+- Reverb
+
+### Подробнее
 Смотри `BACKEND.MD`
 
 ## Фронтенд
 
+### Стек
+- Vue
+- Tailwind
+
+### Подробнее
 Смотри `FRONTEND.MD`
 
 ## Как запустить целостно?
 
-Нам нужен сам сервер, затем реверб, затем вайт.
+Нам нужен сам сервер, затем редис, затем реверб, затем воркер, затем вит.
 
 ```bash
 php artisan serve
 php artisan reverb:start
+php artisan queue:work
 npm run dev
 ```
 

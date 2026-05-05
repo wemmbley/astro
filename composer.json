@@ -10,11 +10,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "geoip2/geoip2": "^3.3",
         "inertiajs/inertia-laravel": "^3.0",
         "laravel/framework": "^13.0",
         "laravel/reverb": "^1.0",
         "laravel/tinker": "^3.0",
         "league/commonmark": "^2.8",
+        "predis/predis": "^3.4",
         "wendelladriel/laravel-lift": "^0.18.0"
     },
     "require-dev": {

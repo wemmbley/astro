@@ -6,5 +6,6 @@ use app\Providers\AppServiceProvider;
 return [
     AppServiceProvider::class,
     AIServiceProvider::class,
-    \App\Modules\Matrix\Infrastructure\Providers\MatrixServiceProvider::class
+    \App\Modules\Matrix\Infrastructure\Providers\MatrixServiceProvider::class,
+    \App\Modules\Analytics\Infrastructure\Providers\AnalyticsServiceProvider::class,
 ];

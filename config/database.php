@@ -114,6 +114,14 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'redis' => [
+            'client' => 'predis',
+            'default' => [
+                'host'     => env('REDIS_HOST', '127.0.0.1'),
+                'port'     => env('REDIS_PORT', 6379),
+                'database' => 0,
+            ],
+        ],
     ],
 
     /*

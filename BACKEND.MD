@@ -10,11 +10,22 @@ composer setup
 composer dev
 ```
 
-В дополнение Вам понадобится Reverb, чтобы фронт корректно загрузился.
+В дополнение Вам понадобится Reverb, чтобы фронт корректно загрузился (notifications, feed, etc.).
 
 ```bash
 php artisan reverb:start
 ```
+
+А так же воркер для джобов (analytics, etc)
+
+```bash
+php artisan queue:work
+```
+
+В общей сложности, Вам понадобится 3 вещи:
+- Сервер
+- Реверб
+- Очереди
 
 ## Модули.
 
