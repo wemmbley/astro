@@ -7,19 +7,17 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('interpret_planet_sign', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('repository_key');
-            $table->tinyText('planet');
-            $table->tinyText('sign');
+            $table->unsignedBigInteger('user_id');
+            $table->string('title');
             $table->longText('content');
-            $table->tinyText('lang');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('interpret_planet_sign');
+        Schema::dropIfExists('posts');
     }
 };
