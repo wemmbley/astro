@@ -78,7 +78,10 @@ const props = defineProps({
                     <Friends />
                     <Subscriptions />
                 </div>
-                <h2 class="text-white text-xl mt-2">Посты</h2>
+                <h2 class="text-surface-200 uppercase text-md font-bold mt-4">
+                    Посты
+                    <span class="ml-1 border border-surface-600 text-accent rounded-md font-normal pl-1 pr-1">22</span>
+                </h2>
                 <Posts />
             </div>
         </div>

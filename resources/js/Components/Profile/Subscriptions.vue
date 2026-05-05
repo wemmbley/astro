@@ -12,24 +12,23 @@ const subscriptions = ref([
     { id: 8, name: 'Роман Белов',     avatar: 'https://randomuser.me/api/portraits/men/63.jpg' },
 ])
 </script>
-
 <template>
-    <div class="bg-surface-700 border border-surface-border/60 rounded-xl p-4 shadow-sm">
+    <div class="bg-surface-700 border border-surface-600 rounded-xl p-4 shadow-sm">
         <div class="flex items-center justify-between mb-4 px-1">
-            <span class="text-[11px] font-bold uppercase tracking-[0.1em] text-cream/40">Подписки</span>
-            <span class="text-[10px] font-medium text-accent bg-accent/10 px-2 py-0.5 rounded-md ring-1 ring-accent/20">
+            <span class="text-xs font-bold uppercase tracking-[0.1em] text-cream/40">Подписки</span>
+            <span class="text-xs font-medium text-accent bg-accent/10 px-2 py-0.5 rounded-md ring-1 ring-accent/20">
                 {{ subscriptions.length }}
             </span>
         </div>
 
-        <div class="grid grid-cols-3 gap-2">
+        <div class="grid grid-cols-3 gap-6">
             <div v-for="sub in subscriptions.slice(0, 6)" :key="sub.id"
                  class="group flex flex-col items-center gap-1.5 transition-all duration-300 cursor-pointer">
                 <div class="relative">
                     <img :src="sub.avatar"
-                         class="w-11 h-11 rounded-full object-cover ring-2 ring-transparent group-hover:ring-accent/50 group-hover:scale-105 transition-all duration-300 shadow-md" />
+                         class="w-11 h-11 rounded-full object-cover ring-2 ring-transparent transition-all duration-300 shadow-md" />
                 </div>
-                <span class="text-[10px] text-cream/60 group-hover:text-cream truncate w-full text-center transition-colors">
+                <span class="text-[11px] mb-2 text-cream/60 group-hover:text-cream truncate w-full text-center transition-colors">
                     {{ sub.name }}
                 </span>
             </div>

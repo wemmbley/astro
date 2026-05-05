@@ -22,51 +22,76 @@ const props = defineProps<{
     post: Post
 }>()
 </script>
-
 <template>
-    <div class="group border rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-accent/5 transition-all duration-500">
-        <div class="relative w-full h-56 overflow-hidden">
-            <img :src="post.image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent opacity-80" />
+    <div class="group relative border border-surface-500/60 bg-surface-700 rounded-2xl overflow-hidden
+                hover:border-surface-400/60 hover:shadow-2xl hover:shadow-black/30
+                transition-all duration-500 cursor-pointer">
 
-            <div class="absolute top-4 right-4">
-                <span class="backdrop-blur-md bg-surface-card/60 text-accent text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg border border-white/5">
+        <!-- Image -->
+        <div class="relative w-full h-52 overflow-hidden">
+            <img
+                :src="post.image"
+                class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-700 via-surface-700/20 to-transparent" />
+
+            <!-- Tag -->
+            <div class="absolute top-3 left-3">
+                <span class="inline-flex items-center backdrop-blur-md bg-black/40 border border-white/10
+                             text-accent text-[10px] font-bold uppercase tracking-widest
+                             px-2.5 py-1 rounded-lg">
                     {{ post.tag }}
                 </span>
             </div>
         </div>
 
-        <div class="p-5">
-            <div class="flex items-center gap-3 mb-4">
-                <img :src="post.author.avatar" class="w-8 h-8 rounded-full ring-2 ring-surface-border" />
-                <div class="flex flex-col">
-                    <span class="text-cream text-xs font-semibold">{{ post.author.name }}</span>
-                    <span class="text-cream/30 text-[10px]">{{ post.date }}</span>
+        <!-- Content -->
+        <div class="px-5 pt-4 pb-2">
+            <!-- Author -->
+            <div class="flex items-center gap-2.5 mb-3">
+                <div class="relative">
+                    <img :src="post.author.avatar" class="w-7 h-7 rounded-full object-cover ring-1 ring-surface-border" />
+                    <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10" />
+                </div>
+                <div class="flex items-center gap-2 min-w-0">
+                    <span class="text-cream/80 text-[11px] font-semibold truncate">{{ post.author.name }}</span>
+                    <span class="text-cream/20 text-[10px]">·</span>
+                    <span class="text-cream/30 text-[10px] shrink-0">{{ post.date }}</span>
                 </div>
             </div>
 
-            <h2 class="text-cream text-lg font-semibold mb-2 group-hover:text-accent transition-colors duration-300 leading-tight">
+            <!-- Title -->
+            <h2 class="text-cream text-[15px] font-semibold leading-snug mb-2.5
+                       group-hover:text-accent transition-colors duration-300 line-clamp-2">
                 {{ post.title }}
             </h2>
-            <p class="text-cream/50 text-sm leading-relaxed line-clamp-2">
+
+            <!-- Excerpt -->
+            <p class="text-cream/40 text-[12px] leading-relaxed line-clamp-2">
                 {{ post.excerpt }}
             </p>
         </div>
 
-        <div class="flex items-center justify-between px-5 pb-5 pt-2">
-            <div class="flex items-center gap-2">
-                <button class="flex items-center gap-2 bg-surface-hover/50 hover:bg-accent/10 hover:text-accent text-cream/40 text-xs transition-all px-3 py-2 rounded-xl group/btn">
-                    <Heart :size="16" class="group-hover/btn:fill-accent/20" />
-                    <span class="font-medium">{{ post.likes }}</span>
+        <!-- Footer -->
+        <div class="flex items-center justify-between px-5 py-3 mt-1">
+            <div class="flex items-center gap-1.5">
+                <button class="flex items-center gap-1.5 text-cream/30 hover:text-accent text-xs
+                               hover:bg-accent/10 px-2.5 py-1.5 rounded-lg
+                               transition-all duration-200 group/like">
+                    <Heart :size="14" class="transition-all duration-200 group-hover/like:scale-110" />
+                    <span class="font-medium tabular-nums">{{ post.likes }}</span>
                 </button>
-                <button class="flex items-center gap-2 bg-surface-hover/50 hover:bg-accent/10 hover:text-accent text-cream/40 text-xs transition-all px-3 py-2 rounded-xl">
-                    <MessageCircle :size="16" />
-                    <span class="font-medium">{{ post.comments }}</span>
+                <button class="flex items-center gap-1.5 text-cream/30 hover:text-accent text-xs
+                               hover:bg-accent/10 px-2.5 py-1.5 rounded-lg
+                               transition-all duration-200">
+                    <MessageCircle :size="14" />
+                    <span class="font-medium tabular-nums">{{ post.comments }}</span>
                 </button>
             </div>
 
-            <button class="p-2 text-cream/30 hover:text-white transition-colors">
-                <Share2 :size="18" />
+            <button class="p-1.5 text-cream/20 hover:text-cream/60 rounded-lg
+                           hover:bg-surface-500/50 transition-all duration-200">
+                <Share2 :size="15" />
             </button>
         </div>
     </div>

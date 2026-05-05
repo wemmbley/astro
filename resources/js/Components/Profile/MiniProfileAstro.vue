@@ -12,7 +12,7 @@ const miniProfile = {
 </script>
 
 <template>
-    <div class="bg-surface-0 border border-surface-500 rounded-xl shadow-sm p-5 w-full">
+    <div class="bg-surface-800 border border-surface-600 rounded-xl shadow-sm p-5 w-full">
         <div class="grid grid-cols-3 gap-4 mb-6">
             <div class="text-center">
                 <div class="text-surface-400 mb-1 flex justify-center">
