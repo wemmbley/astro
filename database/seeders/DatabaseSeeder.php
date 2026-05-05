@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Interpretations\InterpretRepository;
 use App\Models\Navbar;
 use App\Models\Post;
-use App\Models\User;
+use App\Models\Social\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;

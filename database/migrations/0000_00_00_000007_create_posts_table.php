@@ -12,7 +12,13 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->longText('content');
+            $table->string('slug')->unique();
+            $table->unsignedInteger('views_count')->default(0);
+            $table->unsignedInteger('likes_count')->default(0);
+            $table->unsignedInteger('comments_count')->default(0);
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
+            $table->index(['status', 'published_at']);
         });
     }
 

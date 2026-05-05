@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models\Social;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use WendellAdriel\Lift\Attributes\Cast;
+use WendellAdriel\Lift\Attributes\Fillable;
+use WendellAdriel\Lift\Attributes\Hidden;
+use WendellAdriel\Lift\Attributes\Relations\HasMany;
+use WendellAdriel\Lift\Lift;
+
+#[HasMany(UserFollow::class,         'following',             'follower_id')]
+#[HasMany(UserFollow::class,         'followers',             'following_id')]
+#[HasMany(UserFriend::class,         'friends',               'user_id')]
+#[HasMany(UserFriendRequest::class,  'sentFriendRequests',    'sender_id')]
+#[HasMany(UserFriendRequest::class,  'receivedFriendRequests','receiver_id')]
+#[HasMany(UserBlock::class,          'blockedUsers',          'blocker_id')]
+#[HasMany(UserBlock::class,          'blockedBy',             'blocked_id')]
+final class User extends Authenticatable
+{
+    use HasFactory, Notifiable, Lift;
+
+    #[Fillable]
+    public string $name;
+
+    #[Fillable]
+    public string $email;
+
+    #[Fillable]
+    #[Hidden]
+    #[Cast('hashed')]
+    public string $password;
+
+    #[Hidden]
+    public ?string $remember_token = null;
+
+    #[Cast('datetime')]
+    public string $email_verified_at;
+}
