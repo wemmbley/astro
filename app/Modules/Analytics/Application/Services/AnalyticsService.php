@@ -23,6 +23,7 @@ class AnalyticsService
     public function getSiteUniqueVisitsTodayByCountry(): Collection
     {
         return PageView::query()
+            ->whereDate('created_at', today())
             ->selectRaw('country, count(distinct fingerprint) as uniq')
             ->groupBy('country')
             ->get();

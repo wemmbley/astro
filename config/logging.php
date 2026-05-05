@@ -127,6 +127,14 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'telegram' => [
+            'driver' => 'monolog',
+            'handler' => \App\Application\UseCases\Logger\LogIntoTelegram::class,
+            'level'   => 'error',
+            'chat' => env('TELEGRAPH_CHAT_ID', 'undefined'),
+            'token' => env('TELEGRAPH_BOT_TOKEN', 'undefined'),
+        ],
+
     ],
 
 ];
