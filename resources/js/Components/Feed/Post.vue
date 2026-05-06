@@ -22,63 +22,74 @@ const props = defineProps<{
     post: Post
 }>()
 </script>
+
 <template>
-    <div class="group relative rounded-2xl overflow-hidden
-                hover:border-surface-400/60 hover:shadow-2xl hover:shadow-black/30
-                transition-all duration-500 cursor-pointer">
-        <div class="pt-4 pb-2">
-            <div class="flex items-center gap-2.5 mb-3">
-                <div class="relative">
-                    <img :src="post.author.avatar" class="w-9 h-9 rounded-full object-cover" />
-                    <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10" />
+    <div class="group max-w-4xl pt-4">
+        <div class="flex items-start justify-between gap-3 mb-4">
+            <div class="flex items-center gap-2.5 min-w-0">
+                <div class="relative flex-shrink-0">
+                    <img :src="post.author.avatar"
+                         class="w-10 h-10 rounded-full object-cover"/>
+                    <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10"/>
                 </div>
-                <div class="flex min-w-0 flex-col">
-                    <span class="text-cream/80 text-[14px] ml-2 font-semibold truncate">{{ post.author.name }}</span>
-                    <div class="flex">
-                        <div class="top-3 left-3">
-                        <span class="inline-flex items-center backdrop-blur-md bg-black/40 border border-white/10
-                                     text-accent text-[10px] font-bold uppercase tracking-widest
-                                     px-2.5 py-1 rounded-lg">
+                <div class="flex flex-col gap-1 min-w-0">
+                    <span class="text-[14px] font-semibold text-cream/85 truncate">
+                        {{ post.author.name }}
+                    </span>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.08em]
+                                     text-accent bg-accent/10 border border-accent/20
+                                     px-2 py-0.5 rounded-md">
                             {{ post.tag }}
                         </span>
-                        </div>
-                        <span class="text-cream/30 text-[14px] shrink-0">{{ post.date }}</span>
+                        <span class="text-cream/20 text-[10px]">·</span>
+                        <span class="text-[12px] text-cream/28 shrink-0">{{ post.date }}</span>
                     </div>
-                    Подписаться
-                    Скрыть пользователя из ленты
                 </div>
             </div>
-            <h2 class="text-cream text-[22px] font-semibold leading-snug mb-2.5
-                       group-hover:text-accent transition-colors duration-300 line-clamp-2">
-                {{ post.title }}
-            </h2>
-            <p class="text-cream/40 text-[16px] leading-relaxed line-clamp-2">
-                {{ post.excerpt }}
-            </p>
-        </div>
-        <div class="relative w-full h-52 overflow-hidden mt-1">
-            <img
-                :src="post.image"
-                class="w-full h-full object-cover scale-100 transition-transform duration-700 ease-out"
-            />
-        </div>
-        <div class="flex items-center justify-between py-3 mt-1">
-            <div class="flex items-center gap-1.5">
-                <button class="flex items-center gap-1.5 text-cream/30 hover:text-accent text-xs
-                               hover:bg-accent/10 px-2.5 py-1.5 rounded-lg
-                               transition-all duration-200 group/like">
-                    <Heart :size="22" class="transition-all duration-200 group-hover/like:scale-110" />
-                    <span class="font-medium tabular-nums">{{ post.likes }}</span>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+                <button class="text-[11px] font-semibold text-accent cursor-pointer
+                               bg-accent/10 hover:bg-accent/20 border border-accent/20
+                               px-3 py-1.5 rounded-lg transition-colors duration-200 whitespace-nowrap">
+                    Подписаться
                 </button>
-                <button class="flex items-center gap-1.5 text-cream/30 hover:text-accent text-xs
-                               hover:bg-accent/10 px-2.5 py-1.5 rounded-lg
-                               transition-all duration-200">
-                    <MessageCircle :size="22" />
-                    <span class="font-medium tabular-nums">{{ post.comments }}</span>
+                <button class="text-[11px] font-medium text-cream/55 hover:text-cream/90
+                               border border-white/7 hover:border-white/15 cursor-pointer
+                               px-2.5 py-1.5 rounded-lg transition-all duration-200 whitespace-nowrap">
+                    Скрыть
                 </button>
             </div>
-            <button class="p-1.5 text-cream/20 hover:text-cream/60 rounded-lg hover:bg-surface-500/50 transition-all duration-200">
-                <Share2 :size="22" />
+        </div>
+        <h2 class="text-[20px] font-semibold text-cream/95 leading-snug mb-2.5
+                   transition-colors duration-300 line-clamp-2">
+            {{ post.title }}
+        </h2>
+        <p class="text-[14px] text-cream/55 leading-relaxed line-clamp-2 mb-3.5">
+            {{ post.excerpt }}
+        </p>
+        <div class="rounded-2xl overflow-hidden h-56">
+            <img :src="post.image"
+                 class="w-full h-full object-cover transition-transform duration-700
+                        group-hover:scale-[1.03]"/>
+        </div>
+        <div class="flex items-center justify-between pt-2.5 pb-1">
+            <div class="flex items-center gap-1">
+                <button class="flex items-center gap-1.5 text-cream/28 hover:text-accent text-[13px]
+                               font-medium hover:bg-accent/10 px-2.5 py-1.5 rounded-xl
+                               transition-all duration-200 group/like">
+                    <Heart :size="20" class="transition-transform duration-200 group-hover/like:scale-110"/>
+                    <span class="tabular-nums">{{ post.likes }}</span>
+                </button>
+                <button class="flex items-center gap-1.5 text-cream/28 hover:text-accent text-[13px]
+                               font-medium hover:bg-accent/10 px-2.5 py-1.5 rounded-xl
+                               transition-all duration-200">
+                    <MessageCircle :size="20"/>
+                    <span class="tabular-nums">{{ post.comments }}</span>
+                </button>
+            </div>
+            <button class="p-2 text-cream/20 hover:text-cream/55 rounded-xl
+                           hover:bg-white/6 transition-all duration-200">
+                <Share2 :size="20"/>
             </button>
         </div>
     </div>
