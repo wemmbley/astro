@@ -44,6 +44,8 @@ const props = defineProps<{
                         </div>
                         <span class="text-cream/30 text-[14px] shrink-0">{{ post.date }}</span>
                     </div>
+                    Подписаться
+                    Скрыть пользователя из ленты
                 </div>
             </div>
             <h2 class="text-cream text-[22px] font-semibold leading-snug mb-2.5
