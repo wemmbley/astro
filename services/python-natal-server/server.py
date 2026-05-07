@@ -7,6 +7,7 @@ from pydantic import BaseModel, field_validator
 from typing import Optional
 import datetime
 import logging
+import time
 
 from config import ALLOWED_IPS, RATE_LIMIT
 from astro_core import calculate_chart, VALID_PLANETS, VALID_ASPECTS
@@ -109,6 +110,7 @@ class ChartRequest(BaseModel):
 @limiter.limit(RATE_LIMIT)
 async def get_chart(request: Request, body: ChartRequest):
     try:
+        start = time.time()
         birth_dt = datetime.datetime.strptime(body.birth_datetime, "%d-%m-%Y %H:%M")
         result = calculate_chart(
             birth_dt_local=birth_dt,
@@ -117,6 +119,8 @@ async def get_chart(request: Request, body: ChartRequest):
             requested_planets=body.planets,
             requested_aspects=body.aspects,
         )
+        end = time.time()
+        print(f"time: {end - start}")
         return result
     except Exception as e:
         logger.error(f"Calculation error: {e}")
