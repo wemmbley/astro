@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@tailwind utilities;
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -24,6 +25,36 @@
     --color-cream: #dedacd;
 }
 
+@layer utilities {
+    .scrollbar-surface::-webkit-scrollbar {
+        width: 14px;
+        height: 14px;
+    }
+    .scrollbar-surface::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: var(--color-surface-700);
+    }
+    .scrollbar-surface::-webkit-scrollbar-thumb {
+        border-radius: 100vh;
+        background: linear-gradient(
+            to bottom,
+            var(--color-surface-400),
+            var(--color-surface-500)
+        );
+        border: 3px solid var(--color-surface-700);
+    }
+    .scrollbar-surface::-webkit-scrollbar-thumb:hover {
+        background: var(--color-surface-400);
+    }
+    .focus-accent {
+        @apply focus:outline-none focus:ring-2 focus:ring-accent/60 focus:border-accent;
+    }
+    .surface-ui {
+        @apply cursor-pointer text-surface-100 transition-all rounded-md shadow-inner shadow-black/20 border border-surface-600 bg-surface-700 hover:bg-surface-600 hover:border-surface-500 focus:outline-none focus:ring-2 focus:ring-accent/60 focus:border-accent;
+    }
+}
+
 body {
-    color: white;
+    background: var(--color-surface-800);
+    color: var(--color-surface-50);
 }

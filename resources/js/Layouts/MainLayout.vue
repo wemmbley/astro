@@ -10,7 +10,6 @@ const { hasContainer = true } = defineProps({
 
 <template>
     <div
-        class="min-h-screen"
         :class="background ? '' : 'bg-surface-800'"
     >
         <template v-if="background">
@@ -18,13 +17,13 @@ const { hasContainer = true } = defineProps({
                 class="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
                 :style="`background-image: url('${background}')`"
             />
-            <div class="fixed inset-0 -z-10 bg-surface-800/70" />
+            <div class="fixed inset-0 -z-10 bg-surface-800/40" />
         </template>
 
         <Navbar :navbar="navbar" />
 
         <div v-if="hasContainer">
-            <div class="max-w-4xl mx-auto min-h-screen flex justify-center pt-10">
+            <div class="max-w-4xl pt-10 m-auto">
                 <slot />
             </div>
         </div>
