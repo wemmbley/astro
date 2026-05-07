@@ -11,6 +11,11 @@ class LogIntoTelegram extends AbstractProcessingHandler
 
     protected function write(LogRecord $record): void
     {
+        # Disable Telegram Throw-Notification for local develop.
+        if(!app()->isProduction()) {
+            return;
+        }
+
         try {
 
             $exception = $record->context['exception'] ?? null;

@@ -335,12 +335,16 @@ def calculate_chart(
 
     dominant_element = max(element_counts, key=lambda e: element_counts[e])
     dominant_sign    = max(sign_counts,    key=lambda s: sign_counts[s])
+    dominant = {
+        "sign": dominant_sign,
+        "count": sign_counts[dominant_sign]
+    }
 
     alchemy_result = {
         "elements":         element_counts,
         "dominant_element": dominant_element,
         "signs":            sign_counts,
-        "dominant_sign":    dominant_sign,
+        "dominant_sign":    dominant,
     }
 
     return {

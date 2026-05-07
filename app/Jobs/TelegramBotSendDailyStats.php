@@ -13,6 +13,7 @@ class TelegramBotSendDailyStats
 📊 *Статистика за {today()->format('d.m.Y')}*
 
 Уникальных посетителей за сегодня: {$analyticsService->getSiteUniqueVisitsToday()}
+Покупок совершено: Х
 ")->send();
     }
 }

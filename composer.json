@@ -19,10 +19,12 @@
         "laravel/tinker": "^3.0",
         "league/commonmark": "^2.8",
         "predis/predis": "^3.4",
-        "wendelladriel/laravel-lift": "^0.18.0"
+        "wendelladriel/laravel-lift": "^0.18.0",
+        "ext-redis": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "kint-php/kint": "^6.1",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6",

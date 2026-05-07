@@ -15,6 +15,11 @@ final readonly class NatalCacheService
         callable $resolver
     ): mixed
     {
+        # Skip cache on local.
+        if (! app()->isProduction()) {
+            return $resolver();
+        }
+
         $key = $this->getCacheHashKey();
 
         return Cache::lock(

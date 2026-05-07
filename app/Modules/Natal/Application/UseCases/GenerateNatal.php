@@ -11,13 +11,14 @@ final readonly class GenerateNatal
 {
     public function __construct(
         private PythonClient $pythonClient,
-        private NatalCacheService $cacheService,
     ) {}
 
-    public function execute(Birthday $birthday): Natal
+    public function execute(Birthday $birthday): array
     {
-        $natal = $this->cacheService->getNatalFromCache(function() use($birthday) {
-            return $this->pythonClient->getNatalChart($birthday);
+        $natalCacheService = new NatalCacheService($birthday);
+
+        $natal = $natalCacheService->getNatalFromCache(function() use($birthday) {
+            return $this->pythonClient->getNatalChart($birthday)->toArray();
         });
 
         return $natal;
