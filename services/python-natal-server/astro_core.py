@@ -28,6 +28,7 @@ _PLANET_CODES: dict[str, int] = {
     "TrueLilith":  swe.OSCU_APOG,
     "MeanNode":    swe.MEAN_NODE,
     "TrueNode":    swe.TRUE_NODE,
+    "NorthNode":   swe.MEAN_NODE,
     "Pholus":      swe.PHOLUS,
     "Ceres":       swe.CERES,
     "Pallas":      swe.PALLAS,
@@ -246,6 +247,14 @@ def calculate_chart(
         except Exception:
             pass
 
+    # ── South Node (производный от North) ────────────────────────────────────
+    if "NorthNode" in lons and "SouthNode" in want_planets:
+        lons["SouthNode"]       = (lons["NorthNode"] + 180) % 360
+        speeds["SouthNode"]     = speeds["NorthNode"]
+        decls["SouthNode"]      = -decls["NorthNode"]
+        decl_spds["SouthNode"]  = -decl_spds["NorthNode"]
+        retrogrades["SouthNode"] = retrogrades["NorthNode"]
+
     # Aspect table override from request
     asp_override = None
     if requested_aspects is not None:
@@ -255,10 +264,40 @@ def calculate_chart(
             if name in _ASPECT_DEGREES
         }
 
+    # ── Part of Fortune ───────────────────────────────────────────────────────
+    pof_result: dict | None = None
+
+    if "Sun" in lons and "Moon" in lons:
+        asc = ascmc[0]
+        sun_house = _get_house(lons["Sun"], house_cusps)
+        is_day = sun_house is not None and 7 <= sun_house <= 12
+
+        if is_day:
+            pof_lon = (asc + lons["Moon"] - lons["Sun"]) % 360
+        else:
+            pof_lon = (asc + lons["Sun"] - lons["Moon"]) % 360
+
+        # ↓ без этих строк Fortune не попадёт в lons и цикл её пропустит
+        lons["Fortune"]        = pof_lon
+        speeds["Fortune"]      = 0.0
+        retrogrades["Fortune"] = False
+
+        pof_sign, pof_deg_in_sign = _get_sign(pof_lon)
+        pof_result = {
+            "is_day_chart": is_day,
+            "longitude":    round(pof_lon, 4),
+            "sign": {
+                "name":      pof_sign,
+                "degree":    round(pof_deg_in_sign, 2),
+                "formatted": _format_angle(pof_deg_in_sign),
+            },
+            "house": _get_house(pof_lon, house_cusps),
+        }
+
     # ── Planets ───────────────────────────────────────────────────────────────
     planets_result: dict = {}
 
-    for planet_name in [p for p in PLANETS if p in lons]:
+    for planet_name in [p for p in [*PLANETS, "Fortune"] if p in lons]:
         deg = lons[planet_name]
         sign, deg_in_sign = _get_sign(deg)
 
@@ -303,6 +342,13 @@ def calculate_chart(
                     })
 
         planets_result[planet_name] = planet_data
+
+        # Fortune получает дополнительные поля от pof_result
+        if planet_name == "Fortune" and pof_result:
+            planets_result["Fortune"].update({
+                "is_day_chart": pof_result["is_day_chart"],
+                "longitude":    pof_result["longitude"],
+            })
 
     # ── Houses ────────────────────────────────────────────────────────────────
     houses_result: dict = {}

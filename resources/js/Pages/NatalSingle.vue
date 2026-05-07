@@ -1,5 +1,7 @@
 <script setup>
 import MainLayout from "@/Layouts/MainLayout.vue";
+import AstroProfile from "@/Components/Natal/AstroProfile.vue";
+
 
 const props = defineProps({
     navbar: Array,
@@ -10,25 +12,13 @@ const props = defineProps({
 <template>
     <MainLayout :navbar="navbar">
         <div class="flex flex-col">
-            Знаки
-            <div v-for="planet in natal.planets" :key="planet.name">
-                <div class="flex gap-2">
-                    <p>{{ planet.name }}</p>
-                    <p>{{ planet.sign }}</p>
-                    <p>{{ planet.degree }}*</p>
-                    <p>{{ planet.house }}</p>
-
-                    <div v-if="planet.retrograde">
-                        <span>R</span>
-                    </div>
-                </div>
-            </div>
+           <AstroProfile :planets="natal.planets" />
             <span>Дома</span>
             <div v-for="cuspid in natal.cusps" :key="cuspid.house">
                 <div class="flex gap-2">
                     <h2>{{ cuspid.house }}</h2>
                     <span>{{ cuspid.sign }}</span>
-                    <span>{{ cuspid.degree }}*</span>
+                    <span>{{ cuspid.degree }}°</span>
                 </div>
             </div>
             <span>Элементы</span>

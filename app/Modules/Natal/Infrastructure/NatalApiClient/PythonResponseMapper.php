@@ -153,10 +153,11 @@ final readonly class PythonResponseMapper
             'Uranus'    => PlanetName::Uranus,
             'Neptune'   => PlanetName::Neptune,
             'Pluto'     => PlanetName::Pluto,
-            'MeanNode'  => PlanetName::NorthNode,
+            'NorthNode' => PlanetName::NorthNode,
+            'SouthNode' => PlanetName::SouthNode,
             'Lilith'    => PlanetName::Lilith,
             'Chiron'    => PlanetName::Chiron,
-            'Fortuna'   => PlanetName::Fortuna,
+            'Fortune'   => PlanetName::Fortune,
 
             default =>
                 throw new \DomainException( "Unknown planet {$planet}" )

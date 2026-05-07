@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps({
+    house: String,
     number: Number,
     color: {
         type: String,
@@ -17,7 +18,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div v-if="number === 1">
+    <div v-if="number === 1 || house === 'one'">
         <svg
             :width="width"
             :height="height"
@@ -37,7 +38,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 2">
+    <div v-else-if="number === 2 || house === 'two'">
         <svg
             :width="width"
             :height="height"
@@ -57,7 +58,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 3">
+    <div v-else-if="number === 3 || house === 'three'">
         <svg
             :width="width"
             :height="height"
@@ -77,7 +78,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 4">
+    <div v-else-if="number === 4 || house === 'four'">
         <svg
             :width="width"
             :height="height"
@@ -97,7 +98,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 5">
+    <div v-else-if="number === 5 || house === 'five'">
         <svg
             :width="width"
             :height="height"
@@ -117,7 +118,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 6">
+    <div v-else-if="number === 6 || house === 'six'">
         <svg
             :width="width"
             :height="height"
@@ -137,7 +138,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 7">
+    <div v-else-if="number === 7 || house === 'seven'">
         <svg
             :width="width"
             :height="height"
@@ -157,7 +158,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 8">
+    <div v-else-if="number === 8 || house === 'eight'">
         <svg
             :width="width"
             :height="height"
@@ -177,7 +178,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 9">
+    <div v-else-if="number === 9 || house === 'nine'">
         <svg
             :width="width"
             :height="height"
@@ -197,7 +198,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 10">
+    <div v-else-if="number === 10 || house === 'ten'">
         <svg
             :width="width"
             :height="height"
@@ -222,7 +223,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 11">
+    <div v-else-if="number === 11 || house === 'eleven'">
         <svg
             :width="width"
             :height="height"
@@ -247,7 +248,7 @@ const props = defineProps({
             />
         </svg>
     </div>
-    <div v-else-if="number === 12">
+    <div v-else-if="number === 12 || house === 'twelve'">
         <svg
             :width="width"
             :height="height"

@@ -18,5 +18,5 @@ enum PlanetName: string
     case SouthNode = 'south_node';
     case Lilith = 'lilith';
     case Chiron = 'chiron';
-    case Fortuna = 'fortuna';
+    case Fortune = 'fortune';
 }

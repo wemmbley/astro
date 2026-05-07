@@ -21,8 +21,8 @@ const planetColors: Record<string, string> = {
     pluto: 'water',
     lilith: 'earth',
     chiron: 'earth',
-    northNode: 'earth',
-    southNode: 'earth',
+    north_node: 'earth',
+    south_node: 'earth',
     fortune: 'earth',
 };
 
@@ -33,7 +33,7 @@ const props = defineProps({
             const validPlanets = [
                 'sun', 'moon', 'mercury', 'venus', 'mars',
                 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto',
-                'lilith', 'chiron', 'northNode', 'southNode', 'fortune'
+                'lilith', 'chiron', 'north_node', 'south_node', 'fortune'
             ];
             return validPlanets.indexOf(value) !== -1;
         },
@@ -143,12 +143,12 @@ const computedColor = computed(() => {
             <path d="M28.9419 36.5292V17.6466M28.9419 1V17.6466M28.9419 17.6466L43.9895 2.24228M28.9419 17.6466L43.9895 27.5848" :stroke="computedColor" stroke-width="6"/>
         </svg>
     </div>
-    <div v-else-if="planet === 'northNode'">
+    <div v-else-if="planet === 'north_node'">
         <svg :width="width" :height="height" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M58.5188 20.1402C58.5188 20.1402 68.2238 18.2582 63.8821 9.79183C59.5404 1.32549 54.4324 6.65595 54.4324 6.65595C54.4324 6.65595 46.7706 9.79183 46.7706 20.1402C46.7706 30.4886 55.454 36.4478 54.4324 46.7957C53.4108 57.1435 52.3892 56.5163 46.7706 62.1609C41.1519 67.8055 30.1699 69.3731 24.0405 62.1609C17.911 54.9487 16.3787 54.0076 16.1233 44.9141C15.8679 35.8206 24.0405 30.4886 24.0405 20.1402C24.0405 9.79182 17.911 6.65595 17.911 6.65595C17.911 6.65595 11.5262 1.95266 7.9507 9.79182C4.37518 17.631 12.0369 20.1402 12.0369 20.1402" :stroke="computedColor" stroke-width="6"/>
         </svg>
     </div>
-    <div v-else-if="planet === 'southNode'">
+    <div v-else-if="planet === 'south_node'">
         <svg :width="width" :height="height" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.4812 51.8598C13.4812 51.8598 3.77623 53.7418 8.11793 62.2082C12.4596 70.6745 17.5676 65.344 17.5676 65.344C17.5676 65.344 25.2294 62.2082 25.2294 51.8598C25.2294 41.5114 16.546 35.5522 17.5676 25.2043C18.5892 14.8565 19.6108 15.4837 25.2294 9.83908C30.8481 4.19451 41.8301 2.62688 47.9595 9.83908C54.089 17.0513 55.6213 17.9923 55.8767 27.0859C56.1321 36.1794 47.9595 41.5114 47.9595 51.8598C47.9595 62.2082 54.089 65.344 54.089 65.344C54.089 65.344 60.4738 70.0473 64.0493 62.2082C67.6248 54.369 59.9631 51.8598 59.9631 51.8598" :stroke="computedColor" stroke-width="6"/>
         </svg>
