@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        $this->seedAdmin();
+        $users = $this->seedAdmin();
         $this->seedNavbars();
-        $this->seedInterpretations();
-        $this->seedPosts();
+        $this->seedInterpretations($users);
+        $this->seedPosts($users);
     }
 
-    private function seedAdmin(): void
+    private function seedAdmin()
     {
-        User::create([
+        $userAdmin = User::create([
             'name' => fake()->name(),
             'email' => 'admin@admin.admin',
             'email_verified_at' => now(),
@@ -33,18 +33,25 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        User::create([
+        $userEditor = User::create([
             'name' => fake()->name(),
             'email' => 'editor@editor.editor',
             'email_verified_at' => now(),
             'password' => Hash::make(Str::random()),
             'remember_token' => Str::random(10),
         ]);
+
+        return [
+            'admin' => $userAdmin,
+            'editor' => $userEditor,
+        ];
     }
 
-    private function seedPosts(): void
+    private function seedPosts(array $users): void
     {
         Post::query()->where('email', 'admin@admin.admin')->create([
+            'user_id' => $users['admin']->id,
+            'slug' => 'saturn-v-karte',
             'title' => 'Сатурн в Карте. Алхимия элементов и типажей.',
             'content' => '# Сатурн в Карте
 
@@ -100,6 +107,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Post::query()->where('email', 'admin@admin.admin')->create([
+            'user_id' => $users['admin']->id,
+            'slug' => 'solnce-v-karte',
             'title' => 'Солнце в Карте. Алхимия элементов и типажей.',
             'content' => '# Солнце в Карте
             Солнце отвечает за волю и творчество, а главное - стиль и эстетику исполнения собственной воли в поступках и делах.
@@ -149,6 +158,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Post::query()->where('email', 'editor@editor.editor')->create([
+            'user_id' => $users['editor']->id,
+            'slug' => 'test-zapis',
             'title' => 'Всем привет!!! Моя тестовая запись!!!',
             'content' => '# Первая запись моего блога
 
@@ -156,7 +167,7 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    private function seedInterpretations(): void
+    private function seedInterpretations(array $users): void
     {
         $isRepoExists = InterpretRepository::where('name', 'default')->exists();
 
@@ -168,6 +179,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'default',
             'version' => '1.0.0',
             'last_cached_date' => now(),
+            'key' => 'default:1.0.0',
+            'author_id' => $users['admin']->getKey(),
+            'stars' => 0,
         ]);
     }
 

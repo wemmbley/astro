@@ -39,19 +39,6 @@ class InterpretRepository extends Authenticatable
     #[Fillable]
     public ?string $last_cached_date;
 
-    protected static function booted(): void
-    {
-        static::creating(function (self $model) {
-            $model->key = self::buildKey($model->name, $model->version);
-        });
-
-        static::updating(function (self $model) {
-            if ($model->isDirty('name') || $model->isDirty('version')) {
-                $model->key = self::buildKey($model->name, $model->version);
-            }
-        });
-    }
-
     public static function buildKey(string $name, string $version): string
     {
         return Str::slug($name) . ':' . $version;

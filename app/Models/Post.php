@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use WendellAdriel\Lift\Attributes\Cast;
 use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Rules;
@@ -25,7 +24,7 @@ class Post extends Authenticatable
     #[Fillable]
     public string $content;
 
-    #[Cast('slug')]
+    #[Fillable]
     public string $slug;
 
     #[Rules(['required', 'integer', 'min:0'])]

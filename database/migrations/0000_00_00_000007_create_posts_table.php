@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->unsignedInteger('comments_count')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
-            $table->index(['status', 'published_at']);
         });
     }
 
