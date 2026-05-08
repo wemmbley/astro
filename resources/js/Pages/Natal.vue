@@ -45,9 +45,9 @@ onMounted(() => {
     selectedMinute.value = 59
 })
 
-defineProps<{
-    navbar?: Array<any>
-}>()
+defineProps({
+    navbar: Array,
+})
 </script>
 
 <template>

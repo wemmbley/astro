@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import Modal from "@/Utils/Modal.vue";
 import {MapPinIcon, MapIcon, CircleOffIcon} from "lucide-vue-next";
 import ArrowIcon from "@/Icons/ArrowIcon.vue";
 import { onClickOutside } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
+import { useQuery } from '@tanstack/vue-query'
+import { api } from '@/Libs/Fetcher'
 
 const cityDropdownTarget = useTemplateRef('city-dropdown')
 
 const open = ref(false);
+const nothingFoundOpen = ref(false);
+const resultsOpen = ref(false);
 const loading = ref(false);
 const manualMode = ref(false);
 const manualLat = ref('');
@@ -18,6 +22,13 @@ const query = ref('');
 function applyManual() {
     open.value = false;
 }
+
+onMounted(() => {
+    useQuery({
+        queryKey: ['planets'],
+        queryFn: () => api('city/find/test'),
+    })
+})
 
 onClickOutside(cityDropdownTarget, event => open.value = false)
 </script>
@@ -69,7 +80,7 @@ onClickOutside(cityDropdownTarget, event => open.value = false)
                 >
                     <MapPinIcon size="16" /> Ввести координаты вручную
                 </button>
-                <ul class="max-h-52 overflow-y-auto">
+                <ul v-if="resultsOpen" class="max-h-52 overflow-y-auto">
                     <li class="flex justify-between items-center px-4 py-2.5 text-sm
                     hover:bg-surface-700 cursor-pointer transition">
                         <span>Мерчик</span>
@@ -84,7 +95,7 @@ onClickOutside(cityDropdownTarget, event => open.value = false)
                     border-t-primary-400 rounded-full" />
                     Загрузка…
                 </div>
-                <p class="px-4 py-3 text-md text-surface-300 flex cursor-default">
+                <p v-if="nothingFoundOpen" class="px-4 py-3 text-md text-surface-300 flex cursor-default">
                     <CircleOffIcon size="16" class="mt-1" />
                     <span class="ml-2">Ничего не найдено...</span>
                 </p>

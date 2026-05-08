@@ -2,7 +2,6 @@
 import MainLayout from "@/Layouts/MainLayout.vue";
 import AstroProfile from "@/Components/Natal/AstroProfile.vue";
 
-
 const props = defineProps({
     navbar: Array,
     natal: Array,

@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^3.0.3",
+        "@tanstack/vue-query": "^5.100.9",
         "@vitejs/plugin-vue": "^6.0.6",
         "@vueuse/core": "^14.3.0",
         "lucide-vue-next": "^1.0.0",

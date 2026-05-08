@@ -2,6 +2,7 @@
 import SignIcon from "@/Icons/Zodiac/SignIcon.vue";
 import PlanetIcon from "@/Icons/Zodiac/PlanetIcon.vue";
 import HouseIcon from "@/Icons/Zodiac/HouseIcon.vue";
+import Tooltip from "@/Utils/Tooltip.vue";
 
 defineProps({
     planets: Array,
@@ -18,13 +19,12 @@ defineProps({
                 <p>{{ planet.degree }}°</p>
                 <HouseIcon class="pl-2" :house="planet.house" width="26" height="26" />
                 <div v-if="planet.retrograde">
-                    <span class="border border-surface-500 pl-3 pr-3 rounded-md text-accent">R</span>
+                    <span class="cursor-default border border-surface-500 pl-3 pr-3 rounded-md text-accent">
+                        <Tooltip>Ретроградное движение</Tooltip>
+                        R
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>
