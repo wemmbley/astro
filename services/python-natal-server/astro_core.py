@@ -397,4 +397,6 @@ def calculate_chart(
         "planets": planets_result,
         "houses":  houses_result,
         "alchemy": alchemy_result,
+        "asc":     round(ascmc[0], 4),
+        "mc":      round(ascmc[1], 4),
     }
