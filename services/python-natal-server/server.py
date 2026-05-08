@@ -5,6 +5,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from pydantic import BaseModel, field_validator
 from typing import Optional
+from chart_svg import render_chart
 import datetime
 import logging
 import time
@@ -119,6 +120,7 @@ async def get_chart(request: Request, body: ChartRequest):
             requested_planets=body.planets,
             requested_aspects=body.aspects,
         )
+        result["chart_svg"] = render_chart(result)
         end = time.time()
         print(f"time: {end - start}")
         return result
