@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+    # Laravel App
+    laravel:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        container_name: laravel_app
+        restart: unless-stopped
+        volumes:
+            - ./src:/var/www
+            - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+        depends_on:
+            - postgres
+            - redis
+        networks:
+            - backend
+
+    # Nginx (Load Balancer)
+    nginx:
+        image: nginx:alpine
+        container_name: nginx_balancer
+        ports:
+            - "80:80"
+        volumes:
+            - ./src:/var/www
+            - ./docker/nginx/conf.d:/etc/nginx/conf.d
+        depends_on:
+            - laravel
+        networks:
+            - backend
+
+    # Redis
+    redis:
+        image: redis:alpine
+        container_name: redis_cache
+        networks:
+            - backend
+
+    # PostgreSQL
+    postgres:
+        image: postgres:16-alpine
+        container_name: postgres_db
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: app
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: secret
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+            - ./docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+        command: "postgres -c config_file=/etc/postgresql/postgresql.conf"
+        networks:
+            - backend
+
+    # Python Service
+    python_api:
+        build:
+            context: ./services/python-natal-server
+            dockerfile: ./services/python-natal-server/Dockerfile
+        container_name: python_api
+        restart: always
+        ports:
+            - "8020:8020"
+        environment:
+            - PYTHONUNBUFFERED=1
+        healthcheck:
+            test: [ "CMD", "curl", "-f", "http://localhost:8020/health" ]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        networks:
+            - backend
+
+    # Worker (Laravel Queue)
+    worker:
+        build:
+            context: .
+            dockerfile: docker/laravel/Dockerfile
+        container_name: laravel_worker
+        command: php /var/www/artisan queue:work --sleep=3 --tries=3
+        volumes:
+            - ./src:/var/www
+            - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+        depends_on:
+            - redis
+            - postgres
+        networks:
+            - backend
+
+    # VITE
+    vite:
+        image: node:20
+        working_dir: /var/www
+        command: npm run dev
+        volumes:
+            - ./:/var/www
+        ports:
+            - "5173:5173"
+        networks:
+            - backend
+
+networks:
+    backend:
+        driver: bridge
+
+volumes:
+    pgdata:
