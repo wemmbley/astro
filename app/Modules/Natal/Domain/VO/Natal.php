@@ -12,6 +12,7 @@ final readonly class Natal
         public Elements         $elements,
         public DominantSign     $dominantSign,
         public HouseSystemName  $houseSystem,
+        public ?string          $svgChart,
     ) {}
 
     public function toArray(): array
@@ -22,6 +23,7 @@ final readonly class Natal
             'elements'      => $this->elements->toArray(),
             'dominant_sign' => $this->dominantSign->toArray(),
             'house_system'  => $this->houseSystem->value,
+            'svg_chart'     => $this->svgChart,
         ];
     }
 }
