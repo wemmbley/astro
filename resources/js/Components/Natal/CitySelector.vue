@@ -32,9 +32,8 @@ onClickOutside(cityDropdownTarget, event => open.value = false)
         </div>
     </Modal>
 
-    <div class="relative w-full">
+    <div class="relative w-full" ref="city-dropdown">
         <button
-            ref="city-dropdown"
             @click="open = !open"
             class="surface-ui flex items-center gap-2 w-full px-4 py-2 text-left">
             <span class="text-primary-400"><MapIcon /></span>
