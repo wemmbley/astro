@@ -13,26 +13,19 @@ import time
 from config import ALLOWED_IPS, RATE_LIMIT
 from astro_core import calculate_chart, VALID_PLANETS, VALID_ASPECTS
 
-# Логирование
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
 logger = logging.getLogger(__name__)
 
-# Rate limiter — ключ по IP
 limiter = Limiter(key_func=get_remote_address)
 
-app = FastAPI(
-    title="Astro API",
-    docs_url=None,   # скрыть /docs от чужих (или оставить для себя)
-    redoc_url=None,
-)
+app = FastAPI(title="Astro API", docs_url="/docs", redoc_url="/redoc")
 
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS — разрешаем только свой фронт
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://frontend.loc"],
@@ -40,10 +33,11 @@ app.add_middleware(
     allow_headers=["Content-Type"],
 )
 
+
 # ── Middleware: IP whitelist ──────────────────────────────────────────────────
+
 @app.middleware("http")
 async def ip_whitelist(request: Request, call_next):
-    # Учитываем прокси (nginx передаёт X-Forwarded-For)
     forwarded_for = request.headers.get("X-Forwarded-For")
     client_ip = forwarded_for.split(",")[0].strip() if forwarded_for else request.client.host
 
@@ -51,18 +45,17 @@ async def ip_whitelist(request: Request, call_next):
         logger.warning(f"Blocked request from {client_ip}")
         raise HTTPException(status_code=403, detail="Forbidden")
 
-    response = await call_next(request)
-    return response
+    return await call_next(request)
 
 
 # ── Схема запроса ─────────────────────────────────────────────────────────────
+
 class ChartRequest(BaseModel):
-    # "DD-MM-YYYY HH:MM"
-    birth_datetime: str
+    birth_datetime: str   # "DD-MM-YYYY HH:MM"
     lat: float
     lon: float
-    planets: Optional[list[str]] = None   # None = все
-    aspects: Optional[list[str]] = None   # None = все
+    planets: Optional[list[str]] = None
+    aspects: Optional[list[str]] = None
 
     @field_validator("birth_datetime")
     @classmethod
@@ -106,28 +99,60 @@ class ChartRequest(BaseModel):
         return v
 
 
-# ── Эндпоинт ──────────────────────────────────────────────────────────────────
-@app.post("/chart")
+# ── Общая логика расчёта ──────────────────────────────────────────────────────
+
+def _compute_chart(body: ChartRequest) -> dict:
+    """Чистый расчёт без SVG. Вызывается обоими эндпоинтами."""
+    birth_dt = datetime.datetime.strptime(body.birth_datetime, "%d-%m-%Y %H:%M")
+    return calculate_chart(
+        birth_dt_local=birth_dt,
+        lat=body.lat,
+        lon=body.lon,
+        requested_planets=body.planets,
+        requested_aspects=body.aspects,
+    )
+
+
+# ── Эндпоинт 1: только данные — быстро ───────────────────────────────────────
+
+@app.post("/chart/data")
 @limiter.limit(RATE_LIMIT)
-async def get_chart(request: Request, body: ChartRequest):
+async def get_chart_data(request: Request, body: ChartRequest):
+    """
+    Возвращает планеты, дома, алхимию, ASC, MC.
+    Без SVG — грузится первым, отдаёт данные для таблиц и текста.
+    """
     try:
         start = time.time()
-        birth_dt = datetime.datetime.strptime(body.birth_datetime, "%d-%m-%Y %H:%M")
-        result = calculate_chart(
-            birth_dt_local=birth_dt,
-            lat=body.lat,
-            lon=body.lon,
-            requested_planets=body.planets,
-            requested_aspects=body.aspects,
-        )
-        result["chart_svg"] = render_chart(result)
-        end = time.time()
-        print(f"time: {end - start}")
+        result = _compute_chart(body)
+        logger.info(f"/chart/data — {round(time.time() - start, 3)}s")
         return result
     except Exception as e:
         logger.error(f"Calculation error: {e}")
         raise HTTPException(status_code=500, detail="Ошибка расчёта карты")
 
+
+# ── Эндпоинт 2: только SVG — медленнее, грузится лениво ──────────────────────
+
+@app.post("/chart/svg")
+@limiter.limit(RATE_LIMIT)
+async def get_chart_svg(request: Request, body: ChartRequest):
+    """
+    Считает карту + рендерит SVG-колесо.
+    Вызывается со фронта после onMounted — не блокирует LCP.
+    """
+    try:
+        start = time.time()
+        result = _compute_chart(body)
+        svg    = render_chart(result)
+        logger.info(f"/chart/svg  — {round(time.time() - start, 3)}s")
+        return {"chart_svg": svg}
+    except Exception as e:
+        logger.error(f"SVG render error: {e}")
+        raise HTTPException(status_code=500, detail="Ошибка рендера SVG")
+
+
+# ── Health ────────────────────────────────────────────────────────────────────
 
 @app.get("/health")
 async def health():
