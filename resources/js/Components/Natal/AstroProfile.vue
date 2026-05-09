@@ -18,13 +18,13 @@ defineProps({
                 <SignIcon :sign="planet.sign" width="26" height="26" />
                 <p>{{ planet.degreeFormatted }}</p>
                 <HouseIcon class="pl-2" :house="planet.house" width="26" height="26" />
-                <div v-if="planet.retrograde">
+                <div v-if="planet.retrograde" class="relative group">
                     <span class="cursor-default border border-surface-500 pl-3 pr-3 rounded-md text-accent">
                         <Tooltip>Ретроградное движение</Tooltip>
                         R
                     </span>
                 </div>
-                <div v-if="planet.stationary">
+                <div v-if="planet.stationary" class="relative group">
                     <span class="cursor-default border border-surface-500 pl-3 pr-3 rounded-md text-accent">
                         <Tooltip>Прямое (стационарное) движение</Tooltip>
                         <i>st</i>

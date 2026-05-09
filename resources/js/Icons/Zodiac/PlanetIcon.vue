@@ -11,7 +11,7 @@ const defaultColors = {
 const planetColors: Record<string, string> = {
     sun: 'fire',
     moon: 'water',
-    mercury: 'fire',
+    mercury: 'air',
     venus: 'air',
     mars: 'fire',
     jupiter: 'fire',

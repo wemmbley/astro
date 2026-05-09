@@ -40,10 +40,12 @@ const normalized = computed(() => props.aspect.toLowerCase());
 
     <!-- Sextile ⚹ -->
     <svg v-else-if="normalized === 'sextile'" :width="width" :height="height" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11 36H61" :stroke="computedColor" stroke-width="5"/>
-        <path d="M17 17L55 55" :stroke="computedColor" stroke-width="5"/>
-        <path d="M55 17L17 55" :stroke="computedColor" stroke-width="5"/>
+        <path d="M11 35H60.5" :stroke="computedColor" stroke-width="5"/>
+        <path d="M17 16L56 55" :stroke="computedColor" stroke-width="5"/>
+        <path d="M56 16L17 55" :stroke="computedColor" stroke-width="5"/>
+        <path d="M36 60.5L36 11" :stroke="computedColor" stroke-width="5"/>
     </svg>
+
 
     <!-- Square □ -->
     <svg v-else-if="normalized === 'square'" :width="width" :height="height" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
