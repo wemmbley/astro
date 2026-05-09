@@ -44,7 +44,7 @@ final readonly class PythonResponseMapper
                 aspects:            self::mapAspects( $body['aspects'] ?? [] ),
                 longitude:          (float) ( $body['longitude'] ?? 0 ),
                 degree:             (float) $body['sign']['degree'],
-                degreeFormatted:    (float) $body['sign']['formatted'],
+                degreeFormatted:    (string) $body['sign']['formatted'],
                 retrograde:         (bool) ( $body['retrograde'] ?? false ),
                 stationary:         ( $body['motion'] === 'stationary' ?? false ),
             );
@@ -58,17 +58,17 @@ final readonly class PythonResponseMapper
         $houses = [];
 
         foreach ($items as $name => $body) {
-
             preg_match('/House(\d+)/', $name, $match);
 
             $number = (int)$match[1];
 
             $houses[] = new House(
-                house:      self::mapHouse($number),
-                sign:       self::mapSign( $body['sign']['name'] ),
-                aspects:    self::mapAspects( $body['aspects'] ?? [] ),
-                degree:     (float) $body['sign']['degree'],
-                longitude:  (float) $body['cusp_longitude'],
+                house:              self::mapHouse($number),
+                sign:               self::mapSign( $body['sign']['name'] ),
+                aspects:            self::mapAspects( $body['aspects'] ?? [] ),
+                degree:             (float) $body['sign']['degree'],
+                degreeFormatted:    (string) $body['sign']['formatted'],
+                longitude:          (float) $body['cusp_longitude'],
             );
         }
 

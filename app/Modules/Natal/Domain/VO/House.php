@@ -12,6 +12,7 @@ final readonly class House
         public SignName         $sign,
         public AspectCollection $aspects,
         public float            $degree,
+        public string           $degreeFormatted,
         public float            $longitude,
     ) {}
 
@@ -23,11 +24,12 @@ final readonly class House
     public static function fromArray(array $data): self
     {
         return new self(
-            house:     HouseName::from($data['house']),
-            sign:      SignName::from($data['sign']),
-            aspects:   $data['aspects'],
-            degree:    (float) $data['degree'],
-            longitude: (float) $data['longitude'],
+            house:              HouseName::from($data['house']),
+            sign:               SignName::from($data['sign']),
+            aspects:            $data['aspects'],
+            degree:             (float) $data['degree'],
+            degreeFormatted:    (string) $data['degreeFormatted'],
+            longitude:          (float) $data['longitude'],
         );
     }
 
@@ -42,10 +44,11 @@ final readonly class House
     public function toArray(): array
     {
         return [
-            'house'     => $this->house->value,
-            'sign'      => $this->sign->value,
-            'degree'    => $this->degree,
-            'longitude' => $this->longitude,
+            'house'             => $this->house->value,
+            'sign'              => $this->sign->value,
+            'degree'            => $this->degree,
+            'degreeFormatted'   => $this->degreeFormatted,
+            'longitude'         => $this->longitude,
         ];
     }
 }

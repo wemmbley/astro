@@ -87,6 +87,29 @@ _active_aspects: dict[str, float] = {
 VALID_PLANETS = set(PLANETS)
 VALID_ASPECTS  = set(ASPECTS)
 
+_STATIONARY_THRESHOLD: dict[str, float] = {
+    "Sun":     0.0,
+    "Moon":    0.0,
+    "Mercury": 0.003,
+    "Venus":   0.002,
+    "Mars":    0.001,
+    "Jupiter": 0.0002,
+    "Saturn":  0.0001,
+    "Uranus":  0.00003,
+    "Neptune": 0.00002,
+    "Pluto":   0.00001,
+    "Chiron":  0.00005,
+    "Fortune": 0.0,
+    "Lilith":    0.0,
+    "TrueLilith": 0.0,
+    "NorthNode": 0.0,
+    "SouthNode": 0.0,
+    "MeanNode":  0.0,
+    "TrueNode":  0.0,
+    "Fortune":   0.0,
+}
+_DEFAULT_THRESHOLD = 0.005
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -138,12 +161,13 @@ def _get_orb(aspect: str, p1: str, p2: str) -> float:
     return 2.5
 
 
-def _get_motion(speed: float) -> str:
-    if abs(speed) < 0.0003:   # порог статионарности
+def _get_motion(speed: float, planet: str = "") -> str:
+    if planet == "Fortune":
+        return "direct"
+    threshold = _STATIONARY_THRESHOLD.get(planet, _DEFAULT_THRESHOLD)
+    if threshold > 0 and abs(speed) < threshold:
         return "stationary"
-    if speed < 0:
-        return "retrograde"
-    return "direct"
+    return "retrograde" if speed < 0 else "direct"
 
 
 def _is_applying(p1_lon, p2_lon, p1_spd, p2_spd, angle) -> bool:
@@ -236,7 +260,6 @@ def calculate_chart(
     requested_planets: list | None = None,
     requested_aspects: list | None = None,
 ) -> dict:
-
     offset = get_utc_offset(lat, lon, birth_dt_local)
     utc_dt = birth_dt_local - datetime.timedelta(hours=offset)
     year, month, day = utc_dt.year, utc_dt.month, utc_dt.day
@@ -336,7 +359,7 @@ def calculate_chart(
             },
             "house":      _get_house(deg, house_cusps),
             "retrograde": retrogrades.get(planet_name, False),
-            "motion":     _get_motion(speeds.get(planet_name, 0)),
+            "motion": _get_motion(speeds.get(planet_name, 0), planet_name),
             "aspects":    [],
         }
 

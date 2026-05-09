@@ -16,7 +16,7 @@ defineProps({
             <div class="grid grid-cols-5 text-cream pb-[0.5px]">
                 <PlanetIcon :planet="planet.name" width="26" height="26" />
                 <SignIcon :sign="planet.sign" width="26" height="26" />
-                <p>{{ planet.degree }}°</p>
+                <p>{{ planet.degreeFormatted }}</p>
                 <HouseIcon class="pl-2" :house="planet.house" width="26" height="26" />
                 <div v-if="planet.retrograde">
                     <span class="cursor-default border border-surface-500 pl-3 pr-3 rounded-md text-accent">
@@ -24,12 +24,12 @@ defineProps({
                         R
                     </span>
                 </div>
-<!--                <div v-if="planet.stationary">-->
-<!--                    <span class="cursor-default border border-surface-500 pl-3 pr-3 rounded-md text-accent">-->
-<!--                        <Tooltip>Прямое движение</Tooltip>-->
-<!--                        ast-->
-<!--                    </span>-->
-<!--                </div>-->
+                <div v-if="planet.stationary">
+                    <span class="cursor-default border border-surface-500 pl-3 pr-3 rounded-md text-accent">
+                        <Tooltip>Прямое (стационарное) движение</Tooltip>
+                        <i>st</i>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

@@ -22,8 +22,8 @@ final class Birthday
         [$day, $month, $year] = explode('-', $date);
         [$hour, $minute] = explode('-', $time);
 
-        $this->lat = $lat;
-        $this->lon = $lon;
+        $this->lat = $this->dmsToDecimal($lat);
+        $this->lon = $this->dmsToDecimal($lon);
         $this->day = $day;
         $this->month = $month;
         $this->year = $year;
@@ -36,12 +36,12 @@ final class Birthday
 
     public function getLat(): float
     {
-        return $this->dmsToDecimal($this->lat);
+        return $this->lat;
     }
 
     public function getLon(): float
     {
-        return $this->dmsToDecimal($this->lon);
+        return $this->lon;
     }
 
     public function getDay(): int
@@ -113,7 +113,7 @@ final class Birthday
 
     public function getBirthDateTime(): string
     {
-        return sprintf('%s-%s-%s %s:%s',
+        return sprintf('%02d-%02d-%04d %02d:%02d',
             $this->day,
             $this->month,
             $this->year,
@@ -169,7 +169,12 @@ final class Birthday
     private function dmsToDecimal(float $dms): float
     {
         $degrees = (int) $dms;
-        $minutes = round(($dms - $degrees) * 100); // 49.59 → минуты = 59
-        return $degrees + $minutes / 60;
+        $minutesPart = round(($dms - $degrees) * 100);
+
+        if ($minutesPart >= 60) {
+            return $dms;
+        }
+
+        return $degrees + $minutesPart / 60;
     }
 }

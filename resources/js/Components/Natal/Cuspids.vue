@@ -14,7 +14,7 @@ defineProps({
             <div class="grid grid-cols-3 pb-[0.5px]">
                 <HouseIcon class="pl-2" :house="cuspid.house" width="26" height="26"/>
                 <SignIcon :sign="cuspid.sign" width="26" height="26"/>
-                <span class="text-cream">{{ cuspid.degree }}°</span>
+                <span class="text-cream">{{ cuspid.degreeFormatted }}</span>
             </div>
         </div>
     </div>
