@@ -36,12 +36,12 @@ final readonly class Birthday
 
     public function getLat(): float
     {
-        return $this->lat;
+        return $this->dmsToDecimal($this->lat);
     }
 
     public function getLon(): float
     {
-        return $this->lon;
+        return $this->dmsToDecimal($this->lon);
     }
 
     public function getDay(): int
@@ -122,5 +122,12 @@ final readonly class Birthday
         if($this->minute < 0 || $this->minute > 59) {
             throw new \InvalidArgumentException('Invalid minute handed.');
         }
+    }
+
+    private function dmsToDecimal(float $dms): float
+    {
+        $degrees = (int) $dms;
+        $minutes = round(($dms - $degrees) * 100); // 49.59 → минуты = 59
+        return $degrees + $minutes / 60;
     }
 }

@@ -1,6 +1,8 @@
+from timezonefinder import TimezoneFinder
 import swisseph as swe
 import datetime
 import math
+import pytz
 
 from config import (
     EPHE_PATH, UTC_OFFSET, PARALLEL_ORB,
@@ -88,6 +90,16 @@ VALID_ASPECTS  = set(ASPECTS)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+def get_utc_offset(lat: float, lon: float, dt_local: datetime.datetime) -> float:
+    tf = TimezoneFinder()
+    tz_name = tf.timezone_at(lat=lat, lng=lon)
+    if not tz_name:
+        return UTC_OFFSET  # fallback
+    tz = pytz.timezone(tz_name)
+    # Локализуем без смещения, чтобы получить правильный DST
+    aware = tz.localize(dt_local, is_dst=None)
+    return aware.utcoffset().total_seconds() / 3600
+
 def _ecliptic_to_equatorial(longitude: float, year: int, latitude: float = 0) -> float:
     eps = math.radians(23.439291 - 0.0130042 * (year - 2000) / 100)
     lon = math.radians(longitude)
@@ -126,6 +138,14 @@ def _get_orb(aspect: str, p1: str, p2: str) -> float:
     return 2.5
 
 
+def _get_motion(speed: float) -> str:
+    if abs(speed) < 0.0003:   # порог статионарности
+        return "stationary"
+    if speed < 0:
+        return "retrograde"
+    return "direct"
+
+
 def _is_applying(p1_lon, p2_lon, p1_spd, p2_spd, angle) -> bool:
     diff = (p2_lon - p1_lon) % 360
     if diff > 180:
@@ -153,7 +173,12 @@ def _calc_aspects(p1_lon, p2_lon, p1_name, p2_name, p1_spd, p2_spd,
                 diff -= 360
             orb_exact = abs(abs(diff) - asp_angle)
             applying = _is_applying(p1_lon, p2_lon, p1_spd, p2_spd, asp_angle)
-            results.append((asp_name, round(orb_exact, 2), "applying" if applying else "separating"))
+            results.append((
+                asp_name,
+                round(orb_exact, 2),
+                _format_angle(orb_exact),
+                "applying" if applying else "separating"
+            ))
     return results
 
 
@@ -165,7 +190,7 @@ def _calc_parallels(decl1, decl2, name1, name2, decl_speed) -> list:
         return []
     applying = abs(abs(decl1 + spd1 * 0.01) - abs(decl2 + spd2 * 0.01)) < diff
     asp = "Parallel" if (decl1 > 0) == (decl2 > 0) else "Contraparallel"
-    return [(asp, round(diff, 2), "applying" if applying else "separating")]
+    return [(asp, round(diff, 2), _format_angle(diff), "applying" if applying else "separating")]
 
 
 def _calc_house_aspects(house_lon: float, house_num: int,
@@ -196,6 +221,7 @@ def _calc_house_aspects(house_lon: float, house_num: int,
                     "type":     asp_name,
                     "target":   planet_name,
                     "orb":      round(orb_exact, 2),
+                    "orb_fmt":  _format_angle(orb_exact),
                     "applying": "applying" if applying else "separating",
                 })
     return results
@@ -211,7 +237,8 @@ def calculate_chart(
     requested_aspects: list | None = None,
 ) -> dict:
 
-    utc_dt = birth_dt_local - datetime.timedelta(hours=UTC_OFFSET)
+    offset = get_utc_offset(lat, lon, birth_dt_local)
+    utc_dt = birth_dt_local - datetime.timedelta(hours=offset)
     year, month, day = utc_dt.year, utc_dt.month, utc_dt.day
     hour = utc_dt.hour + utc_dt.minute / 60
 
@@ -244,8 +271,8 @@ def calculate_chart(
             if spd < -180: spd += 360
             speeds[name]    = spd
             decl_spds[name] = r_nxt[0][1] - r[0][1]
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[WARN] {name}: {e}")
 
     # ── South Node (производный от North) ────────────────────────────────────
     if "NorthNode" in lons and "SouthNode" in want_planets:
@@ -309,6 +336,7 @@ def calculate_chart(
             },
             "house":      _get_house(deg, house_cusps),
             "retrograde": retrogrades.get(planet_name, False),
+            "motion":     _get_motion(speeds.get(planet_name, 0)),
             "aspects":    [],
         }
 
@@ -316,7 +344,7 @@ def calculate_chart(
             if other_name == planet_name:
                 continue
 
-            for asp_name, orb_exact, direction in _calc_aspects(
+            for asp_name, orb_exact, orb_fmt, direction in _calc_aspects(
                 deg, other_deg, planet_name, other_name,
                 speeds.get(planet_name, 0),
                 speeds.get(other_name, 0),
@@ -326,11 +354,12 @@ def calculate_chart(
                     "type":     asp_name,
                     "target":   other_name,
                     "orb":      orb_exact,
+                    "orb_fmt":  orb_fmt,
                     "applying": direction,
                 })
 
             if planet_name in decls and other_name in decls:
-                for asp_name, orb_exact, direction in _calc_parallels(
+                for asp_name, orb_exact, orb_fmt, direction in _calc_parallels(
                     decls[planet_name], decls[other_name],
                     planet_name, other_name, decl_spds,
                 ):
@@ -338,6 +367,7 @@ def calculate_chart(
                         "type":     asp_name,
                         "target":   other_name,
                         "orb":      orb_exact,
+                        "orb_fmt":  orb_fmt,
                         "applying": direction,
                     })
 

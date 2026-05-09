@@ -3,3 +3,5 @@ uvicorn[standard]
 slowapi
 pydantic
 pyswisseph
+timezonefinder
+pytz

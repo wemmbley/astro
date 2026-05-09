@@ -30,6 +30,8 @@ class PythonClient
 
             $natalChartArray = $response->json();
 
+            dd($natalChartArray);
+
         } catch (\Throwable $e) {
 
             Log::critical(
