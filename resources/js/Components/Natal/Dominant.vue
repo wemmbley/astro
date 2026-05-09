@@ -7,8 +7,8 @@ defineProps({
 </script>
 
 <template>
-    <div class="bg-surface-700 mt-4 w-full rounded-xl border border-surface-500 overflow-hidden">
-        <div class="px-4 pt-2 text-center text-surface-200">
+    <div class="mt-4 w-full overflow-hidden">
+        <div class="px-4 pt-2 text-center text-surface-200 font-medium">
             Доминанта
         </div>
         <span class="flex gap-2 p-4 w-full justify-center">

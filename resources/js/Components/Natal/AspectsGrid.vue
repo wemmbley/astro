@@ -4,7 +4,7 @@ import PlanetIcon from "@/Icons/Zodiac/PlanetIcon.vue"
 import AspectIcon from "@/Icons/Zodiac/AspectIcon.vue"
 import Tooltip from "@/Utils/Tooltip.vue";
 import { aspectTranslations } from "@/Lang/NatalTypesLang"
-import {planetTranslations} from "../../Lang/NatalTypesLang";
+import { planetTranslations } from "../../Lang/NatalTypesLang";
 
 const props = defineProps<{
     planets: Record<string, {

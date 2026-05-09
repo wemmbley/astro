@@ -10,8 +10,8 @@ defineProps({
 </script>
 
 <template>
-    <div class="bg-surface-700 rounded-xl pt-2 pl-4 pb-4 border border-surface-500">
-        <p class="mb-2 text-center text-surface-200">Знаки</p>
+    <div class="rounded-xl pt-2 pl-4 pb-4 ">
+        <p class="mb-2 text-center font-medium text-surface-200">Знаки</p>
         <div v-for="planet in planets" :key="planet.name">
             <div class="grid grid-cols-5 text-cream pb-[0.5px]">
                 <PlanetIcon :planet="planet.name" width="26" height="26" />
