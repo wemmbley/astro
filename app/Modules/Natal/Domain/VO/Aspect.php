@@ -11,6 +11,7 @@ final readonly class Aspect
         private AspectName $name,
         private AspectTarget $target,
         private float $orb,
+        private string $orbFormatted,
     ) {}
 
     public function getName(): AspectName
@@ -26,5 +27,20 @@ final readonly class Aspect
     public function getOrb(): float
     {
         return $this->orb;
+    }
+
+    public function getOrbFormatted(): string
+    {
+        return $this->orbFormatted;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name'          => $this->name->value,
+            'target'        => $this->target->get()->value,
+            'orb'           => $this->orb,
+            'orbFormatted'  => $this->orbFormatted,
+        ];
     }
 }

@@ -37,15 +37,16 @@ final readonly class PythonResponseMapper
         $planets = [];
 
         foreach ($items as $name => $body) {
-
             $planets[] = new Planet(
-                name:       self::mapPlanet( $name ),
-                sign:       self::mapSign( $body['sign']['name'] ),
-                house:      self::mapHouse( (int) $body['house'] ),
-                aspects:    self::mapAspects( $body['aspects'] ?? [] ),
-                longitude:  (float) ( $body['longitude'] ?? 0 ),
-                degree:     (float) $body['sign']['degree'],
-                retrograde: (bool) ( $body['retrograde'] ?? false ),
+                name:               self::mapPlanet( $name ),
+                sign:               self::mapSign( $body['sign']['name'] ),
+                house:              self::mapHouse( (int) $body['house'] ),
+                aspects:            self::mapAspects( $body['aspects'] ?? [] ),
+                longitude:          (float) ( $body['longitude'] ?? 0 ),
+                degree:             (float) $body['sign']['degree'],
+                degreeFormatted:    (float) $body['sign']['formatted'],
+                retrograde:         (bool) ( $body['retrograde'] ?? false ),
+                stationary:         ( $body['motion'] === 'stationary' ?? false ),
             );
         }
 
@@ -90,9 +91,10 @@ final readonly class PythonResponseMapper
 
         foreach ($items as $item) {
             $aspects[] = new Aspect(
-                name:   self::mapAspect( $item['type'] ),
-                target: self::mapAspectTarget( $item['target'] ),
-                orb:    (float) $item['orb'],
+                name:         self::mapAspect( $item['type'] ),
+                target:       self::mapAspectTarget( $item['target'] ),
+                orb:          (float) $item['orb'],
+                orbFormatted: (string) $item['orb_fmt'],
             );
         }
 

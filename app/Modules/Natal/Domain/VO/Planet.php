@@ -15,7 +15,9 @@ final readonly class Planet
         public AspectCollection $aspects,
         public float $longitude,
         public float $degree,
+        public string $degreeFormatted,
         public bool $retrograde,
+        public bool $stationary,
     ) {}
 
     public function getName(): PlanetName
@@ -26,19 +28,31 @@ final readonly class Planet
     public static function fromArray(array $data): self
     {
         return new self(
-            name:       PlanetName::from($data['name']),
-            sign:       SignName::from($data['sign']),
-            house:      HouseName::from($data['house']),
-            aspects:    $data['aspects'],
-            longitude:  (float) $data['longitude'],
-            degree:     (float) $data['degree'],
-            retrograde: (bool) ($data['retrograde'] ?? false),
+            name:               PlanetName::from($data['name']),
+            sign:               SignName::from($data['sign']),
+            house:              HouseName::from($data['house']),
+            aspects:            $data['aspects'],
+            longitude:          (float) $data['longitude'],
+            degree:             (float) $data['degree'],
+            degreeFormatted:    $data['degreeFormatted'],
+            retrograde:         (bool) ($data['retrograde'] ?? false),
+            stationary:         ($data['motion'] === 'stationary' ?? false),
         );
     }
 
     public function isRetrograde(): bool
     {
         return $this->retrograde;
+    }
+
+    public function isStationary(): bool
+    {
+        return $this->stationary;
+    }
+
+    public function getDegreeFormatted(): string
+    {
+        return $this->degreeFormatted;
     }
 
     public function equals(self $other): bool
@@ -52,12 +66,15 @@ final readonly class Planet
     public function toArray(): array
     {
         return [
-            'name'       => $this->name->value,
-            'sign'       => $this->sign->value,
-            'house'      => $this->house->value,
-            'longitude'  => $this->longitude,
-            'degree'     => $this->degree,
-            'retrograde' => $this->retrograde,
+            'name'              => $this->name->value,
+            'sign'              => $this->sign->value,
+            'house'             => $this->house->value,
+            'longitude'         => $this->longitude,
+            'degree'            => $this->degree,
+            'degreeFormatted'   => $this->degreeFormatted,
+            'stationary'        => $this->stationary,
+            'retrograde'        => $this->retrograde,
+            'aspects'           => array_map(fn(Aspect $asp) => $asp->toArray(), $this->aspects->all())
         ];
     }
 }

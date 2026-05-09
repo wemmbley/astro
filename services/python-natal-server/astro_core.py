@@ -358,18 +358,21 @@ def calculate_chart(
                     "applying": direction,
                 })
 
+            # Вместо безусловного вызова _calc_parallels:
             if planet_name in decls and other_name in decls:
-                for asp_name, orb_exact, orb_fmt, direction in _calc_parallels(
-                    decls[planet_name], decls[other_name],
-                    planet_name, other_name, decl_spds,
-                ):
-                    planet_data["aspects"].append({
-                        "type":     asp_name,
-                        "target":   other_name,
-                        "orb":      orb_exact,
-                        "orb_fmt":  orb_fmt,
-                        "applying": direction,
-                    })
+                table = asp_override if asp_override is not None else _active_aspects
+                if "Parallel" in table or "Contraparallel" in table:
+                    for asp_name, orb_exact, orb_fmt, direction in _calc_parallels(
+                        decls[planet_name], decls[other_name],
+                        planet_name, other_name, decl_spds,
+                    ):
+                        planet_data["aspects"].append({
+                            "type":     asp_name,
+                            "target":   other_name,
+                            "orb":      orb_exact,
+                            "orb_fmt":  orb_fmt,
+                            "applying": direction,
+                        })
 
         planets_result[planet_name] = planet_data
 

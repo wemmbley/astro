@@ -10,10 +10,10 @@ defineProps({
 </script>
 
 <template>
-    <div class="bg-surface-700 rounded-md pt-3 pl-4 pb-3 border border-surface-500">
-        <p class="mb-2">Знаки</p>
+    <div class="bg-surface-700 rounded-xl pt-2 pl-4 pb-4 border border-surface-500">
+        <p class="mb-2 text-center text-surface-200">Знаки</p>
         <div v-for="planet in planets" :key="planet.name">
-            <div class="grid grid-cols-5 text-cream">
+            <div class="grid grid-cols-5 text-cream pb-[0.5px]">
                 <PlanetIcon :planet="planet.name" width="26" height="26" />
                 <SignIcon :sign="planet.sign" width="26" height="26" />
                 <p>{{ planet.degree }}°</p>
@@ -24,6 +24,12 @@ defineProps({
                         R
                     </span>
                 </div>
+<!--                <div v-if="planet.stationary">-->
+<!--                    <span class="cursor-default border border-surface-500 pl-3 pr-3 rounded-md text-accent">-->
+<!--                        <Tooltip>Прямое движение</Tooltip>-->
+<!--                        ast-->
+<!--                    </span>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

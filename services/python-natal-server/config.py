@@ -51,6 +51,8 @@ ASPECTS = [
     "Square",            # 90°
     "Trine",             # 120°
     "Sextile",           # 60°
+    #"Parallel",
+    #"Contraparallel",
     #"Semisextile",       # 30°
     #"Quincunx",          # 150°
     #"Semisquare",        # 45°

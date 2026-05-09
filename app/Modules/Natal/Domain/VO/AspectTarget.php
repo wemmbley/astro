@@ -20,4 +20,9 @@ final readonly class AspectTarget
     {
         return $this->value instanceof HouseName;
     }
+
+    public function get(): HouseName|PlanetName
+    {
+        return $this->value;
+    }
 }
