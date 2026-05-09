@@ -37,5 +37,12 @@ const props = defineProps({
             <h2 class="text-center font-medium pb-5 text-surface-200">Натальный документ</h2>
             <ZodiacCanvas :natal="natal" class="mb-5" />
         </div>
+        <div class="max-w-4xl pt-10 m-auto">
+            <div class="grid grid-cols-[1fr_280px] gap-6">
+                <div>
+                    <h2 class="text-center font-medium pb-5 text-surface-200">Трактовка</h2>
+                </div>
+            </div>
+        </div>
     </MainLayout>
 </template>
