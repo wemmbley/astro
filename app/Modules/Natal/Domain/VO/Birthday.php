@@ -2,7 +2,7 @@
 
 namespace App\Modules\Natal\Domain\VO;
 
-final readonly class Birthday
+final class Birthday
 {
     private float $lat;
     private float $lon;
@@ -67,6 +67,48 @@ final readonly class Birthday
     public function getMinute(): int
     {
         return $this->minute;
+    }
+
+    public function setDay(int $day): self
+    {
+        $this->day = $day;
+        return $this;
+    }
+
+    public function setMonth(int $month): self
+    {
+        $this->month = $month;
+        return $this;
+    }
+
+    public function setYear(int $year): self
+    {
+        $this->year = $year;
+        return $this;
+    }
+
+    public function setHour(int $hour): self
+    {
+        $this->hour = $hour;
+        return $this;
+    }
+
+    public function setMinute(int $minute): self
+    {
+        $this->minute = $minute;
+        return $this;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+        return $this;
+    }
+
+    public function setLon(float $lon): self
+    {
+        $this->lon = $lon;
+        return $this;
     }
 
     public function getBirthDateTime(): string

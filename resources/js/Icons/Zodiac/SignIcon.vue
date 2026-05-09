@@ -5,7 +5,7 @@ const defaultSignColors = {
     water: '#3090FF',
     fire: '#FF332D',
     air: '#27C81F',
-    earth: '#676767',
+    earth: '#808080',
 };
 
 const signElements: Record<string, string> = {

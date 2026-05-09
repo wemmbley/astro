@@ -31,6 +31,7 @@ class NatalController
         return Inertia::render('NatalSingle', [
             'navbar' => $navbar->execute(GetNavbar::MAIN_NAVBAR),
             'natal' => $natal->execute($birthday),
+            'coordinates' => $birthday->toArray(),
         ]);
     }
 }

@@ -5,7 +5,7 @@ const defaultColors = {
     fire: '#FF332D',
     water: '#3090FF',
     air: '#27C81F',
-    earth: '#676767',
+    earth: '#808080',
 };
 
 const planetColors: Record<string, string> = {

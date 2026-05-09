@@ -29,7 +29,6 @@ final readonly class PythonResponseMapper
             elements:       self::mapElements( $payload['alchemy']['elements'] ),
             dominantSign:   self::mapDominantSign( $payload['alchemy']['dominant_sign'] ),
             houseSystem:    HouseSystemName::Placidius,
-            svgChart:       $payload['chart_svg'],
         );
     }
 
