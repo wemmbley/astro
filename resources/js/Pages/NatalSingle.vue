@@ -42,7 +42,10 @@ const props = defineProps({
             <div class="grid grid-cols-[1fr_280px] gap-6">
                 <div>
                     <h2 class="text-center font-medium pb-5 text-surface-200">Трактовка</h2>
-                    <SinglePlanet :planet="natal.planets.sun" />
+                    <div class="flex flex-col gap-5">
+                        <SinglePlanet :planet="natal.planets.sun" />
+                        <SinglePlanet :planet="natal.planets.moon" />
+                    </div>
                 </div>
             </div>
         </div>

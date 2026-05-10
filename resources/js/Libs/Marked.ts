@@ -1,49 +1,99 @@
 import { marked } from 'marked'
+import fm from 'front-matter'
 
-const renderer = new marked.Renderer()
+export type Block =
+    | { type: 'paragraph'; text: string }
+    | { type: 'list'; ordered: boolean; items: string[] }
+    | { type: 'code'; lang: string; text: string }
+    | { type: 'image'; href: string; alt: string; link?: string }
+    | { type: 'hr' }
 
-renderer.heading = ({ tokens, depth }) => {
-    const text = tokens.map(t => t.raw).join('')
-
-    // смещение заголовков
-    const level = Math.min(depth + 1, 6)
-
-    const classes: Record<number, string> = {
-        2: 'title',
-        3: 'subtitle',
-        4: 'subtitle-4',
-        5: 'subtitle-5',
-    }
-
-    const className = classes[level] ?? ''
-
-    return `<h${level} class="${className}">${text}</h${level}>`
+export interface Section {
+    heading: string
+    level: number
+    blocks: Block[]
 }
 
-marked.use({ renderer })
+export interface ParsedMarkdown {
+    attributes: Record<string, any>
+    sections: Section[]
+    get: (heading: string) => Section | undefined
+    byLevel: (level: number) => Section[]
+}
 
-export default marked
+function tokenToBlocks(tokens: marked.Token[]): Block[] {
+    const blocks: Block[] = []
 
-export function parseInterpretation(text: string) {
-    const lines = text
-        .split('\n')
-        .map(l => l.trim())
-        .filter(Boolean)
+    for (const t of tokens) {
+        if (t.type === 'paragraph') {
+            const imageToken = (t.tokens ?? []).find(i => i.type === 'image') as any
+            const linkToken  = (t.tokens ?? []).find(i => i.type === 'link')  as any
 
-    const title = lines[0]
+            if (imageToken) {
+                blocks.push({
+                    type: 'image',
+                    href: imageToken.href,
+                    alt:  imageToken.text,
+                    link: linkToken?.href,
+                })
+            } else {
+                blocks.push({ type: 'paragraph', text: t.raw.trim() })
+            }
+        } else if (t.type === 'list') {
+            blocks.push({
+                type: 'list',
+                ordered: t.ordered,
+                items: t.items.map((i: any) => i.text),
+            })
+        } else if (t.type === 'code') {
+            blocks.push({ type: 'code', lang: t.lang ?? '', text: t.text })
+        } else if (t.type === 'hr') {
+            blocks.push({ type: 'hr' })
+        }
+        // space и прочий шум — пропускаем
+    }
 
-    const tagsIndex = lines.findIndex(l => l.toLowerCase() === 'тэги')
+    return blocks
+}
 
-    const tags =
-        tagsIndex !== -1
-            ? lines[tagsIndex + 1] ?? ''
-            : ''
+export function parseMarkdown(source: string): ParsedMarkdown {
+    const parsed    = fm<Record<string, any>>(source)
+    const allTokens = marked.lexer(parsed.body)
 
-    const full = text
+    const sections: Section[] = []
+    let current: { heading: string; level: number; tokens: marked.Token[] } = {
+        heading: '',
+        level: 0,
+        tokens: [],
+    }
+
+    for (const token of allTokens) {
+        if (token.type === 'heading') {
+            if (current.tokens.length > 0 || current.level > 0) {
+                sections.push({
+                    heading: current.heading,
+                    level:   current.level,
+                    blocks:  tokenToBlocks(current.tokens),
+                })
+            }
+            current = { heading: token.text, level: token.depth, tokens: [] }
+        } else {
+            current.tokens.push(token)
+        }
+    }
+
+    if (current.level > 0 || current.tokens.length > 0) {
+        sections.push({
+            heading: current.heading,
+            level:   current.level,
+            blocks:  tokenToBlocks(current.tokens),
+        })
+    }
 
     return {
-        title,
-        tags,
-        full,
+        attributes: parsed.attributes,
+        sections,
+        get:     (heading) => sections.find(s => s.heading === heading),
+        byLevel: (level)   => sections.filter(s => s.level === level),
     }
 }

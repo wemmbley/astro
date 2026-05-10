@@ -77,6 +77,18 @@
 Поэт
 Танцор
 
-# Гимн
+# Семантический код
+
 [![Описание видео](https://img.youtube.com/vi/FZ0rlskJPDs/sddefault.jpg)](https://www.youtube.com/watch?v=FZ0rlskJPDs&list=RDU0QuEpg4V4U&index=2)
+
+Нет необходимости куда либо бежать, чего-то достигать, всё уже есть, просто прочувствуй.
+Прогулйся, не спеши, переживи этот момент и мгновение всем сердцем и Душой.
+
 [![Описание видео](https://img.youtube.com/vi/lzqHF2pUKBA/maxresdefault.jpg)](https://www.youtube.com/watch?v=lzqHF2pUKBA&list=RDOkR0EgSpTxg&index=42)
+
+Полная отадача любовнику и невозможность сказать "нет", искренняя, неподдельная любовь 
+без видимых границ.
+
+[![LOBODA - Твои глаза](https://i3.ytimg.com/vi/6gCbAkqMKYg/maxresdefault.jpg)](https://www.youtube.com/watch?v=6gCbAkqMKYg&list=RDd8-3ffuTTZ8&index=4)
+
+Желание утонуть в партнёре, буквально.
