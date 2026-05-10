@@ -27,6 +27,8 @@ return new class extends Migration {
             $table->longText('content');
             $table->tinyText('lang');
             $table->timestamps();
+
+            $table->unique(['repository_key', 'planet', 'sign', 'lang']);
         });
 
         Schema::create('interpret_planet_house', function (Blueprint $table) {

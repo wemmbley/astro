@@ -58,7 +58,7 @@ const houseChains = computed(() =>
             <div class="relative group cursor-default mb-2">
                 <PlanetIcon :planet="chain.dispositorName" width="26" height="26" />
                 <Tooltip>
-                    {{ planetTranslations[chain.dispositorName] }}
+                    Диспозитор {{ planetTranslations[chain.dispositorName] }}
                     <template v-if="chain.isSelfDispositor"> — в своём знаке</template>
                 </Tooltip>
             </div>

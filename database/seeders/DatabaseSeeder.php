@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Interpretations\InterpretCuspidSign;
+use App\Models\Interpretations\InterpretEntity;
+use App\Models\Interpretations\InterpretPlanetAspect;
+use App\Models\Interpretations\InterpretPlanetHouse;
+use App\Models\Interpretations\InterpretPlanetSign;
 use App\Models\Interpretations\InterpretRepository;
 use App\Models\Navbar;
 use App\Models\Post;
@@ -169,20 +174,163 @@ class DatabaseSeeder extends Seeder
 
     private function seedInterpretations(array $users): void
     {
-        $isRepoExists = InterpretRepository::where('name', 'default')->exists();
-
-        if($isRepoExists) {
+        if (InterpretRepository::where('key', 'default:1.0.0')->exists()) {
             return;
         }
 
-        InterpretRepository::create([
-            'name' => 'default',
-            'version' => '1.0.0',
+        $repo = InterpretRepository::create([
+            'name'             => 'default',
+            'key'              => 'default:1.0.0',
+            'version'          => '1.0.0',
             'last_cached_date' => now(),
-            'key' => 'default:1.0.0',
-            'author_id' => $users['admin']->getKey(),
-            'stars' => 0,
+            'author_id'        => $users['admin']->getKey(),
+            'stars'            => 0,
         ]);
+
+        $repoKey = 'default:1.0.0';
+        $lang    = 'ru';
+        $base    = storage_path("interpretations/{$lang}");
+
+        $planets = [
+            'Chiron', 'Fortune', 'Jupiter', 'Lilith', 'Mars',
+            'Mercury', 'Moon', 'Neptune', 'NorthNode', 'Pluto',
+            'Saturn', 'Sun', 'Uranus', 'Venus',
+        ];
+
+        $aspects = ['Conjunction', 'Opposition', 'Sextile', 'Square', 'Trine'];
+
+        $signs = [
+            'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
+            'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces',
+        ];
+
+        $houses = array_map(fn($n) => str_pad($n, 2, '0', STR_PAD_LEFT), range(1, 12));
+
+        // ── Верхнеуровневые аспекты → interpret_entity (type=aspect) ────────────
+        foreach ($aspects as $aspect) {
+            $content = $this->readFile("{$base}/Aspects/{$aspect}.md");
+            if ($content === null) continue;
+
+            InterpretEntity::create([
+                'repository_key' => $repoKey,
+                'name'           => $aspect,
+                'type'           => 'aspect',
+                'content'        => $content,
+                'lang'           => $lang,
+            ]);
+        }
+
+        // ── Дома ────────────────────────────────────────────────────────────────
+        foreach ($houses as $house) {
+            $houseDir = "{$base}/Houses/{$house}";
+
+            if (!is_dir($houseDir)) continue;
+
+            // Houses/{01}/{01}.md → interpret_entity (type=house)
+            $content = $this->readFile("{$houseDir}/{$house}.md");
+            if ($content !== null) {
+                InterpretEntity::create([
+                    'repository_key' => $repoKey,
+                    'name'           => $house,
+                    'type'           => 'house',
+                    'content'        => $content,
+                    'lang'           => $lang,
+                ]);
+            }
+
+            // Houses/{01}/{Sign}.md → interpret_cuspid_sign
+            foreach ($signs as $sign) {
+                $content = $this->readFile("{$houseDir}/{$sign}.md");
+                if ($content === null) continue;
+
+                InterpretCuspidSign::create([
+                    'repository_key' => $repoKey,
+                    'house'          => $house,
+                    'sign'           => $sign,
+                    'content'        => $content,
+                    'lang'           => $lang,
+                ]);
+            }
+        }
+
+        // ── Планеты ─────────────────────────────────────────────────────────────
+        foreach ($planets as $planet) {
+            $planetDir = "{$base}/Planets/{$planet}";
+
+            if (!is_dir($planetDir)) continue;
+
+            // Planets/{Planet}/{Planet}.md → interpret_entity (type=planet)
+            $content = $this->readFile("{$planetDir}/{$planet}.md");
+            if ($content !== null) {
+                InterpretEntity::create([
+                    'repository_key' => $repoKey,
+                    'name'           => $planet,
+                    'type'           => 'planet',
+                    'content'        => $content,
+                    'lang'           => $lang,
+                ]);
+            }
+
+            // Planets/{Planet}/Signs/{Sign}.md → interpret_planet_sign
+            foreach ($signs as $sign) {
+                $content = $this->readFile("{$planetDir}/Signs/{$sign}.md");
+                if ($content === null) continue;
+
+                InterpretPlanetSign::create([
+                    'repository_key' => $repoKey,
+                    'planet'         => $planet,
+                    'sign'           => $sign,
+                    'content'        => $content,
+                    'lang'           => $lang,
+                ]);
+            }
+
+            // Planets/{Planet}/Houses/{01}.md → interpret_planet_house
+            foreach ($houses as $house) {
+                $content = $this->readFile("{$planetDir}/Houses/{$house}.md");
+                if ($content === null) continue;
+
+                InterpretPlanetHouse::create([
+                    'repository_key' => $repoKey,
+                    'planet'         => $planet,
+                    'house'          => $house,
+                    'content'        => $content,
+                    'lang'           => $lang,
+                ]);
+            }
+
+            // Planets/{Planet}/Aspects/{Aspect}/{ToPlanet}.md → interpret_planet_aspect
+            foreach ($aspects as $aspect) {
+                $aspectDir = "{$planetDir}/Aspects/{$aspect}";
+
+                if (!is_dir($aspectDir)) continue;
+
+                foreach ($planets as $toPlanet) {
+                    $content = $this->readFile("{$aspectDir}/{$toPlanet}.md");
+                    if ($content === null) continue;
+
+                    InterpretPlanetAspect::create([
+                        'repository_key' => $repoKey,
+                        'planet'         => $planet,
+                        'aspect'         => $aspect,
+                        'to_planet'      => $toPlanet,
+                        'content'        => $content,
+                        'lang'           => $lang,
+                    ]);
+                }
+            }
+        }
+    }
+
+    private function readFile(string $path): ?string
+    {
+        if (!file_exists($path) || !is_readable($path)) {
+            return null;
+        }
+
+        $content = file_get_contents($path);
+
+        return ($content !== false && trim($content) !== '') ? $content : null;
     }
 
     private function seedNavbars(): void

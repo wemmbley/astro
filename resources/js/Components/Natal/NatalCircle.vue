@@ -77,7 +77,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
         class="natal-chart max-w-xl [&_svg]:w-full [&_svg]:h-auto cursor-zoom-in"
         @click="openFullscreen"
     >
-        <div v-if="svgLoading" class="w-full aspect-square bg-gray-100 animate-pulse rounded-full"/>
+        <div v-if="svgLoading" class="w-full aspect-square bg-surface-500 animate-pulse rounded-full"/>
         <div v-else v-html="svgData.svg" />
     </div>
     <Teleport to="body">

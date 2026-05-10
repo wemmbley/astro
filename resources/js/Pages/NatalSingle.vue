@@ -7,6 +7,7 @@ import Elements from "@/Components/Natal/Elements.vue";
 import Dominant from "@/Components/Natal/Dominant.vue";
 import AspectsGrid from "@/Components/Natal/AspectsGrid.vue";
 import ZodiacCanvas from "@/Components/Natal/ZodiacCanvas.vue";
+import SinglePlanet from "@/Components/Natal/SinglePlanet.vue";
 
 const props = defineProps({
     navbar: Object,
@@ -41,6 +42,7 @@ const props = defineProps({
             <div class="grid grid-cols-[1fr_280px] gap-6">
                 <div>
                     <h2 class="text-center font-medium pb-5 text-surface-200">Трактовка</h2>
+                    <SinglePlanet :planet="natal.planets.sun" />
                 </div>
             </div>
         </div>

@@ -4,11 +4,13 @@ namespace App\Models\Interpretations;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use WendellAdriel\Lift\Attributes\DB;
 use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Rules;
 use WendellAdriel\Lift\Lift;
 
+#[DB(table: 'interpret_planet_house')]
 class InterpretPlanetHouse extends Authenticatable
 {
     use HasFactory, Lift;
