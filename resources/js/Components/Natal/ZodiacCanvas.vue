@@ -146,14 +146,14 @@ const houseChains = computed(() =>
                             <template v-if="planet.retrograde"> ℞</template>
                         </Tooltip>
                     </div>
-                    <div class="relative group cursor-default">
-                        <SignIcon :sign="planet.sign" width="18" height="18" />
-                        <Tooltip>{{ signTranslations[planet.sign] }}</Tooltip>
-                    </div>
-                    <div class="relative group cursor-default">
-                        <HouseIcon :house="planet.house" width="18" height="18" />
-                        <Tooltip>{{ houseTranslations[planet.house] }}</Tooltip>
-                    </div>
+<!--                    <div class="relative group cursor-default">-->
+<!--                        <SignIcon :sign="planet.sign" width="18" height="18" />-->
+<!--                        <Tooltip>{{ signTranslations[planet.sign] }}</Tooltip>-->
+<!--                    </div>-->
+<!--                    <div class="relative group cursor-default">-->
+<!--                        <HouseIcon :house="planet.house" width="18" height="18" />-->
+<!--                        <Tooltip>{{ houseTranslations[planet.house] }}</Tooltip>-->
+<!--                    </div>-->
 <!--                    <span class="text-[9px] text-cream/50 leading-none">{{ planet.degreeFormatted }}</span>-->
                 </div>
             </template>

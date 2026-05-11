@@ -38,13 +38,17 @@ const props = defineProps({
             <h2 class="text-center font-medium pb-5 text-surface-200">Натальный документ</h2>
             <ZodiacCanvas :natal="natal" class="mb-5" />
         </div>
-        <div class="max-w-4xl pt-10 m-auto">
+        <div class="max-w-5xl pt-10 m-auto">
             <div class="grid grid-cols-[1fr_280px] gap-6">
                 <div>
-                    <h2 class="text-center font-medium pb-5 text-surface-200">Трактовка</h2>
-                    <div class="flex flex-col gap-5">
-                        <SinglePlanet :planet="natal.planets.sun" />
-                        <SinglePlanet :planet="natal.planets.moon" />
+                    <h2 class="text-2xl text-center pb-15 text-surface-200">Трактовка</h2>
+                    <div class="flex flex-col gap-15">
+                        <div v-for="planet in natal.planets" :key="planet.name">
+                            <SinglePlanet :planet="planet" />
+                            <div v-if="planet.name === 'pluto'" class="w-full text-center text-xl mt-30">
+                                <p>Неканонические планеты и фиктивные точки</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -13,12 +13,39 @@ import { signTranslations, houseTranslations, planetTranslations, aspectTranslat
 import type { AspectType, SignType, HouseType, PlanetType } from '@/Types/NatalTypes'
 import sunImage from '@/../img/Astro/PlanetArts/Sun.jpg'
 import moonImage from '@/../img/Astro/PlanetArts/Moon.png'
+import jupiterImage from '@/../img/Astro/PlanetArts/Jupiter.png'
+import neptuneImage from '@/../img/Astro/PlanetArts/Neptune.png'
+import northNodeImage from '@/../img/Astro/PlanetArts/NorthNode.jpg'
+import southNodeImage from '@/../img/Astro/PlanetArts/SouthNode.jpg'
+import plutoImage from '@/../img/Astro/PlanetArts/Pluto.jpg'
+import uranusImage from '@/../img/Astro/PlanetArts/Uranus.png'
+import venusImage from '@/../img/Astro/PlanetArts/Venus.jpg'
+import lilithImage from '@/../img/Astro/PlanetArts/Lilith.png'
+import mercuryImage from '@/../img/Astro/PlanetArts/Mercury.jpg'
+import fortuneImage from '@/../img/Astro/PlanetArts/Fortune.png'
+import saturnImage from '@/../img/Astro/PlanetArts/Saturn.png'
+import chironImage from '@/../img/Astro/PlanetArts/Chiron.jpg'
+import marsImage from '@/../img/Astro/PlanetArts/Mars.png'
+import {MoveRightIcon} from 'lucide-vue-next';
 
 type ParsedMd = ReturnType<typeof parseMarkdown>
 
 const IMAGE_NAME_MAPPER: Record<string, string> = {
     sun: sunImage,
     moon: moonImage,
+    jupiter: jupiterImage,
+    neptune: neptuneImage,
+    north_node: northNodeImage,
+    south_node: southNodeImage,
+    pluto: plutoImage,
+    uranus: uranusImage,
+    venus: venusImage,
+    lilith: lilithImage,
+    mercury: mercuryImage,
+    fortune: fortuneImage,
+    saturn: saturnImage,
+    chiron: chironImage,
+    mars: marsImage,
 }
 
 const HOUSE_WORD_TO_NUMBER: Record<string, number> = {
@@ -172,7 +199,7 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
         <div v-else class="flex gap-5 items-stretch">
 
             <!-- Левый столбец: изображение -->
-            <div class="shrink-0 w-38 h-110">
+            <div class="shrink-0 w-50 h-110">
                 <img
                     v-if="IMAGE_NAME_MAPPER[planet.name]"
                     :src="IMAGE_NAME_MAPPER[planet.name]"
@@ -197,80 +224,71 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                     <span
                         v-for="tag in tags"
                         :key="tag"
-                        class="text-xs text-gray-400 bg-surface-700 px-2 py-0.5 rounded-full"
+                        class="text-[14px] text-surface-200 py-0.5"
                     >
-                        {{ tag }}
+                        {{ tag }},
                     </span>
                     </div>
-                    <p v-if="entityFirstPara" class="text-sm text-gray-300">
+                    <p v-if="entityFirstPara"
+                       class="flex text-sm text-gray-300 hover:text-accent cursor-pointer"
+                       @click="openModal('entity')"
+                    >
                         {{ entityFirstPara }}
                     </p>
-                    <button class="text-xs text-accent hover:text-white transition self-start" @click="openModal('entity')">
-                        ...читать подробнее
-                    </button>
                 </div>
 
                 <!-- Знак -->
                 <div class="flex items-start gap-2">
-                    <SignIcon :sign="planet.sign" width="18" height="18" class="mt-0.5 shrink-0" />
                     <div class="flex flex-col gap-0.5">
-                        <span class="text-sm font-medium text-amber-300">
+                        <span class="flex text-sm font-medium text-amber-300 mb-1">
+                            <SignIcon :sign="planet.sign" width="20" height="20" class="mr-1.5 shrink-0" />
                             {{ signTranslations[planet.sign as SignType] }}
                         </span>
-                        <p v-if="signFirstPara" class="text-[13px] text-surface-100">
+                        <p v-if="signFirstPara"
+                           class="flex text-sm text-gray-300 hover:text-accent cursor-pointer"
+                           @click="openModal('sign')"
+                        >
                             {{ signFirstPara }}
                         </p>
-                        <button
-                            v-if="signMd"
-                            class="text-xs text-accent hover:text-white transition self-start"
-                            @click="openModal('sign')"
-                        >
-                            ...подробнее
-                        </button>
                     </div>
                 </div>
 
                 <!-- Дом -->
                 <div class="flex items-start gap-2">
-                    <HouseIcon :house="planet.house" width="24" height="24" class="mt-0.5 shrink-0" />
                     <div class="flex flex-col gap-0.5">
-                        <span class="text-sm font-medium text-amber-300">
+                        <span class="flex text-sm font-medium text-amber-300 mb-1">
+                            <HouseIcon :house="planet.house" width="20" height="20" class="mr-1.5 shrink-0" />
                             {{ houseTranslations[planet.house as HouseType] }}
                         </span>
-                        <p v-if="houseFirstPara" class="text-[13px] text-surface-100">
+                        <p v-if="houseFirstPara"
+                           class="flex text-sm text-gray-300 hover:text-accent cursor-pointer"
+                           @click="openModal('house')"
+                        >
                             {{ houseFirstPara }}
                         </p>
-                        <button
-                            v-if="houseMd"
-                            class="text-xs text-accent hover:text-white transition self-start"
-                            @click="openModal('house')"
-                        >
-                            ...подробнее
-                        </button>
                     </div>
                 </div>
 
                 <!-- Аспекты -->
-                <div v-if="planet.aspects.length" class="flex flex-col gap-2">
-                    <h3 class="text-xs uppercase tracking-wider text-gray-500">Аспекты</h3>
+                <div v-if="planet.aspects?.length" class="flex flex-col gap-2">
+                    <h3 class="flex text-sm text-surface-50 mb-1">Аспекты</h3>
                     <div
                         v-for="a in planet.aspects"
                         :key="aspectKey(a.name, a.target)"
                         class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
                         @click="openModal(aspectKey(a.name, a.target))"
                     >
-                        <PlanetIcon :planet="planet.name" :width="16" :height="16" />
                         <AspectIcon
                             :aspect="a.name"
                             :width="16"
                             :height="16"
                             :style="{ color: ASPECT_COLOR[a.name] }"
                         />
-                        <PlanetIcon :planet="a.target" :width="16" :height="16" />
                         <span class="text-xs text-gray-400">
                             {{ aspectTranslations[a.name as AspectType] }}
                             {{ planetTranslations[a.target as PlanetType] }}
                         </span>
+                        <PlanetIcon :planet="a.target" :width="16" :height="16" />
                         <!-- Орб бейджик -->
                         <span class="ml-auto text-xs font-mono text-surface-400">
                             {{ a.orbFormatted }}
