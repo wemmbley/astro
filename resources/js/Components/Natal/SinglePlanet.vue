@@ -19,14 +19,16 @@ import northNodeImage from '@/../img/Astro/PlanetArts/NorthNode.jpg'
 import southNodeImage from '@/../img/Astro/PlanetArts/SouthNode.jpg'
 import plutoImage from '@/../img/Astro/PlanetArts/Pluto.jpg'
 import uranusImage from '@/../img/Astro/PlanetArts/Uranus.png'
-import venusImage from '@/../img/Astro/PlanetArts/Venus.jpg'
+import venusImage from '@/../img/Astro/PlanetArts/Venus.png'
 import lilithImage from '@/../img/Astro/PlanetArts/Lilith.png'
 import mercuryImage from '@/../img/Astro/PlanetArts/Mercury.jpg'
 import fortuneImage from '@/../img/Astro/PlanetArts/Fortune.png'
 import saturnImage from '@/../img/Astro/PlanetArts/Saturn.png'
-import chironImage from '@/../img/Astro/PlanetArts/Chiron.jpg'
+import chironImage from '@/../img/Astro/PlanetArts/Chiron.png'
 import marsImage from '@/../img/Astro/PlanetArts/Mars.png'
 import {MoveRightIcon} from 'lucide-vue-next';
+import AIIcon from "@/Icons/AIIcon.vue";
+import ScriptIcon from "@/Icons/ScriptIcon.vue";
 
 type ParsedMd = ReturnType<typeof parseMarkdown>
 
@@ -215,9 +217,17 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
 
                 <!-- Entity -->
                 <div class="flex flex-col gap-1">
-                    <div class="flex items-center gap-2">
-                        <PlanetIcon :planet="planet.name" :width="20" :height="20" />
-                        <h2 class="font-semibold text-amber-300">{{ entityTitle }}</h2>
+                    <div class="flex items-center justify-between">
+                        <div class="flex gap-2">
+                            <PlanetIcon :planet="planet.name" :width="20" :height="20" />
+                            <h2 class="font-semibold text-amber-300">{{ entityTitle }}</h2>
+                        </div>
+                        <div class="
+                        text-accent border border-surface-600 bg-surface-700 rounded p-1.5
+                        hover:bg-surface-600 transition cursor-pointer
+                        ">
+                            <AIIcon :width="18" :height="18" />
+                        </div>
                     </div>
                     <!-- Тэги -->
                     <div v-if="tags.length" class="flex flex-wrap gap-1">
@@ -294,6 +304,14 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                             {{ a.orbFormatted }}
                         </span>
                     </div>
+                </div>
+
+                <div class="font-light flex justify-center
+                        text-accent/80 border border-surface-600 bg-surface-700 rounded p-1.5
+                        hover:bg-surface-600 transition cursor-pointer
+                        ">
+                    <ScriptIcon :width="20" :height="20" />
+                    <p class="pl-2">Читать полную легенду</p>
                 </div>
             </div>
         </div>
