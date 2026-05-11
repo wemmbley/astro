@@ -2,6 +2,8 @@
 defineProps<{
     title?: string
     show: boolean
+    wide?: boolean
+    confirm?: boolean  // показывать ли кнопки подтверждения
 }>()
 
 const emit = defineEmits(['update:show', 'confirm', 'cancel'])
@@ -13,43 +15,52 @@ const close = () => emit('update:show', false)
     <transition name="modal-fade">
         <div
             v-if="show"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-4"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-4 py-6"
             @click="close"
         >
             <transition name="modal-scale">
                 <div
                     v-if="show"
-                    class="relative w-full max-w-lg text-white bg-surface-700 border border-surface-500 rounded-2xl shadow-2xl"
+                    class="relative flex flex-col text-white bg-surface-700 border border-surface-500 rounded-2xl shadow-2xl transition-all duration-300"
+                    :class="wide
+                        ? 'w-full max-w-3xl h-[90vh]'
+                        : 'w-full max-w-lg max-h-[90vh]'
+                    "
                     @click.stop
                 >
-                    <button
-                        class="cursor-pointer absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-surface-500 transition"
-                        @click="close"
+                    <!-- Шапка -->
+                    <div class="shrink-0 flex items-center justify-between px-7 pt-6 pb-4 border-b border-surface-500">
+                        <h2 v-if="title" class="text-xl font-semibold pr-4">{{ title }}</h2>
+                        <button
+                            class="cursor-pointer ml-auto shrink-0 w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-surface-500 transition"
+                            @click="close"
+                        >
+                            ✕
+                        </button>
+                    </div>
+
+                    <!-- Контент со скроллом -->
+                    <div class="scrollbar-surface flex-1 overflow-y-auto px-7 py-5 text-gray-300 text-sm leading-relaxed">
+                        <slot />
+                    </div>
+
+                    <!-- Футер с кнопками (опционально) -->
+                    <div
+                        v-if="confirm"
+                        class="shrink-0 flex justify-end gap-3 px-7 py-5 border-t border-surface-500"
                     >
-                        ✕
-                    </button>
-
-                    <div class="p-7">
-                        <h2 v-if="title" class="text-xl font-semibold pr-8">{{ title }}</h2>
-
-                        <div class="mt-4 text-gray-300 text-sm leading-relaxed">
-                            <slot />
-                        </div>
-
-                        <div class="mt-7 flex justify-end gap-3">
-                            <button
-                                class="cursor-pointer px-5 py-2.5 rounded-xl text-sm font-medium text-gray-300 bg-surface-600 hover:bg-surface-500 transition"
-                                @click="emit('cancel'); close()"
-                            >
-                                Отмена
-                            </button>
-                            <button
-                                class="cursor-pointer px-5 py-2.5 rounded-xl text-sm font-medium bg-blue-600 hover:bg-blue-500 active:scale-95 transition text-white"
-                                @click="emit('confirm'); close()"
-                            >
-                                Подтвердить
-                            </button>
-                        </div>
+                        <button
+                            class="cursor-pointer px-5 py-2.5 rounded-xl text-sm font-medium text-gray-300 bg-surface-600 hover:bg-surface-500 transition"
+                            @click="emit('cancel'); close()"
+                        >
+                            Отмена
+                        </button>
+                        <button
+                            class="cursor-pointer px-5 py-2.5 rounded-xl text-sm font-medium bg-blue-600 hover:bg-blue-500 active:scale-95 transition text-white"
+                            @click="emit('confirm'); close()"
+                        >
+                            Подтвердить
+                        </button>
                     </div>
                 </div>
             </transition>

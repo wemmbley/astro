@@ -14,6 +14,8 @@ import type { AspectType, SignType, HouseType, PlanetType } from '@/Types/NatalT
 import sunImage from '@/../img/Astro/PlanetArts/Sun.jpg'
 import moonImage from '@/../img/Astro/PlanetArts/Moon.png'
 
+type ParsedMd = ReturnType<typeof parseMarkdown>
+
 const IMAGE_NAME_MAPPER: Record<string, string> = {
     sun: sunImage,
     moon: moonImage,
@@ -71,17 +73,11 @@ const { data, isLoading } = useQuery({
 })
 
 const interpret = computed(() => data.value?.interpret ?? null)
-
-// ── Markdown хелперы ─────────────────────────────────────────────────────────
-type ParsedMd = ReturnType<typeof parseMarkdown>
-
-// ── Тэги планеты (восстанавливаем) ───────────────────────────────────────────
 const tags = computed(() => entityMd.value?.attributes?.tags ?? [])
 
 // ── Все блоки для модалки (h1 + h2 + все подуровни) ─────────────────────────
 const allBlocks = (md: ParsedMd | null) => {
     if (!md) return []
-    // собираем по всем уровням заголовков
     const blocks: any[] = []
     for (let level = 1; level <= 4; level++) {
         const sections = md.byLevel(level) ?? []
@@ -90,7 +86,6 @@ const allBlocks = (md: ParsedMd | null) => {
                 blocks.push({ type: 'heading', text: section.heading, level })
             }
             for (const b of section.blocks ?? []) {
-                // не дублируем — блок мог уже попасть через byLevel(1)
                 if (!blocks.includes(b)) blocks.push(b)
             }
         }
@@ -101,7 +96,7 @@ const allBlocks = (md: ParsedMd | null) => {
 // Первый абзац секции "Описание" (вторая h1, индекс 1) — для превью
 const descriptionFirstPara = (md: ParsedMd | null): string | null => {
     if (!md) return null
-    const sections = md.byLevel(1)
+    const sections = md.byLevel(2)
     // ищем секцию с заголовком "Описание" или берём вторую
     const descSection = sections.find((s: any) =>
         s.heading?.toLowerCase() === 'описание'
@@ -137,12 +132,12 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
 
 <template>
     <!-- ── Модалка: entity ───────────────────────────────────────────────── -->
-    <Modal :title="entityTitle" :show="!!modals['entity']" @update:show="closeModal('entity')">
+    <Modal wide :title="entityTitle" :show="!!modals['entity']" @update:show="closeModal('entity')">
         <Markdown :blocks="allBlocks(entityMd)" />
     </Modal>
 
     <!-- ── Модалка: знак ─────────────────────────────────────────────────── -->
-    <Modal
+    <Modal wide
         :title="signTranslations[planet.sign as SignType]"
         :show="!!modals['sign']"
         @update:show="closeModal('sign')"
@@ -151,7 +146,7 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
     </Modal>
 
     <!-- ── Модалка: дом ──────────────────────────────────────────────────── -->
-    <Modal
+    <Modal wide
         :title="houseTranslations[planet.house as HouseType]"
         :show="!!modals['house']"
         @update:show="closeModal('house')"
@@ -161,7 +156,7 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
 
     <!-- ── Модалки: аспекты ──────────────────────────────────────────────── -->
     <template v-for="a in planet.aspects" :key="`modal-${a.name}-${a.target}`">
-        <Modal
+        <Modal wide
             :title="`${aspectTranslations[a.name as AspectType]} → ${planetTranslations[a.target as PlanetType]}`"
             :show="!!modals[aspectKey(a.name, a.target)]"
             @update:show="closeModal(aspectKey(a.name, a.target))"
@@ -177,7 +172,7 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
         <div v-else class="flex gap-5 items-stretch">
 
             <!-- Левый столбец: изображение -->
-            <div class="shrink-0 w-36">
+            <div class="shrink-0 w-38 h-110">
                 <img
                     v-if="IMAGE_NAME_MAPPER[planet.name]"
                     :src="IMAGE_NAME_MAPPER[planet.name]"
@@ -194,7 +189,7 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                 <!-- Entity -->
                 <div class="flex flex-col gap-1">
                     <div class="flex items-center gap-2">
-                        <PlanetIcon :planet="planet.name" :width="18" :height="18" />
+                        <PlanetIcon :planet="planet.name" :width="20" :height="20" />
                         <h2 class="font-semibold text-amber-300">{{ entityTitle }}</h2>
                     </div>
                     <!-- Тэги -->
@@ -207,7 +202,7 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                         {{ tag }}
                     </span>
                     </div>
-                    <p v-if="entityFirstPara" class="text-sm text-gray-300 line-clamp-2">
+                    <p v-if="entityFirstPara" class="text-sm text-gray-300">
                         {{ entityFirstPara }}
                     </p>
                     <button class="text-xs text-accent hover:text-white transition self-start" @click="openModal('entity')">
@@ -219,10 +214,10 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                 <div class="flex items-start gap-2">
                     <SignIcon :sign="planet.sign" width="18" height="18" class="mt-0.5 shrink-0" />
                     <div class="flex flex-col gap-0.5">
-                        <span class="text-sm font-medium text-amber-200">
+                        <span class="text-sm font-medium text-amber-300">
                             {{ signTranslations[planet.sign as SignType] }}
                         </span>
-                        <p v-if="signFirstPara" class="text-xs text-gray-400 line-clamp-2">
+                        <p v-if="signFirstPara" class="text-[13px] text-surface-100">
                             {{ signFirstPara }}
                         </p>
                         <button
@@ -237,12 +232,12 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
 
                 <!-- Дом -->
                 <div class="flex items-start gap-2">
-                    <HouseIcon :house="planet.house" width="18" height="18" class="mt-0.5 shrink-0" />
+                    <HouseIcon :house="planet.house" width="24" height="24" class="mt-0.5 shrink-0" />
                     <div class="flex flex-col gap-0.5">
-                        <span class="text-sm font-medium text-amber-200">
+                        <span class="text-sm font-medium text-amber-300">
                             {{ houseTranslations[planet.house as HouseType] }}
                         </span>
-                        <p v-if="houseFirstPara" class="text-xs text-gray-400 line-clamp-2">
+                        <p v-if="houseFirstPara" class="text-[13px] text-surface-100">
                             {{ houseFirstPara }}
                         </p>
                         <button
@@ -277,10 +272,7 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                             {{ planetTranslations[a.target as PlanetType] }}
                         </span>
                         <!-- Орб бейджик -->
-                        <span
-                            class="ml-auto text-xs px-1.5 py-0.5 rounded-md font-mono"
-                            :style="{ color: ASPECT_COLOR[a.name] }"
-                        >
+                        <span class="ml-auto text-xs font-mono text-surface-400">
                             {{ a.orbFormatted }}
                         </span>
                     </div>

@@ -26,17 +26,32 @@ function tokenToBlocks(tokens: marked.Token[]): Block[] {
 
     for (const t of tokens) {
         if (t.type === 'paragraph') {
-            const imageToken = (t.tokens ?? []).find(i => i.type === 'image') as any
-            const linkToken  = (t.tokens ?? []).find(i => i.type === 'link')  as any
+            const children = t.tokens ?? []
 
-            if (imageToken) {
+            // [![alt](src)](url) — link содержащий image
+            const linkWithImage = children.find(
+                (i: any) => i.type === 'link' && i.tokens?.some((j: any) => j.type === 'image')
+            ) as any
+
+            // просто ![alt](src) без ссылки
+            const bareImage = children.find((i: any) => i.type === 'image') as any
+
+            if (linkWithImage) {
+                const img = linkWithImage.tokens.find((j: any) => j.type === 'image')
                 blocks.push({
                     type: 'image',
-                    href: imageToken.href,
-                    alt:  imageToken.text,
-                    link: linkToken?.href,
+                    href: img.href,
+                    alt:  img.text ?? img.alt ?? '',
+                    link: linkWithImage.href,
+                })
+            } else if (bareImage) {
+                blocks.push({
+                    type: 'image',
+                    href: bareImage.href,
+                    alt:  bareImage.text ?? bareImage.alt ?? '',
                 })
             } else {
+                // сохраняем raw чтобы не потерять \n внутри параграфа
                 blocks.push({ type: 'paragraph', text: t.raw.trim() })
             }
         } else if (t.type === 'list') {
@@ -50,7 +65,6 @@ function tokenToBlocks(tokens: marked.Token[]): Block[] {
         } else if (t.type === 'hr') {
             blocks.push({ type: 'hr' })
         }
-        // space и прочий шум — пропускаем
     }
 
     return blocks
