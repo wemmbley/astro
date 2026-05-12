@@ -20,6 +20,9 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^3.0.3",
+        "@milkdown/crepe": "^7.21.0",
+        "@milkdown/kit": "^7.21.0",
+        "@milkdown/vue": "^7.21.0",
         "@tanstack/vue-query": "^5.100.9",
         "@vitejs/plugin-vue": "^6.0.6",
         "@vueuse/core": "^14.3.0",
