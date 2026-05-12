@@ -22,8 +22,8 @@ final class Birthday
         [$day, $month, $year] = explode('-', $date);
         [$hour, $minute] = explode('-', $time);
 
-        $this->lat = $this->dmsToDecimal($lat);
-        $this->lon = $this->dmsToDecimal($lon);
+        $this->lat = $lat;
+        $this->lon = $lon;
         $this->day = $day;
         $this->month = $month;
         $this->year = $year;
@@ -164,17 +164,5 @@ final class Birthday
         if($this->minute < 0 || $this->minute > 59) {
             throw new \InvalidArgumentException('Invalid minute handed.');
         }
-    }
-
-    private function dmsToDecimal(float $dms): float
-    {
-        $degrees = (int) $dms;
-        $minutesPart = round(($dms - $degrees) * 100);
-
-        if ($minutesPart >= 60) {
-            return $dms;
-        }
-
-        return $degrees + $minutesPart / 60;
     }
 }
