@@ -1,12 +1,19 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     title?: string
     show: boolean
     wide?: boolean
+    ultrawide?: boolean
     confirm?: boolean  // показывать ли кнопки подтверждения
 }>()
 
 const emit = defineEmits(['update:show', 'confirm', 'cancel'])
+
+function getWideClasses() {
+    if(props.ultrawide) return 'max-w-4xl h-[90vh]';
+    if(props.wide) return 'max-w-lg max-h-[90vh]';
+    return 'max-w-3xl h-[90vh]';
+}
 
 const close = () => emit('update:show', false)
 </script>
@@ -23,10 +30,7 @@ const close = () => emit('update:show', false)
                     v-if="show"
                     class="relative flex flex-col text-white bg-surface-700 border
                     border-surface-500 rounded-2xl shadow-2xl transition-all duration-300"
-                    :class="wide
-                        ? 'w-full max-w-3xl h-[90vh]'
-                        : 'w-full max-w-lg max-h-[90vh]'
-                    "
+                    :class="'w-full' + getWideClasses()"
                     @click.stop
                 >
                     <!-- Шапка -->

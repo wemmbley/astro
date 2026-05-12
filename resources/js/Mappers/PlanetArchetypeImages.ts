@@ -10,6 +10,7 @@ import mercuryImage from '@/../img/Astro/Archetype/Mercury.jpg'
 import saturnImage from '@/../img/Astro/Archetype/Saturn.png'
 import chironImage from '@/../img/Astro/Archetype/Chiron.png'
 import marsImage from '@/../img/Astro/Archetype/Mars.png'
+import astrologerImage from '@/../img/Astro/Archetype/Astrologer.png'
 
 const IMAGE_NAME_MAPPER: Record<string, string> = {
     sun: sunImage,
@@ -24,6 +25,7 @@ const IMAGE_NAME_MAPPER: Record<string, string> = {
     saturn: saturnImage,
     chiron: chironImage,
     mars: marsImage,
+    astrologer: astrologerImage,
 }
 
 export function getPlanetArchetypeImage(name: string)
