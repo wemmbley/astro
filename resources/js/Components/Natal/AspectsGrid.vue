@@ -3,8 +3,8 @@ import { computed, ref } from 'vue'
 import PlanetIcon from "@/Icons/Zodiac/PlanetIcon.vue"
 import AspectIcon from "@/Icons/Zodiac/AspectIcon.vue"
 import Tooltip from "@/Utils/Tooltip.vue";
-import { aspectTranslations } from "@/Lang/NatalTypesLang"
-import { planetTranslations } from "../../Lang/NatalTypesLang";
+import { aspectTranslations, planetTranslations } from "@/Lang/NatalTypesLang"
+import { getAspectColor } from "@/Mappers/AspectColor"
 
 const props = defineProps<{
     planets: Record<string, {
@@ -16,22 +16,6 @@ const props = defineProps<{
         }>
     }>
 }>()
-
-const ASPECT_COLOR: Record<string, string> = {
-    conjunction:    '#3b82f6', // слияние в чистом свете, начало цикла
-    opposition:     '#c23c3c', // противостояние, столкновение двух истин
-    square:         '#c23c3c', // трение, высекающее искру действия
-    trine:          '#eebe21', // природная лёгкость, дар потока
-    sextile:        '#eebe21', // свежий ветер возможностей
-    semisquare:     '#c23c3c', // назойливый зуд, требующий внимания
-    sesquiquadrate: '#c23c3c', // застарелое напряжение, подтачивающее изнутри
-    quincunx:       '#ba54ee', // иррациональная нестыковка, вынужденная адаптация
-    quintile:       '#3b82f6', // творческая искра, игра ума
-    biquintile:     '#3b82f6', // оформленный талант, двойная квинтэссенция
-    semisextile:    '#9ca3af', // едва заметная связь, требующая осознанности
-    parallel:       '#3b82f6', // глубинный резонанс, подобный соединению на уровне склонения
-    contraparallel: '#c23c3c', // скрытое противостояние, подобное оппозиции
-};
 
 const list = computed(() => Object.keys(props.planets))
 
@@ -74,7 +58,6 @@ const getAspects = (row: string, col: string) => {
                         @mouseenter="hovered = { ri, ci }"
                         @mouseleave="hovered = null"
                     >
-                        <!-- Диагональ — иконка планеты -->
                         <div
                             v-if="ci === ri"
                             class="w-9 h-9 flex items-center justify-center rounded transition-colors relative group"
@@ -84,25 +67,25 @@ const getAspects = (row: string, col: string) => {
                             <Tooltip>{{ planetTranslations[row.toLowerCase()] }}</Tooltip>
                         </div>
 
-                        <!-- Ячейка аспектов -->
                         <div
                             v-else
                             class="relative group w-9 h-9 flex flex-wrap items-center justify-center gap-px p-0.5 border border-white/8 rounded transition-colors"
                             :class="isHighlighted(ri, ci) ? 'bg-surface-600' : ''"
                         >
                             <AspectIcon
-                                v-for="a in getAspects(row, col)"
-                                :key="a.name"
-                                :aspect="a.name"
-                                :color="ASPECT_COLOR[a.name] ?? '#ffffff'"
+                                v-for="aspect in getAspects(row, col)"
+                                :key="aspect.name"
+                                :aspect="aspect.name"
+                                :color="getAspectColor(aspect.name) ?? '#ffffff'"
                                 :width="getAspects(row, col).length > 1 ? 13 : 19"
                                 :height="getAspects(row, col).length > 1 ? 13 : 19"
                             />
 
-                            <!-- Тултип -->
                             <div v-if="getAspects(row, col).length">
-                                <div v-for="a in getAspects(row, col)" :key="a.name">
-                                    <Tooltip>{{ aspectTranslations[a.name] }} {{ a.orbFormatted }}</Tooltip>
+                                <div v-for="aspect in getAspects(row, col)" :key="aspect.name">
+                                    <Tooltip>
+                                        {{ aspectTranslations[aspect.name] }} {{ aspect.orbFormatted }}
+                                    </Tooltip>
                                 </div>
                             </div>
                         </div>

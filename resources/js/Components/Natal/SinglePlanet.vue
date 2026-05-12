@@ -11,54 +11,15 @@ import HouseIcon from '@/Icons/Zodiac/HouseIcon.vue'
 import AspectIcon from '@/Icons/Zodiac/AspectIcon.vue'
 import { signTranslations, houseTranslations, planetTranslations, aspectTranslations } from '@/Lang/NatalTypesLang'
 import type { AspectType, SignType, HouseType, PlanetType } from '@/Types/NatalTypes'
-import sunImage from '@/../img/Astro/PlanetArts/Sun.jpg'
-import moonImage from '@/../img/Astro/PlanetArts/Moon.png'
-import jupiterImage from '@/../img/Astro/PlanetArts/Jupiter.png'
-import neptuneImage from '@/../img/Astro/PlanetArts/Neptune.png'
-import northNodeImage from '@/../img/Astro/PlanetArts/NorthNode.jpg'
-import southNodeImage from '@/../img/Astro/PlanetArts/SouthNode.jpg'
-import plutoImage from '@/../img/Astro/PlanetArts/Pluto.jpg'
-import uranusImage from '@/../img/Astro/PlanetArts/Uranus.png'
-import venusImage from '@/../img/Astro/PlanetArts/Venus.png'
-import lilithImage from '@/../img/Astro/PlanetArts/Lilith.png'
-import mercuryImage from '@/../img/Astro/PlanetArts/Mercury.jpg'
-import fortuneImage from '@/../img/Astro/PlanetArts/Fortune.png'
-import saturnImage from '@/../img/Astro/PlanetArts/Saturn.png'
-import chironImage from '@/../img/Astro/PlanetArts/Chiron.png'
-import marsImage from '@/../img/Astro/PlanetArts/Mars.png'
 import AIIcon from "@/Icons/AIIcon.vue";
+import { getPlanetImage } from "@/Mappers/PlanetImages"
+import { getAspectColor } from "@/Mappers/AspectColor"
 
 type ParsedMd = ReturnType<typeof parseMarkdown>
-
-const IMAGE_NAME_MAPPER: Record<string, string> = {
-    sun: sunImage,
-    moon: moonImage,
-    jupiter: jupiterImage,
-    neptune: neptuneImage,
-    north_node: northNodeImage,
-    south_node: southNodeImage,
-    pluto: plutoImage,
-    uranus: uranusImage,
-    venus: venusImage,
-    lilith: lilithImage,
-    mercury: mercuryImage,
-    fortune: fortuneImage,
-    saturn: saturnImage,
-    chiron: chironImage,
-    mars: marsImage,
-}
 
 const HOUSE_WORD_TO_NUMBER: Record<string, number> = {
     one: 1, two: 2, three: 3, four: 4, five: 5, six: 6,
     seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12,
-}
-
-const ASPECT_COLOR: Record<string, string> = {
-    conjunction: '#3b82f6',
-    opposition:  '#c23c3c',
-    square:      '#c23c3c',
-    trine:       '#eebe21',
-    sextile:     '#eebe21',
 }
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
@@ -147,21 +108,18 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
     <!-- ── Модалка: AI ───────────────────────────────────────────────── -->
     <Modal :title="entityTitle" :show="!!modals['ai']" @update:show="closeModal('ai')">
         <div class="space-y-4 text-sm leading-6">
-
             <p>
                 Получите возможность лично пообщаться с профессиональным
                 AI-астрологом и задать любой вопрос о Вашей Планете,
                 её влиянии на жизнь, характер, отношения, внутренние конфликты,
                 реализации и жизненных сценариях.
             </p>
-
             <p>
                 В отличие от кратких трактовок, диалог позволяет
                 разбирать Вашу карту глубоко и целостно —
                 с учётом Знака, Дома, аспектов и взаимосвязей
                 со всеми остальными Планетами.
             </p>
-
             <ul class="list-disc pl-5 space-y-1">
                 <li>любые вопросы без ограничений по теме;</li>
                 <li>глубокие и связанные ответы вместо шаблонов;</li>
@@ -169,42 +127,31 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                 <li>разбор сильных сторон и внутренних противоречий;</li>
                 <li>живой интерактивный формат общения.</li>
             </ul>
-
             <p>
                 AI обучен на профессиональных авторских материалах
                 и ведёт диалог на основе именно Вашей натальной карты.
             </p>
-
             <div class="pt-2 border-t border-surface-500">
                 <div class="flex items-center justify-between">
                     <span class="text-sm opacity-70">Доступ к AI-диалогу</span>
                     <span class="text-lg font-semibold">58 грн</span>
                 </div>
-
-                <button
-                    class="text-accent border border-accent w-full mt-4 rounded-xl py-3 font-medium"
-                >
+                <button class="text-accent border border-accent w-full mt-4 rounded-xl py-3 font-medium">
                     Начать диалог
                 </button>
             </div>
-
         </div>
     </Modal>
 
     <!-- ── Модалка: AI Collect Text ──────────────────────────────────────── -->
     <Modal :title="entityTitle" :show="!!modals['aiFull']" @update:show="closeModal('aiFull')">
         <div class="space-y-4 text-sm leading-6">
-
             <p>
                 Получите целостную и глубокую трактовку Вашей Планеты,
                 созданную на основе профессиональной астрологической системы
                 и авторской базы интерпретаций.
             </p>
-
-            <p>
-                Анализ включает:
-            </p>
-
+            <p>Анализ включает:</p>
             <ul class="list-disc pl-5 space-y-1">
                 <li>положение Планеты в Знаке и Доме;</li>
                 <li>влияние всех аспектов и взаимосвязей;</li>
@@ -212,32 +159,27 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                 <li>сильные стороны, внутренние противоречия и потенциал реализации;</li>
                 <li>единое цельное описание без разрозненных фрагментов.</li>
             </ul>
-
             <p>
                 Текст генерируется персонально по Вашей натальной карте
                 и формирует полноценный связный портрет вместо набора
-                отдельных трактовок.
+                отдельных трактовок. Вам не придётся пытаться самостоятельно
+                собирать фрагментированную информацию - полная картина будет
+                перед Вами.
             </p>
-
             <p class="text-surface-300">
                 * Далее Вы сможете пообщаться с AI
                 в обычном формате вопрос-ответ, по цене 58грн за сообщение,
                 если у Вас будут уточняющие вопросы.
             </p>
-
             <div class="pt-2 border-t border-surface-500">
                 <div class="flex items-center justify-between">
                     <span class="text-sm opacity-70">Полный разбор</span>
                     <span class="text-lg font-semibold">71 грн</span>
                 </div>
-
-                <button
-                    class="text-accent border border-accent w-full mt-4 rounded-xl py-3 font-medium"
-                >
+                <button class="text-accent border border-accent w-full mt-4 rounded-xl py-3 font-medium">
                     Получить полный анализ
                 </button>
             </div>
-
         </div>
     </Modal>
 
@@ -275,28 +217,20 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
         </Modal>
     </template>
 
-    <!-- ── Карточка ──────────────────────────────────────────────────────── -->
     <div class="mb-5">
         <div v-if="isLoading" class="h-40 w-full animate-pulse rounded-md bg-surface-700"/>
-
         <div v-else class="flex gap-5 items-stretch">
-
-            <!-- Левый столбец: изображение -->
             <div class="shrink-0 w-50 h-110">
                 <img
-                    v-if="IMAGE_NAME_MAPPER[planet.name]"
-                    :src="IMAGE_NAME_MAPPER[planet.name]"
+                    v-if="getPlanetImage(planet.name)"
+                    :src="getPlanetImage(planet.name)"
                     class="w-full h-full object-cover rounded-xl"
-                />
+                    alt="planet image preview" />
                 <div v-else class="w-full h-full flex items-center justify-center">
                     <PlanetIcon :planet="planet.name" :width="48" :height="48" />
                 </div>
             </div>
-
-            <!-- Правый столбец: контент -->
             <div class="flex flex-col gap-4 flex-1 min-w-0">
-
-                <!-- Entity -->
                 <div class="flex flex-col gap-1">
                     <div class="flex items-center justify-between">
                         <div class="flex gap-2">
@@ -311,30 +245,27 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                             <AIIcon :width="18" :height="18" />
                         </div>
                     </div>
-                    <!-- Тэги -->
                     <div v-if="tags.length" class="flex flex-wrap gap-1">
                     <span
                         v-for="tag in tags"
                         :key="tag"
-                        class="text-[14px] text-surface-200 py-0.5"
-                    >
+                        class="text-[14px] text-surface-200 py-0.5">
                         {{ tag }},
                     </span>
                     </div>
                     <p
                         v-if="entityFirstPara"
-                        class="text-sm text-gray-300 hover:text-accent cursor-pointer"
-                        @click="openModal('entity')"
-                    >
+                        class="text-sm text-gray-300"
+                        @click="openModal('entity')">
                         {{ entityFirstPara }}
                         <span class="inline-flex text-accent">
-                            <MoveRightIcon class=" w-4 h-4 align-middle ml-1 mt-0.5" />
-                            <span class="ml-2">читать далее</span>
+                                <span class="
+                                    transition ml-2 hover:text-surface-100 hover:underline cursor-pointer">
+                                    ...читать далее
+                                </span>
                         </span>
                     </p>
                 </div>
-
-                <!-- Знак -->
                 <div class="flex items-start gap-2">
                     <div class="flex flex-col gap-0.5">
                         <span class="flex text-sm font-medium text-amber-300 mb-1">
@@ -342,19 +273,18 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                             {{ signTranslations[planet.sign as SignType] }}
                         </span>
                         <p v-if="signFirstPara"
-                           class="text-sm text-gray-300 hover:text-accent cursor-pointer"
-                           @click="openModal('sign')"
-                        >
+                           class="text-sm text-gray-300"
+                           @click="openModal('sign')">
                             {{ signFirstPara }}
                             <span class="inline-flex text-accent">
-                                <MoveRightIcon class="w-4 h-4 align-middle ml-1 mt-0.5" />
-                                <span class="ml-2">читать далее</span>
+                                <span class="
+                                    transition ml-2 hover:text-surface-100 hover:underline cursor-pointer">
+                                    ...читать далее
+                                </span>
                             </span>
                         </p>
                     </div>
                 </div>
-
-                <!-- Дом -->
                 <div class="flex items-start gap-2">
                     <div class="flex flex-col gap-0.5">
                         <span class="flex text-sm font-medium text-amber-300 mb-1">
@@ -362,49 +292,43 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                             {{ houseTranslations[planet.house as HouseType] }}
                         </span>
                         <p v-if="houseFirstPara"
-                           class="text-sm text-gray-300 hover:text-accent cursor-pointer"
-                           @click="openModal('house')"
-                        >
+                           class="text-sm text-gray-300"
+                           @click="openModal('house')">
                             {{ houseFirstPara }}
                             <span class="inline-flex text-accent">
-                                <MoveRightIcon class="w-4 h-4 align-middle ml-1 mt-0.5" />
-                                <span class="ml-2">читать далее</span>
+                                <span class="
+                                transition ml-2 hover:text-surface-100 hover:underline cursor-pointer">
+                                    ...читать далее
+                                </span>
                             </span>
                         </p>
                     </div>
                 </div>
-
-                <!-- Аспекты -->
                 <div v-if="planet.aspects?.length" class="flex flex-col gap-2">
                     <h3 class="flex text-sm text-surface-50 mb-1">Аспекты</h3>
                     <div
-                        v-for="a in planet.aspects"
-                        :key="aspectKey(a.name, a.target)"
+                        v-for="aspect in planet.aspects"
+                        :key="aspectKey(aspect.name, aspect.target)"
                         class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
-                        @click="openModal(aspectKey(a.name, a.target))"
-                    >
+                        @click="openModal(aspectKey(aspect.name, aspect.target))">
                         <AspectIcon
-                            :aspect="a.name"
+                            :aspect="aspect.name"
                             :width="16"
                             :height="16"
-                            :style="{ color: ASPECT_COLOR[a.name] }"
-                        />
+                            :style="{ color: getAspectColor(aspect.name) }"/>
                         <span class="text-xs text-gray-400 hover:text-accent">
-                            {{ aspectTranslations[a.name as AspectType] }}
-                            {{ planetTranslations[a.target as PlanetType] }}
+                            {{ aspectTranslations[aspect.name as AspectType] }}
+                            {{ planetTranslations[aspect.target as PlanetType] }}
                         </span>
-                        <PlanetIcon :planet="a.target" :width="16" :height="16" />
-                        <!-- Орб бейджик -->
+                        <PlanetIcon :planet="aspect.target" :width="16" :height="16" />
                         <span class="ml-auto text-xs font-mono text-surface-400">
-                            {{ a.orbFormatted }}
+                            {{ aspect.orbFormatted }}
                         </span>
                     </div>
                 </div>
-
                 <div class="font-medium uppercase text-xs flex justify-center
                         text-accent/80 border border-surface-600 bg-surface-700 rounded p-1.5
-                        hover:bg-surface-600 transition cursor-pointer
-                        "
+                        hover:bg-surface-600 transition cursor-pointer"
                     @click="openModal('aiFull')">
                     <AIIcon :width="20" :height="20" />
                     <p class="pl-2">Читать полную легенду</p>

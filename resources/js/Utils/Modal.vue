@@ -21,7 +21,8 @@ const close = () => emit('update:show', false)
             <transition name="modal-scale">
                 <div
                     v-if="show"
-                    class="relative flex flex-col text-white bg-surface-700 border border-surface-500 rounded-2xl shadow-2xl transition-all duration-300"
+                    class="relative flex flex-col text-white bg-surface-700 border
+                    border-surface-500 rounded-2xl shadow-2xl transition-all duration-300"
                     :class="wide
                         ? 'w-full max-w-3xl h-[90vh]'
                         : 'w-full max-w-lg max-h-[90vh]'
@@ -40,7 +41,8 @@ const close = () => emit('update:show', false)
                     </div>
 
                     <!-- Контент со скроллом -->
-                    <div class="scrollbar-surface flex-1 overflow-y-auto px-7 py-5 text-gray-300 text-sm leading-relaxed">
+                    <div class="scrollbar-surface flex-1 overflow-y-auto py-5 px-20
+                    text-gray-300 text-md leading-relaxed">
                         <slot />
                     </div>
 
