@@ -2,6 +2,7 @@ import { marked } from 'marked'
 import fm from 'front-matter'
 
 export type Block =
+    | { type: 'heading'; level: number; text: string }
     | { type: 'paragraph'; text: string }
     | { type: 'list'; ordered: boolean; items: string[] }
     | { type: 'code'; lang: string; text: string }
@@ -110,4 +111,14 @@ export function parseMarkdown(source: string): ParsedMarkdown {
         get:     (heading) => sections.find(s => s.heading === heading),
         byLevel: (level)   => sections.filter(s => s.level === level),
     }
+}
+
+export function sectionsToBlocks(sections: Section[]): Block[] {
+    return sections.flatMap(s => [
+        ...(s.level > 0
+                ? [{ type: 'heading' as const, level: s.level, text: s.heading }]
+                : []
+        ),
+        ...s.blocks,
+    ])
 }

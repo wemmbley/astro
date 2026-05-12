@@ -2,7 +2,7 @@
 import { computed, reactive } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
 import { api } from '@/Libs/Fetcher'
-import { parseMarkdown } from '@/Libs/Marked'
+import { parseMarkdown, sectionsToBlocks } from '@/Libs/Marked'
 import Modal from '@/Utils/Modal.vue'
 import Markdown from '@/Utils/Markdown.vue'
 import PlanetIcon from '@/Icons/Zodiac/PlanetIcon.vue'
@@ -26,7 +26,6 @@ import fortuneImage from '@/../img/Astro/PlanetArts/Fortune.png'
 import saturnImage from '@/../img/Astro/PlanetArts/Saturn.png'
 import chironImage from '@/../img/Astro/PlanetArts/Chiron.png'
 import marsImage from '@/../img/Astro/PlanetArts/Mars.png'
-import {MoveRightIcon} from 'lucide-vue-next';
 import AIIcon from "@/Icons/AIIcon.vue";
 
 type ParsedMd = ReturnType<typeof parseMarkdown>
@@ -103,33 +102,20 @@ const { data, isLoading } = useQuery({
 const interpret = computed(() => data.value?.interpret ?? null)
 const tags = computed(() => entityMd.value?.attributes?.tags ?? [])
 
-// ── Все блоки для модалки (h1 + h2 + все подуровни) ─────────────────────────
+// ── Все блоки для модалки ─────────────────────────────────────────────────────
 const allBlocks = (md: ParsedMd | null) => {
     if (!md) return []
-    const blocks: any[] = []
-    for (let level = 1; level <= 4; level++) {
-        const sections = md.byLevel(level) ?? []
-        for (const section of sections) {
-            if (section.heading) {
-                blocks.push({ type: 'heading', text: section.heading, level })
-            }
-            for (const b of section.blocks ?? []) {
-                if (!blocks.includes(b)) blocks.push(b)
-            }
-        }
-    }
-    return blocks
+    return sectionsToBlocks(md.sections)
 }
 
-// Первый абзац секции "Описание" (вторая h1, индекс 1) — для превью
+// Первый абзац секции "Описание" — для превью
 const descriptionFirstPara = (md: ParsedMd | null): string | null => {
     if (!md) return null
-    const sections = md.byLevel(2)
-    // ищем секцию с заголовком "Описание" или берём вторую
-    const descSection = sections.find((s: any) =>
-        s.heading?.toLowerCase() === 'описание'
-    ) ?? sections[1] ?? null
-    return descSection?.blocks?.find((b: any) => b.type === 'paragraph')?.text ?? null
+    const descSection =
+        md.get('Описание') ??
+        md.byLevel(2)[0] ??
+        null
+    return descSection?.blocks?.find(b => b.type === 'paragraph')?.text ?? null
 }
 
 // ── Парсинг ───────────────────────────────────────────────────────────────────
@@ -148,7 +134,6 @@ const aspectMdMap = computed(() => {
     if (!interpret.value?.aspects?.length) return map
     for (const a of interpret.value.aspects) {
         if (!a.content) continue
-        // ключ в нижнем регистре для надёжного поиска
         const key = `${a.aspect.toLowerCase()}-${a.to_planet.toLowerCase()}`
         map[key] = parseMarkdown(a.content)
     }
@@ -232,6 +217,12 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
                 Текст генерируется персонально по Вашей натальной карте
                 и формирует полноценный связный портрет вместо набора
                 отдельных трактовок.
+            </p>
+
+            <p class="text-surface-300">
+                * Далее Вы сможете пообщаться с AI
+                в обычном формате вопрос-ответ, по цене 58грн за сообщение,
+                если у Вас будут уточняющие вопросы.
             </p>
 
             <div class="pt-2 border-t border-surface-500">

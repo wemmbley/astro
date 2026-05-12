@@ -1,18 +1,26 @@
 <script setup lang="ts">
 defineProps({
-    blocks: Object,
+    blocks: Array,
 })
 </script>
 
 <template>
     <template v-for="(block, i) in blocks" :key="i">
-        <h2 v-if="block.type === 'heading' && block.level === 2" class="font-semibold text-amber-300 mt-4 mb-1">
+        <h1 v-if="block.type === 'heading' && block.level === 1"
+            class="font-bold text-amber-300 mt-6 mb-2 text-xl">
+            {{ block.text }}
+        </h1>
+        <h2 v-else-if="block.type === 'heading' && block.level === 2"
+            class="font-semibold text-amber-300 mt-4 mb-1">
             {{ block.text }}
         </h2>
-        <h3 v-else-if="block.type === 'heading' && block.level === 3" class="font-medium text-amber-200 mt-3 mb-1">
+        <h3 v-else-if="block.type === 'heading' && block.level === 3"
+            class="font-medium text-amber-200 mt-3 mb-1">
             {{ block.text }}
         </h3>
-        <p v-else-if="block.type === 'paragraph'" class="mt-2 whitespace-pre-line">{{ block.text }}</p>
+        <p v-else-if="block.type === 'paragraph'" class="mt-2 whitespace-pre-line">
+            {{ block.text }}
+        </p>
         <ul v-else-if="block.type === 'list' && !block.ordered" class="list-disc ml-4 mt-2">
             <li v-for="item in block.items" :key="item">{{ item }}</li>
         </ul>
