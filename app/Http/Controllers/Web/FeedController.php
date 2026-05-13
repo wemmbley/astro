@@ -6,7 +6,7 @@ use App\Application\UseCases\Landing\GetNavbar;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class FeedController
+final readonly class FeedController
 {
     public function index(GetNavbar $navbar): Response
     {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web\Auth;
 use App\Application\UseCases\Landing\GetNavbar;
 use Inertia\Inertia;
 
-class AuthWebController
+final readonly class AuthWebController
 {
     public function __construct(
         private GetNavbar $navbar,

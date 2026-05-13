@@ -6,7 +6,7 @@ use App\Application\UseCases\Landing\GetNavbar;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class HomeController
+final readonly class HomeController
 {
     public function index(GetNavbar $navbar): Response
     {

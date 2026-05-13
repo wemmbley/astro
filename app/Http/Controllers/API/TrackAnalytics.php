@@ -6,7 +6,7 @@ use App\Modules\Analytics\Application\UseCase\TrackIntoRedis;
 use App\Modules\Analytics\Domain\DTO\PageViewDTO;
 use Illuminate\Support\Facades\Request;
 
-class TrackAnalytics
+final readonly class TrackAnalytics
 {
     public function track(Request $request, TrackIntoRedis $trackIntoRedis)
     {

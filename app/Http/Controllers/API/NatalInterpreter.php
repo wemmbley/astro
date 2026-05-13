@@ -8,7 +8,7 @@ use App\Models\Interpretations\InterpretPlanetHouse;
 use App\Models\Interpretations\InterpretPlanetSign;
 use Illuminate\Http\JsonResponse;
 
-class NatalInterpreter
+final readonly class NatalInterpreter
 {
     public function __construct(
         private InterpretEntity       $entity,

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-class CityFinder
+final readonly class CityFinder
 {
     public function find(string $query)
     {

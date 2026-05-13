@@ -10,7 +10,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Http;
 
-class NatalController
+final readonly class NatalController
 {
     public function index(GetNavbar $navbar): Response
     {

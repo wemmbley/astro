@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class MatrixController
+final readonly class MatrixController
 {
     public function index(): Response
     {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Modules\Natal\Domain\VO\Birthday;
 use App\Modules\Natal\Infrastructure\NatalApiClient\PythonClient;
 
-class NatalCircleChartSvg
+final readonly class NatalCircleChartSvg
 {
     public function generate(PythonClient $pythonClient)
     {
