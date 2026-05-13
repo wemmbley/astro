@@ -5,6 +5,7 @@ namespace App\Models\Social;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use WendellAdriel\Lift\Attributes\Cast;
 use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\Hidden;
@@ -20,7 +21,7 @@ use WendellAdriel\Lift\Lift;
 #[HasMany(UserBlock::class,          'blockedBy',             'blocked_id')]
 final class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Lift;
+    use HasFactory, Notifiable, Lift, HasRoles;
 
     #[Fillable]
     public string $name;
