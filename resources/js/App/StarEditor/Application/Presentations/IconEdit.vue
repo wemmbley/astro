@@ -1,0 +1,43 @@
+<template>
+    <BaseIcon v-bind="$props" v-on="$listeners">
+        <g clip-path="url(#clip0_3_18)">
+            <path
+                d="M12 15H9V12L18 3L21 6L12 15Z"
+                :stroke="stroke"
+                :stroke-width="strokeWidth"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M15.75 5.25L18.75 8.25"
+                :stroke="stroke"
+                :stroke-width="strokeWidth"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M20.25 11.25V19.5C20.25 19.6989 20.171 19.8897 20.0303 20.0303C19.8897 20.171 19.6989 20.25 19.5 20.25H4.5C4.30109 20.25 4.11032 20.171 3.96967 20.0303C3.82902 19.8897 3.75 19.6989 3.75 19.5V4.5C3.75 4.30109 3.82902 4.11032 3.96967 3.96967C4.11032 3.82902 4.30109 3.75 4.5 3.75H12.75"
+                :stroke="stroke"
+                :stroke-width="strokeWidth"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </g>
+        <defs>
+            <clipPath id="clip0_3_18">
+                <rect width="24" height="24" fill="white"/>
+            </clipPath>
+        </defs>
+    </BaseIcon>
+</template>
+
+<script setup>
+import BaseIcon from './BaseIcon.vue'
+
+const props = defineProps({
+    size: [Number, String],
+    fill: String,
+    stroke: String,
+    strokeWidth: [Number, String]
+})
+</script>

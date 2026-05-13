@@ -3,6 +3,10 @@
 import { computed } from 'vue'
 import type { TreeNode, NodeClickEvent } from '@/App/StarEditor/Domain/Types/TreeNode'
 import { useTreeState } from '@/App/StarEditor/Application/Composables/TreeState'
+import IconFolderOpen from "@/App/StarEditor/Application/Presentations/IconFolderOpen.vue";
+import IconFile from "@/App/StarEditor/Application/Presentations/IconFile.vue";
+import IconCaretOpen from "@/App/StarEditor/Application/Presentations/IconCaretOpen.vue";
+import IconCaretClosed from "@/App/StarEditor/Application/Presentations/IconCaretClosed.vue";
 
 const props = defineProps<{
     node: TreeNode
@@ -37,7 +41,7 @@ function onRightClick(e: MouseEvent) {
 <template>
     <div class="select-none">
         <div
-            class="flex items-center gap-2 py-[3px] pr-2 rounded-md cursor-pointer
+            class="flex items-center gap-2 py-[2px] pr-2 rounded-md cursor-pointer
              text-surface-300 hover:bg-surface-700/60 hover:text-surface-100
              transition-colors duration-100"
             :style="indentStyle"
@@ -46,20 +50,32 @@ function onRightClick(e: MouseEvent) {
         >
             <span class="w-3 flex-shrink-0 text-[10px] text-surface-500">
                 <template v-if="isFolder">
-                  {{ folderOpen ? '▼' : '▶' }}
-                </template>
-                <template v-else>
-                  <span class="text-accent">◆</span>
+                    <template v-if="folderOpen">
+                        <IconCaretOpen class="pt-[2.5px]" />
+                    </template>
+                    <template v-else>
+                        <IconCaretClosed class="pt-[2.5px]" />
+                    </template>
                 </template>
             </span>
             <span class="flex-shrink-0 text-sm leading-none">
-                {{ isFolder ? (folderOpen ? '📂' : '📁') : '📄' }}
+                <template v-if="isFolder">
+                    <template v-if="folderOpen">
+                        <IconFolderOpen />
+                    </template>
+                    <template v-else>
+                        <IconFolderOpen />
+                    </template>
+                </template>
+                <template v-else>
+                    <IconFile />
+                </template>
             </span>
-            <span class="truncate text-sm leading-5">{{ node.name }}</span>
+            <span class="truncate text-sm font-medium leading-5">{{ node.name }}</span>
         </div>
         <div
             v-if="isFolder && folderOpen"
-            class="border-l border-surface-700/40 ml-[20px]"
+            class="border-l border-surface-700/40 ml-1"
         >
             <TreeNode
                 v-for="child in children"

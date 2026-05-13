@@ -27,11 +27,6 @@ onMounted(() => {
         toolbarTips: false,
         status: false,
         placeholder: "Проба пера...",
-        autosave: {
-            enabled: true,
-            uniqueId: "MyUniqueID",
-            delay: 1000,
-        },
     })
 
     editor.codemirror.on('change', () => {
@@ -52,7 +47,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col h-full flex-1 min-h-0 overflow-hidden scrollbar-surface">
         <textarea ref="textareaRef" />
     </div>
 </template>
@@ -60,44 +55,64 @@ onBeforeUnmount(() => {
 <style>
 @import "@/App/StarEditor/Infrastructure/Vendor/simplemde.min.css";
 
-:deep(.CodeMirror) {
+.CodeMirror {
     height: 100%;
-    background: transparent;
-    color: var(--color-surface-100, #f1f5f9);
+    max-height: 74vh;
+    background: var(--color-surface-700);
+    color: var(--color-surface-100);
+    border: 1px solid var(--color-surface-500);
+    border-radius: 14px;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 14px;
-    line-height: 1.7;
+    line-height: 1.75;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02),
+        0 10px 30px rgba(0,0,0,0.35);
+}
+.CodeMirror-lines { padding: 24px 32px; }
+.CodeMirror-scroll {
+    overflow: auto !important;
+    scrollbar-width: thin;
+}
+.CodeMirror-line { color: var(--color-surface-100); }
+.CodeMirror-selected { background: rgba(255,255,255,0.08) !important; }
+.CodeMirror-cursor { border-left: 2px solid #ffffff !important; }
+.CodeMirror-activeline-background { background: rgba(255,255,255,0.03);}
+.cm-header {
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.4;
+}
+.cm-strong { color: #ffffff; }
+.cm-em { opacity: 0.9; }
+.cm-link { color: var(--color-accent); }
+.cm-comment { color: #94a3b8; }
+.editor-preview {
+    background: var(--color-surface-800);
+    color: var(--color-surface-100);
+    padding: 32px;
+}
+.editor-toolbar,
+.CodeMirror,
+.editor-preview-side {
     border: none;
 }
-
-:deep(.CodeMirror-scroll) {
-    padding: 24px 32px;
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
-
-:deep(.editor-toolbar) {
-    background: var(--color-surface-800, #1e293b);
-    border-bottom: 1px solid var(--color-surface-700, #334155);
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    opacity: 1;
+::-webkit-scrollbar-thumb {
+    background: var(--color-surface-500);
+    border-radius: 10px;
 }
-
-:deep(.editor-toolbar a) {
-    color: var(--color-surface-400, #94a3b8) !important;
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+    display: none;
 }
-
-:deep(.editor-toolbar a:hover),
-:deep(.editor-toolbar a.active) {
-    color: var(--color-accent, #7c3aed) !important;
-    background: var(--color-surface-700, #334155);
-}
-
-:deep(.editor-toolbar i.separator) {
-    border-color: var(--color-surface-600, #475569);
-}
-
-:deep(.CodeMirror-cursor) {
-    border-color: var(--color-accent, #7c3aed);
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 10px;
 }
 </style>
