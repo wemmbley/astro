@@ -10,3 +10,8 @@ export type TreeNode = {
     text?: string,
     children?: Array<TreeNode>,
 };
+
+export type NodeClickEvent = {
+    node: TreeNode
+    mouseEvent: MouseEvent
+}
