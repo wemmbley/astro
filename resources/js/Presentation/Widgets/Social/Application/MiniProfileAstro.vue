@@ -19,21 +19,21 @@ const miniProfile = {
                     <component :is="zodiacIcons[miniProfile.sun]" size="24" />
                 </div>
                 <div class="text-[10px] uppercase text-surface-300 font-bold">{{ planetNames.sun }}</div>
-                <div class="font-bold text-surface-50">{{ zodiacNames[miniProfile.sun] }}</div>
+                <div class="font-bold text-surface-50">{{ zodiacLocale[miniProfile.sun] }}</div>
             </div>
             <div class="text-center border-surface-100">
                 <div class="text-surface-400 mb-1 flex justify-center">
                     <component :is="zodiacIcons[miniProfile.moon]" size="24" />
                 </div>
                 <div class="text-[10px] uppercase text-surface-300 font-bold">{{ planetNames.moon }}</div>
-                <div class="font-bold text-surface-50">{{ zodiacNames[miniProfile.moon] }}</div>
+                <div class="font-bold text-surface-50">{{ zodiacLocale[miniProfile.moon] }}</div>
             </div>
             <div class="text-center">
                 <div class="text-surface-400 mb-1 flex justify-center">
                     <component :is="zodiacIcons[miniProfile.asc]" size="24" />
                 </div>
                 <div class="text-[10px] uppercase text-surface-300 font-bold">{{ planetNames.asc }}</div>
-                <div class="font-bold text-surface-50">{{ zodiacNames[miniProfile.asc] }}</div>
+                <div class="font-bold text-surface-50">{{ zodiacLocale[miniProfile.asc] }}</div>
             </div>
         </div>
         <div class="bg-surface-700 rounded p-3 text-center">

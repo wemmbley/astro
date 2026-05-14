@@ -12,7 +12,7 @@ use App\Models\Interpretations\InterpretRepository;
 use Inertia\Inertia;
 use Inertia\Response;
 
-readonly class RepositoryController
+final readonly class RepositoryController
 {
     const ASPECTS = [
         'Conjunction', 'Opposition', 'Trine', 'Square', 'Sextile',
