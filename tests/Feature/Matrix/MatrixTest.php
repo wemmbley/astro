@@ -1,7 +1,7 @@
 <?php
 
-use App\Modules\Matrix\Domain\Matrix;
-use App\Modules\Matrix\Domain\VO\Birthday;
+use Matrix\Domain\Matrix;
+use Matrix\Domain\VO\Birthday;
 
 test('Matrix calculation for 22.12.2000 matches expected values', function () {
     $birthday = new Birthday(

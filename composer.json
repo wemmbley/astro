@@ -35,7 +35,10 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
+            "API\\": "src/API",
+            "Modules\\": "src/Modules",
+            "UI\\": "src/UI",
+            "Database\\Models\\": "database/models/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }

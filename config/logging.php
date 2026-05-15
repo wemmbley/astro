@@ -129,7 +129,7 @@ return [
 
         'telegram' => [
             'driver' => 'monolog',
-            'handler' => \App\Application\UseCases\Logger\LogIntoTelegram::class,
+            'handler' => \LogIntoTelegram::class,
             'level'   => 'error',
             'chat' => env('TELEGRAPH_CHAT_ID', 'undefined'),
             'token' => env('TELEGRAPH_BOT_TOKEN', 'undefined'),

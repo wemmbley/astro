@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/js/Bootstrap/bootstrap.js')
+    @vite('web/Bootstrap/Bootstrap.js')
     <x-inertia::head />
 </head>
 <body>
