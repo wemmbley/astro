@@ -10,7 +10,6 @@ use Database\Models\Interpretations\InterpretPlanetSign;
 use Database\Models\Interpretations\InterpretRepository;
 use Inertia\Inertia;
 use Inertia\Response;
-use Modules\Common\Infrastructure\Repositories\NavbarRepository;
 
 final readonly class RepositoryController
 {
@@ -31,13 +30,13 @@ final readonly class RepositoryController
         'Saturn', 'Sun', 'Uranus', 'Venus',
     ];
 
-    public function __construct(private NavbarRepository $navbar)
+    public function __construct()
     {
     }
 
     public function edit(string $repoKey): Response
     {
-        $props = ['navbar' => $this->navbar->getByName(NavbarRepository::MAIN_NAVBAR)];
+        $props = [];
 
         if (!InterpretRepository::query()->where('key', $repoKey)->exists()) {
             $props['error'] = 'Данный репозиторий не существует!';

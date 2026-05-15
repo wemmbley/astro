@@ -2,13 +2,13 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\Enums\HouseSystemName;
-use Natal\Domain\VO\DominantSign;
-use Natal\Domain\VO\Elements;
-use Natal\Domain\VO\House;
-use Natal\Domain\VO\HouseCollection;
-use Natal\Domain\VO\Planet;
-use Natal\Domain\VO\PlanetCollection;
+use Modules\Natal\Domain\Enums\HouseSystemName;
+use Modules\Natal\Domain\VO\DominantSign;
+use Modules\Natal\Domain\VO\Elements;
+use Modules\Natal\Domain\VO\House;
+use Modules\Natal\Domain\VO\HouseCollection;
+use Modules\Natal\Domain\VO\Planet;
+use Modules\Natal\Domain\VO\PlanetCollection;
 
 final readonly class Natal
 {

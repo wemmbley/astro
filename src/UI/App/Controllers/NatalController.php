@@ -10,14 +10,12 @@ use Modules\Natal\Domain\VO\Birthday;
 
 final readonly class NatalController
 {
-    public function index(NavbarRepository $navbar): Response
+    public function index(): Response
     {
-        return Inertia::render('Natal', [
-            'navbar' => $navbar->getByName(NavbarRepository::MAIN_NAVBAR),
-        ]);
+        return Inertia::render('Natal', []);
     }
 
-    public function single(GenerateNatal $natal, NavbarRepository $navbar): Response
+    public function single(GenerateNatal $natal): Response
     {
         $birthday = new Birthday()->fromRoute(
             lat: (float)request('lat'),
@@ -27,7 +25,6 @@ final readonly class NatalController
         );
 
         return Inertia::render('NatalSingle', [
-            'navbar' => $navbar->getByName(NavbarRepository::MAIN_NAVBAR),
             'natal' => $natal->execute($birthday),
             'coordinates' => $birthday->toArray(),
         ]);

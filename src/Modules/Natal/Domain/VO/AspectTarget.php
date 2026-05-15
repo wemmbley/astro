@@ -2,8 +2,8 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\Enums\HouseName;
-use Natal\Domain\Enums\PlanetName;
+use Modules\Natal\Domain\Enums\HouseName;
+use Modules\Natal\Domain\Enums\PlanetName;
 
 final readonly class AspectTarget
 {

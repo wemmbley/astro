@@ -6,7 +6,7 @@
 ## Схема
 
 ```
-UI -> API -> MODULE -> ELOQUENT(DB) -+
-                                      |
-                  InertiaResponse <---|
+UI -> API -> MODULE --+
+                      |
+         Response <---|
 ```

@@ -2,7 +2,7 @@
 
 namespace Modules\Natal\Infrastructure\CacheService;
 
-use Natal\Domain\VO\Birthday;
+use Modules\Natal\Domain\VO\Birthday;
 use Illuminate\Support\Facades\Cache;
 
 final readonly class NatalCacheService

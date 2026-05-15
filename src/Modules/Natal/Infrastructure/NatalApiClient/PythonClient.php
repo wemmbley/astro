@@ -2,11 +2,10 @@
 
 namespace Modules\Natal\Infrastructure\NatalApiClient;
 
-use Natal\Domain\VO\Birthday;
-use Natal\Domain\VO\Natal;
+use Modules\Natal\Domain\VO\Birthday;
+use Modules\Natal\Domain\VO\Natal;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Natal\Infrastructure\NatalApiClient\PythonResponseMapper;
 
 class PythonClient
 {

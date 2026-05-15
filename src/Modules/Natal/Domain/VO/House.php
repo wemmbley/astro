@@ -2,9 +2,9 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\Enums\HouseName;
-use Natal\Domain\Enums\SignName;
-use Natal\Domain\VO\AspectCollection;
+use Modules\Natal\Domain\Enums\HouseName;
+use Modules\Natal\Domain\Enums\SignName;
+use Modules\Natal\Domain\VO\AspectCollection;
 
 final readonly class House
 {

@@ -2,9 +2,7 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\Enums\AspectName;
-use Natal\Domain\Enums\PlanetName;
-use Natal\Domain\VO\AspectTarget;
+use Modules\Natal\Domain\Enums\AspectName;
 
 final readonly class Aspect
 {

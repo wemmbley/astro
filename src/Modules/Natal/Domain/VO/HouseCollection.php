@@ -2,7 +2,7 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\VO\House;
+use Modules\Natal\Domain\VO\House;
 
 final class HouseCollection
 {

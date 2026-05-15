@@ -2,7 +2,7 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\Enums\SignName;
+use Modules\Natal\Domain\Enums\SignName;
 
 final readonly class DominantSign
 {

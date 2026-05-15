@@ -2,10 +2,10 @@
 
 namespace Modules\Natal\Application\UseCases;
 
-use Natal\Domain\VO\Birthday;
-use Natal\Domain\VO\Natal;
-use Natal\Infrastructure\CacheService\NatalCacheService;
-use Natal\Infrastructure\NatalApiClient\PythonClient;
+use Modules\Natal\Domain\VO\Birthday;
+use Modules\Natal\Domain\VO\Natal;
+use Modules\Natal\Infrastructure\CacheService\NatalCacheService;
+use Modules\Natal\Infrastructure\NatalApiClient\PythonClient;
 
 final readonly class GenerateNatal
 {

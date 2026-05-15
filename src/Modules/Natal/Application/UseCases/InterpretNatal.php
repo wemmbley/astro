@@ -2,7 +2,7 @@
 
 namespace Modules\Natal\Application\UseCases;
 
-use Natal\Domain\VO\Natal;
+use Modules\Natal\Domain\VO\Natal;
 
 class InterpretNatal
 {

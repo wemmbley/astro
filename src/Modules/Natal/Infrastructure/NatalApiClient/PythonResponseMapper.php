@@ -2,22 +2,22 @@
 
 namespace Modules\Natal\Infrastructure\NatalApiClient;
 
-use Natal\Domain\Enums\AspectName;
-use Natal\Domain\Enums\HouseName;
-use Natal\Domain\Enums\HouseSystemName;
-use Natal\Domain\Enums\PlanetName;
-use Natal\Domain\Enums\SignName;
+use Modules\Natal\Domain\Enums\AspectName;
+use Modules\Natal\Domain\Enums\HouseName;
+use Modules\Natal\Domain\Enums\HouseSystemName;
+use Modules\Natal\Domain\Enums\PlanetName;
+use Modules\Natal\Domain\Enums\SignName;
 
-use Natal\Domain\VO\Aspect;
-use Natal\Domain\VO\AspectCollection;
-use Natal\Domain\VO\AspectTarget;
-use Natal\Domain\VO\DominantSign;
-use Natal\Domain\VO\Elements;
-use Natal\Domain\VO\House;
-use Natal\Domain\VO\HouseCollection;
-use Natal\Domain\VO\Natal;
-use Natal\Domain\VO\Planet;
-use Natal\Domain\VO\PlanetCollection;
+use Modules\Natal\Domain\VO\Aspect;
+use Modules\Natal\Domain\VO\AspectCollection;
+use Modules\Natal\Domain\VO\AspectTarget;
+use Modules\Natal\Domain\VO\DominantSign;
+use Modules\Natal\Domain\VO\Elements;
+use Modules\Natal\Domain\VO\House;
+use Modules\Natal\Domain\VO\HouseCollection;
+use Modules\Natal\Domain\VO\Natal;
+use Modules\Natal\Domain\VO\Planet;
+use Modules\Natal\Domain\VO\PlanetCollection;
 
 final readonly class PythonResponseMapper
 {

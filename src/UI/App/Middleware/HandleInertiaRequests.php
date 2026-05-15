@@ -1,9 +1,10 @@
 <?php
 
-namespace API\Http\Middleware;
+namespace UI\App\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Modules\Common\Infrastructure\Repositories\NavbarRepository;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -15,6 +16,10 @@ class HandleInertiaRequests extends Middleware
      * @var string
      */
     protected $rootView = 'app';
+
+    public function __construct(
+        private NavbarRepository $navbar,
+    ) {}
 
     /**
      * Determines the current asset version.
@@ -37,7 +42,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'navbar' => $this->navbar->getByName(NavbarRepository::MAIN_NAVBAR),
         ];
     }
 }

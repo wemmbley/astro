@@ -9,12 +9,11 @@
 ## Бэкенд
 
 ### Стек
-- Redis
 - Laravel
-- Reverb
+- Redis (временно отключен)
+- Reverb (временно отключен)
 
-### Подробнее
-Смотри `BACKEND.MD`
+### Подробнее Смотри `BACKEND.MD`
 
 ## Фронтенд
 
@@ -22,8 +21,7 @@
 - Vue
 - Tailwind
 
-### Подробнее
-Смотри `FRONTEND.MD`
+### Подробнее Смотри `FRONTEND.MD`
 
 ## Как запустить целостно?
 
@@ -42,4 +40,4 @@ Laravel инициализируется, и бутит Inertia.
 Inertia инициализируется, создаёт роуты и прокидывает туда пропсы.
 Vuejs инициализируется, где надо делает WebSocket либо fetch.
 
-Роутинг фронта хранится в файле `routes/web.php`, контроллеры - `app/Http/Controllers/Web`
+Роутинг фронта хранится в файле `src/UI/Routes/web.php`, контроллеры - `src/UI/App/Http/Controllers`.

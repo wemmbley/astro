@@ -2,7 +2,7 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\VO\Planet;
+use Modules\Natal\Domain\VO\Planet;
 
 final class PlanetCollection
 {

@@ -2,8 +2,6 @@
 
 namespace Modules\Natal\Domain\VO;
 
-use Natal\Domain\VO\Aspect;
-
 final class AspectCollection
 {
     /** @var array<string, Aspect> */
