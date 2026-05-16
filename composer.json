@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.5",
+        "dedoc/scramble": "^0.13.22",
         "defstudio/telegraph": "^1.70",
         "geoip2/geoip2": "^3.3",
         "inertiajs/inertia-laravel": "^3.0",
@@ -20,7 +21,10 @@
         "laravel/tinker": "^3.0",
         "league/commonmark": "^2.8",
         "predis/predis": "^3.4",
+        "spatie/laravel-data": "^4.23",
         "spatie/laravel-permission": "^7.4",
+        "spatie/laravel-typescript-transformer": "^3.2",
+        "spatie/typescript-transformer": "^3.2",
         "wendelladriel/laravel-lift": "^0.18.0"
     },
     "require-dev": {

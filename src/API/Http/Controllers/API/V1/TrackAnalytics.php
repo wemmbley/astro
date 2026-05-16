@@ -3,8 +3,8 @@
 namespace API\Http\Controllers\API\V1;
 
 use Illuminate\Support\Facades\Request;
-use Modules\Analytics\Application\UseCase\TrackIntoRedis;
-use Modules\Analytics\Domain\DTO\PageViewDTO;
+use Modules\Business\Analytics\DTO\PageViewDTO;
+use Modules\Business\Analytics\UseCase\TrackIntoRedis;
 
 final readonly class TrackAnalytics
 {

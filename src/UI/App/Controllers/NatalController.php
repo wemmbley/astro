@@ -4,9 +4,8 @@ namespace UI\App\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
-use Modules\Common\Infrastructure\Repositories\NavbarRepository;
-use Modules\Natal\Application\UseCases\GenerateNatal;
-use Modules\Natal\Domain\VO\Birthday;
+use Modules\Business\Natal\UseCases\GenerateNatal;
+use Modules\Business\Natal\ValueObjects\Birthday;
 
 final readonly class NatalController
 {
