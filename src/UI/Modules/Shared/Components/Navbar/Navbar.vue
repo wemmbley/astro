@@ -1,8 +1,8 @@
 <script setup>
-import NavbarLogo from "@/Modules/Shared/Components/Organisms/Navbar/NavbarLogo.vue";
-import NavbarItems from "@/Modules/Shared/Components/Organisms/Navbar/NavbarItems.vue";
-import NavbarProfile from "@/Modules/Shared/Components/Organisms/Navbar/NavbarProfile.vue";
-import NavbarNotifications from "@/Modules/Shared/Components/Organisms/Navbar/NavbarNotifications.vue";
+import NavbarLogo from "@/Modules/Shared/Components/Navbar/NavbarLogo.vue";
+import NavbarItems from "@/Modules/Shared/Components/Navbar/NavbarItems.vue";
+import NavbarProfile from "@/Modules/Shared/Components/Navbar/NavbarProfile.vue";
+import NavbarNotifications from "@/Modules/Shared/Components/Navbar/NavbarNotifications.vue";
 
 defineProps({
     navbar: Array

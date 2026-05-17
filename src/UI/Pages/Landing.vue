@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import MainLayout from "@/Modules/Shared/Layouts/MainLayout.vue";
+import MainLayout from "@/Resources/Layouts/MainLayout.vue";
 import News from "@/Modules/News/UI/News.vue";
-import HeroImage from "./Assets/Hero.png"
-import Background from "./Assets/Background.png"
-import Stars from "./Assets/Stars.png"
+import HeroImage from "@/Resources/Assets/Home/Hero.png"
+import Background from "@/Resources/Assets/Home/Background.png"
+import Stars from "@/Resources/Assets/Home/Stars.png"
 
 const props = defineProps({
     navbar: Array

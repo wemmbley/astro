@@ -1,5 +1,5 @@
 <script setup>
-import Navbar from "@/Modules/Shared/Components/Organisms/Navbar/Navbar.vue";
+import Navbar from "@/Modules/Shared/Components/Navbar/Navbar.vue";
 
 const { hasContainer = true } = defineProps({
     navbar: Array,
