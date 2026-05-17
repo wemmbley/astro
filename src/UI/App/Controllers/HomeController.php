@@ -9,6 +9,6 @@ final readonly class HomeController
 {
     public function index(): Response
     {
-        return Inertia::render('Public/Home/Landing', []);
+        return Inertia::render('Landing', []);
     }
 }

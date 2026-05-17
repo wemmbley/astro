@@ -1,10 +1,10 @@
 <?php
 
-namespace UI\App\Controllers\Auth;
+namespace UI\App\Controllers;
 
 use Inertia\Inertia;
 
-final readonly class AuthWebController
+final readonly class uthWebController
 {
     public function __construct() {}
 
