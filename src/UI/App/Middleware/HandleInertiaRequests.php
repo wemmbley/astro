@@ -4,7 +4,7 @@ namespace UI\App\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use Modules\Technical\Shared\Repositories\NavbarRepository;
+use Modules\Scene\Shared\Repositories\NavbarRepository;
 
 class HandleInertiaRequests extends Middleware
 {

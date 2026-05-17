@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Technical\Shared\Repositories;
+namespace Modules\Scene\Shared\Repositories;
 
 use Database\Models\Navbar;
 

@@ -2,7 +2,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { VueQueryPlugin } from '@tanstack/vue-query'
-import '../../css/app.css';
+import './App.css';
 
 createInertiaApp({
     resolve: name =>
@@ -15,8 +15,8 @@ createInertiaApp({
         createApp({
             render: () => h(App, props),
         })
-            .use(plugin)
-            .use(VueQueryPlugin)
-            .mount(el)
+        .use(plugin)
+        .use(VueQueryPlugin)
+        .mount(el)
     },
 })

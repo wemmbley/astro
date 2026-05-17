@@ -1,5 +1,5 @@
 <script setup>
-import branding from "@/../img/branding.png";
+import branding from "./Assets/branding.png";
 import {Link} from "@inertiajs/vue3";
 </script>
 

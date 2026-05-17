@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('password');
             $table->char('gender')->default('m');
             $table->string('status')->nullable();
+            $table->unsignedBigInteger('balance')->nullable();
             $table->string('description')->nullable();
             $table->string('banner')->nullable();
             $table->rememberToken();
