@@ -1,19 +1,19 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\ValueObjects;
+namespace Modules\Actors\Astrology\ValueObjects;
 
-use Modules\Natal\Domain\Dictionary\AspectName;
+use Modules\Actors\Astrology\Types\AspectType;
 
 final readonly class Aspect
 {
     public function __construct(
-        private AspectName $name,
+        private AspectType $name,
         private AspectTo   $target,
         private float      $orb,
         private string     $orbFormatted,
     ) {}
 
-    public function getName(): AspectName
+    public function getName(): AspectType
     {
         return $this->name;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Analytics\DTO;
+namespace Modules\Scenarios\Analytics\DTO;
 
 final readonly class PageViewDTO
 {

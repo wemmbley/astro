@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Natal\Services;
+namespace Modules\Actors\Astrology\Services;
 
 final readonly class NatalChartFactory
 {

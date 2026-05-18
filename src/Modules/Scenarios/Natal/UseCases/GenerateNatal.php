@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Business\Natal\UseCases;
+namespace Modules\Scenarios\Natal\UseCases;
 
-use Modules\Business\Natal\Services\NatalCacheService;
-use Modules\Business\Natal\ValueObjects\Birthday;
-use Modules\Technical\Business\Natal\Http\PyClient\PythonClient;
+use Modules\Scenarios\Natal\Services\NatalCacheService;
+use Modules\Scenarios\Natal\ValueObjects\Birthday;
+use Modules\Scene\Scenarios\Natal\Http\PyClient\PythonClient;
 
 final readonly class GenerateNatal
 {

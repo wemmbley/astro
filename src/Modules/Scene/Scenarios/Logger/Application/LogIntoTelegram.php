@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Technical\Business\Logger\Application;
+namespace Modules\Scene\Scenarios\Logger\Application;
 
 use DefStudio\Telegraph\Facades\Telegraph;
 use Monolog\Handler\AbstractProcessingHandler;

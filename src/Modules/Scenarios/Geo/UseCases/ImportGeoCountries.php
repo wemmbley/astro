@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Geo\UseCases;
+namespace Modules\Scenarios\Geo\UseCases;
 
 use Modules\Geo\Domain\Contracts\GeoCountryRepository;
 

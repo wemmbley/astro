@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Technical\Business\Geo\Repositories;
+namespace Modules\Scene\Scenarios\Geo\Repositories;
 
 use Database\Models\GeoCountry;
-use Modules\Business\Geo\Contracts\GeoCountryRepositoryContract;
+use Modules\Scenarios\Geo\Contracts\GeoCountryRepositoryContract;
 
 class GeoCountryRepository implements GeoCountryRepositoryContract
 {

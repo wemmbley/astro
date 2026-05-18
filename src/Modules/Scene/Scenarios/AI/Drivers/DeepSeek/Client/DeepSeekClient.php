@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\DeepSeek\Client;
+namespace Modules\Scene\Scenarios\AI\Drivers\DeepSeek\Client;
 
 use Illuminate\Support\Facades\Http;
-use Modules\Technical\Business\AI\Drivers\DeepSeek\Enums\DeepSeekTemperature;
-use Modules\Technical\Business\AI\Drivers\DeepSeek\Mappers\DeepSeekErrorMapper;
+use Modules\Scene\Scenarios\AI\Drivers\DeepSeek\Enums\DeepSeekTemperature;
+use Modules\Scene\Scenarios\AI\Drivers\DeepSeek\Mappers\DeepSeekErrorMapper;
 
 final readonly class DeepSeekClient
 {

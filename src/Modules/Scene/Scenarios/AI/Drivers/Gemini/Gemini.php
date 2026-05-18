@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\Gemini;
+namespace Modules\Scene\Scenarios\AI\Drivers\Gemini;
 
 use Illuminate\Support\Facades\Http;
-use Modules\Business\AI\Contracts\AIClient;
-use Modules\Business\AI\DTO\AIRequest;
-use Modules\Business\AI\DTO\AIResponse;
-use Modules\Business\AI\Exceptions\AIProviderException;
-use Modules\Business\AI\ValueObjects\Message;
-use Modules\Business\AI\ValueObjects\MessageBag;
-use Modules\Technical\Business\AI\Contracts\AIDriver;
+use Modules\Scenarios\AI\Contracts\AIClient;
+use Modules\Scenarios\AI\DTO\AIRequest;
+use Modules\Scenarios\AI\DTO\AIResponse;
+use Modules\Scenarios\AI\Exceptions\AIProviderException;
+use Modules\Scenarios\AI\ValueObjects\Message;
+use Modules\Scenarios\AI\ValueObjects\MessageBag;
+use Modules\Scene\Scenarios\AI\Contracts\AIDriver;
 
 class Gemini implements AIClient, AIDriver
 {

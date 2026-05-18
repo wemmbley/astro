@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Analytics\ValueObjects;
+namespace Modules\Scenarios\Analytics\ValueObjects;
 
 final readonly class GeoLocation
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Business\AI\DTO;
+namespace Modules\Scenarios\AI\DTO;
 
-use Modules\Business\AI\Enums\AIRequestMode;
-use Modules\Business\AI\ValueObjects\MessageBag;
+use Modules\Scenarios\AI\Enums\AIRequestMode;
+use Modules\Scenarios\AI\ValueObjects\MessageBag;
 
 final readonly class AIRequest
 {

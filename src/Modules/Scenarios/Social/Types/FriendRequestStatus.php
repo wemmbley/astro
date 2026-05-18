@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Social\Enums;
+namespace Modules\Scenarios\Social\Enums;
 
 enum FriendRequestStatus: string
 {

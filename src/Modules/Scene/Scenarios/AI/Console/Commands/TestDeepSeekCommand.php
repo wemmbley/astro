@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Console\Commands;
+namespace Modules\Scene\Scenarios\AI\Console\Commands;
 
 use App\Modules\AI\Core\Contracts\AIProvider;
 use Illuminate\Console\Command;

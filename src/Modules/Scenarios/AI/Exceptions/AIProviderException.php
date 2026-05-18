@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\AI\Exceptions;
+namespace Modules\Scenarios\AI\Exceptions;
 
 final class AIProviderException extends \Exception
 {

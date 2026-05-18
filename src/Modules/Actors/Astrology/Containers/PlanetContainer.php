@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\Containers;
+namespace Modules\Actors\Astrology\Containers;
 
-use Modules\Natal\Domain\Entity\Organisms\Planet;
+use Modules\Actors\Astrology\ValueObjects\Planet;
 
 final class PlanetContainer
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Business\Natal\UseCases;
+namespace Modules\Actors\Astrology\UseCases;
 
-use Modules\Business\Natal\ValueObjects\Natal;
+use Modules\Actors\Astrology\ValueObjects\Natal;
 
 class InterpretNatal
 {

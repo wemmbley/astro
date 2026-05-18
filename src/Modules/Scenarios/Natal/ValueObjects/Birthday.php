@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Natal\ValueObjects;
+namespace Modules\Scenarios\Natal\ValueObjects;
 
 final class Birthday
 {

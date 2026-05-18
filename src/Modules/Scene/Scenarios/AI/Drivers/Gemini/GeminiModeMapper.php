@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\Gemini;
+namespace Modules\Scene\Scenarios\AI\Drivers\Gemini;
 
-use Modules\Business\AI\Enums\AIRequestMode;
+use Modules\Scenarios\AI\Enums\AIRequestMode;
 
 class GeminiModeMapper
 {

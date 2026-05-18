@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Business\AI\Contracts;
+namespace Modules\Scenarios\AI\Contracts;
 
-use Modules\Business\AI\ValueObjects\MessageBag;
+use Modules\Scenarios\AI\ValueObjects\MessageBag;
 
 interface AIClient
 {

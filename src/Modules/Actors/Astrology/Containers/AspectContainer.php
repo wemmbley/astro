@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\Containers;
+namespace Modules\Actors\Astrology\Containers;
 
-use Modules\Esoteric\Astrology\ValueObjects\Aspect;
+use Modules\Actors\Astrology\ValueObjects\Aspect;
 
 final class AspectContainer
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Business\Natal\Services;
+namespace Modules\Scenarios\Natal\Services;
 
 use Illuminate\Support\Facades\Cache;
-use Modules\Business\Natal\ValueObjects\Birthday;
+use Modules\Scenarios\Natal\ValueObjects\Birthday;
 
 final readonly class NatalCacheService
 {

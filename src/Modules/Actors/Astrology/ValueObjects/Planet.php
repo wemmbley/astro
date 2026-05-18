@@ -1,12 +1,81 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\ValueObjects;
+namespace Modules\Actors\Astrology\ValueObjects;
 
-use Modules\Natal\Domain\Dictionary\PlanetTypes;
+use Modules\Actors\Astrology\Containers\AspectContainer;
+use Modules\Actors\Astrology\Types\HouseType;
+use Modules\Actors\Astrology\Types\PlanetType;
+use Modules\Actors\Astrology\Types\SignType;
 
-class Planet
+final readonly class Planet
 {
     public function __construct(
-        private PlanetTypes $planetType,
+        public PlanetType $name,
+        public SignType $sign,
+        public HouseType $house,
+        public AspectContainer $aspects,
+        public float $longitude,
+        public float $degree,
+        public string $degreeFormatted,
+        public bool $retrograde,
+        public bool $stationary,
     ) {}
+
+    public function getName(): PlanetType
+    {
+        return $this->name;
+    }
+
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            name:               PlanetType::from($data['name']),
+            sign:               SignType::from($data['sign']),
+            house:              HouseType::from($data['house']),
+            aspects:            $data['aspects'],
+            longitude:          (float) $data['longitude'],
+            degree:             (float) $data['degree'],
+            degreeFormatted:    $data['degreeFormatted'],
+            retrograde:         (bool) ($data['retrograde'] ?? false),
+            stationary:         ($data['motion'] === 'stationary' ?? false),
+        );
+    }
+
+    public function isRetrograde(): bool
+    {
+        return $this->retrograde;
+    }
+
+    public function isStationary(): bool
+    {
+        return $this->stationary;
+    }
+
+    public function getDegreeFormatted(): string
+    {
+        return $this->degreeFormatted;
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->name === $other->name
+            && $this->sign === $other->sign
+            && $this->house === $other->house
+            && abs($this->longitude - $other->longitude) < 0.001;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name'              => $this->name->value,
+            'sign'              => $this->sign->value,
+            'house'             => $this->house->value,
+            'longitude'         => $this->longitude,
+            'degree'            => $this->degree,
+            'degreeFormatted'   => $this->degreeFormatted,
+            'stationary'        => $this->stationary,
+            'retrograde'        => $this->retrograde,
+            'aspects'           => array_map(fn(Aspect $asp) => $asp->toArray(), $this->aspects->all())
+        ];
+    }
 }

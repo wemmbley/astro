@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\AI\Enums;
+namespace Modules\Scenarios\AI\Enums;
 
 enum AIRequestMode: string
 {

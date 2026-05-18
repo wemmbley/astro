@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Technical\Business\Analytics\Geo;
+namespace Modules\Scene\Scenarios\Analytics\Geo;
 
 use GeoIp2\Database\Reader;
-use Modules\Business\Analytics\Contracts\GeoResolverContract;
-use Modules\Business\Analytics\ValueObjects\GeoLocation;
+use Modules\Scenarios\Analytics\Contracts\GeoResolverContract;
+use Modules\Scenarios\Analytics\ValueObjects\GeoLocation;
 
 final class MaxMindGeoResolver implements GeoResolverContract
 {

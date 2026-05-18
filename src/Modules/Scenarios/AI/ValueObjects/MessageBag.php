@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\AI\ValueObjects;
+namespace Modules\Scenarios\AI\ValueObjects;
 
 final readonly class MessageBag
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Providers;
+namespace Modules\Scene\Scenarios\AI\Providers;
 
 use App\Modules\AI\Adapters\Gemini\GeminiAdapter;
 use App\Modules\AI\Core\Contracts\AIProvider;
 use app\Modules\AI\Infrastructure\Drivers\Gemini\GeminiClient;
 use Illuminate\Support\ServiceProvider;
-use Modules\Technical\Business\AI\Console\Commands\TestClaudeCommand;
-use Modules\Technical\Business\AI\Console\Commands\TestDeepSeekCommand;
-use Modules\Technical\Business\AI\Console\Commands\TestGeminiCommand;
+use Modules\Scene\Scenarios\AI\Console\Commands\TestClaudeCommand;
+use Modules\Scene\Scenarios\AI\Console\Commands\TestDeepSeekCommand;
+use Modules\Scene\Scenarios\AI\Console\Commands\TestGeminiCommand;
 
 class AIServiceProvider extends ServiceProvider
 {

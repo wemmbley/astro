@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\Containers;
+namespace Modules\Actors\Astrology\Containers;
 
 final readonly class ElementContainer
 {

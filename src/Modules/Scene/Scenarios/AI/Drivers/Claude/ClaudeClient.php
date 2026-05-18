@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\Claude;
+namespace Modules\Scene\Scenarios\AI\Drivers\Claude;
 
 use app\Modules\AI\Core\Exceptions\AIProviderException;
 use Illuminate\Support\Facades\Http;

@@ -1,20 +1,22 @@
 <?php
 
-namespace Modules\Business\Natal\ValueObjects;
+namespace Modules\Scenarios\Natal\ValueObjects;
 
-use Modules\Esoteric\Astrology\Containers\HouseContainer;
-use Modules\Esoteric\Astrology\Containers\PlanetContainer;
-use Modules\Natal\Domain\Containers\Elements;
-use Modules\Natal\Domain\Dictionary\HouseSystemName;
+use Modules\Actors\Astrology\Containers\ElementContainer;
+use Modules\Actors\Astrology\Containers\HouseContainer;
+use Modules\Actors\Astrology\Containers\PlanetContainer;
+use Modules\Actors\Astrology\ValueObjects\House;
+use Modules\Actors\Astrology\ValueObjects\Planet;
+use Modules\Scenarios\Natal\Types\HouseSystemTypes;
 
 final readonly class Natal
 {
     public function __construct(
-        public PlanetContainer $planets,
-        public HouseContainer  $houses,
-        public Elements        $elements,
-        public DominantSign    $dominantSign,
-        public HouseSystemName $houseSystem,
+        public PlanetContainer   $planets,
+        public HouseContainer    $houses,
+        public ElementContainer  $elements,
+        public DominantSign      $dominantSign,
+        public HouseSystemTypes  $houseSystem,
     ) {}
 
     public function toArray(): array

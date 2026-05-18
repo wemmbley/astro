@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\DeepSeek\Mappers;
+namespace Modules\Scene\Scenarios\AI\Drivers\DeepSeek\Mappers;
 
 use App\Modules\AI\Core\Exceptions\AIProviderException;
 

@@ -4,8 +4,8 @@ namespace Modules\Technical\Esoteric\Matrix\Console\Commands;
 
 use App\Modules\AI\Core\Contracts\AIProvider;
 use Illuminate\Console\Command;
-use Modules\Esoteric\Matrix\Matrix;
-use Modules\Esoteric\Matrix\ValueObjects\Birthday;
+use Modules\Actors\Matrix\Matrix;
+use Modules\Actors\Matrix\ValueObjects\Birthday;
 
 class TestMatrixCommand extends Command
 {

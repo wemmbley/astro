@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Business\Natal\ValueObjects;
+namespace Modules\Scenarios\Natal\ValueObjects;
 
-use Modules\Natal\Domain\Dictionary\SignName;
+use Modules\Actors\Astrology\Types\SignType;
 
 final readonly class DominantSign
 {
     public function __construct(
-        private SignName $signName,
+        private SignType $signName,
         private int      $count,
     ) {}
 
-    public function getSignName(): SignName
+    public function getSignName(): SignType
     {
         return $this->signName;
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\DeepSeek;
+namespace Modules\Scene\Scenarios\AI\Drivers\DeepSeek;
 
-use Modules\Technical\Business\AI\Drivers\DeepSeek\Client\DeepSeekClient;
+use Modules\Scene\Scenarios\AI\Drivers\DeepSeek\Client\DeepSeekClient;
 
 final readonly class DeepSeek
 {

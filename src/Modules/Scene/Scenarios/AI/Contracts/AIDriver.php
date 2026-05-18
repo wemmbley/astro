@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Contracts;
+namespace Modules\Scene\Scenarios\AI\Contracts;
 
-use Modules\Business\AI\DTO\AIRequest;
-use Modules\Business\AI\DTO\AIResponse;
+use Modules\Scenarios\AI\DTO\AIRequest;
+use Modules\Scenarios\AI\DTO\AIResponse;
 
 interface AIDriver
 {

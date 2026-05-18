@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\AI;
+namespace Modules\Scenarios\AI;
 
 use App\Modules\AI\AbstractAIDriver;
 

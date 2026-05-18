@@ -1,27 +1,27 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\ValueObjects;
+namespace Modules\Actors\Astrology\ValueObjects;
 
-use Modules\Natal\Domain\Dictionary\HouseName;
-use Modules\Natal\Domain\Dictionary\PlanetName;
+use Modules\Actors\Astrology\Types\HouseType;
+use Modules\Actors\Astrology\Types\PlanetType;
 
 final readonly class AspectTo
 {
     public function __construct(
-        public PlanetName|HouseName $value
+        public PlanetType|HouseType $value
     ) {}
 
     public function isPlanet(): bool
     {
-        return $this->value instanceof PlanetName;
+        return $this->value instanceof PlanetType;
     }
 
     public function isHouse(): bool
     {
-        return $this->value instanceof HouseName;
+        return $this->value instanceof HouseType;
     }
 
-    public function get(): HouseName|PlanetName
+    public function get(): HouseType|PlanetType
     {
         return $this->value;
     }

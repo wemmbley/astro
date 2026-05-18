@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Natal\DTO;
+namespace Modules\Actors\Astrology\DTO;
 
 use Database\Models\Interpretations\InterpretCuspidSign;
 use Database\Models\Interpretations\InterpretEntity;

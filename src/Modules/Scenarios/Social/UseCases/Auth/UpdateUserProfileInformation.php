@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Social\UseCases\Auth;
+namespace Modules\Scenarios\Social\UseCases\Auth;
 
 use Database\Models\Social\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

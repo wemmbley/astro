@@ -1,22 +1,22 @@
 <?php
 
-namespace Modules\Technical\Business\Natal\Http\PyClient;
+namespace Modules\Scene\Scenarios\Natal\Http\PyClient;
 
-use Modules\Business\Natal\ValueObjects\DominantSign;
-use Modules\Business\Natal\ValueObjects\Natal;
-use Modules\Esoteric\Astrology\Containers\HouseContainer;
-use Modules\Esoteric\Astrology\Containers\PlanetContainer;
-use Modules\Esoteric\Astrology\ValueObjects\Aspect;
-use Modules\Esoteric\Astrology\ValueObjects\AspectTo;
-use Modules\Esoteric\Astrology\ValueObjects\House;
-use Modules\Natal\Domain\Containers\AspectCollection;
-use Modules\Natal\Domain\Containers\Elements;
-use Modules\Natal\Domain\Dictionary\AspectName;
-use Modules\Natal\Domain\Dictionary\HouseName;
-use Modules\Natal\Domain\Dictionary\HouseSystemName;
-use Modules\Natal\Domain\Dictionary\PlanetName;
-use Modules\Natal\Domain\Dictionary\SignName;
-use Modules\Natal\Domain\Entity\Organisms\Planet;
+use Modules\Actors\Astrology\Containers\AspectContainer;
+use Modules\Actors\Astrology\Containers\ElementContainer;
+use Modules\Actors\Astrology\Types\AspectType;
+use Modules\Actors\Astrology\Types\HouseType;
+use Modules\Actors\Astrology\Types\PlanetType;
+use Modules\Actors\Astrology\Types\SignType;
+use Modules\Actors\Astrology\Containers\HouseContainer;
+use Modules\Actors\Astrology\Containers\PlanetContainer;
+use Modules\Actors\Astrology\ValueObjects\Aspect;
+use Modules\Actors\Astrology\ValueObjects\AspectTo;
+use Modules\Actors\Astrology\ValueObjects\House;
+use Modules\Actors\Astrology\ValueObjects\Planet;
+use Modules\Scenarios\Natal\Types\HouseSystemTypes;
+use Modules\Scenarios\Natal\ValueObjects\DominantSign;
+use Modules\Scenarios\Natal\ValueObjects\Natal;
 
 final readonly class PythonResponseMapper
 {
@@ -27,7 +27,7 @@ final readonly class PythonResponseMapper
             houses:         self::mapHouses( $payload['houses'] ),
             elements:       self::mapElements( $payload['alchemy']['elements'] ),
             dominantSign:   self::mapDominantSign( $payload['alchemy']['dominant_sign'] ),
-            houseSystem:    HouseSystemName::Placidius,
+            houseSystem:    HouseSystemTypes::Placidius,
         );
     }
 
@@ -74,9 +74,9 @@ final readonly class PythonResponseMapper
         return new HouseContainer(...$houses);
     }
 
-    private static function mapElements(array $elements): Elements
+    private static function mapElements(array $elements): ElementContainer
     {
-        return new Elements(
+        return new ElementContainer(
             fire:   (int) ( $elements['Fire'] ?? 0 ),
             earth:  (int) ( $elements['Earth'] ?? 0 ),
             air:    (int) ( $elements['Air'] ?? 0 ),
@@ -84,7 +84,7 @@ final readonly class PythonResponseMapper
         );
     }
 
-    private static function mapAspects(array $items): AspectCollection
+    private static function mapAspects(array $items): AspectContainer
     {
         $aspects = [];
 
@@ -97,25 +97,25 @@ final readonly class PythonResponseMapper
             );
         }
 
-        return new AspectCollection(...$aspects);
+        return new AspectContainer(...$aspects);
     }
 
-    private static function mapAspect(string $aspect): AspectName
+    private static function mapAspect(string $aspect): AspectType
     {
         return match ($aspect) {
-            'Conjunction'       => AspectName::Conjunction,
-            'Square'            => AspectName::Square,
-            'Opposition'        => AspectName::Opposition,
-            'Trine'             => AspectName::Trine,
-            'Sextile'           => AspectName::Sextile,
-            'Semisquare'        => AspectName::Semisquare,
-            'Sesquiquadrate'    => AspectName::Sesquiquadrate,
-            'Contraparallel'    => AspectName::Contraparallel,
-            'Parallel'          => AspectName::Parallel,
-            'Quincunx'          => AspectName::Quincunx,
-            'Quintile'          => AspectName::Quintile,
-            'Biquintile'        => AspectName::Biquintile,
-            'Semisextile'       => AspectName::Semisextile,
+            'Conjunction'       => AspectType::Conjunction,
+            'Square'            => AspectType::Square,
+            'Opposition'        => AspectType::Opposition,
+            'Trine'             => AspectType::Trine,
+            'Sextile'           => AspectType::Sextile,
+            'Semisquare'        => AspectType::Semisquare,
+            'Sesquiquadrate'    => AspectType::Sesquiquadrate,
+            'Contraparallel'    => AspectType::Contraparallel,
+            'Parallel'          => AspectType::Parallel,
+            'Quincunx'          => AspectType::Quincunx,
+            'Quintile'          => AspectType::Quintile,
+            'Biquintile'        => AspectType::Biquintile,
+            'Semisextile'       => AspectType::Semisextile,
 
             default => throw new \DomainException("Unknown aspect {$aspect}")
         };
@@ -141,38 +141,38 @@ final readonly class PythonResponseMapper
         );
     }
 
-    private static function mapPlanet(string $planet): PlanetName
+    private static function mapPlanet(string $planet): PlanetType
     {
         return match ($planet) {
-            'Sun'       => PlanetName::Sun,
-            'Moon'      => PlanetName::Moon,
-            'Mercury'   => PlanetName::Mercury,
-            'Venus'     => PlanetName::Venus,
-            'Mars'      => PlanetName::Mars,
-            'Jupiter'   => PlanetName::Jupiter,
-            'Saturn'    => PlanetName::Saturn,
-            'Uranus'    => PlanetName::Uranus,
-            'Neptune'   => PlanetName::Neptune,
-            'Pluto'     => PlanetName::Pluto,
-            'NorthNode' => PlanetName::NorthNode,
-            'SouthNode' => PlanetName::SouthNode,
-            'Lilith'    => PlanetName::Lilith,
-            'Chiron'    => PlanetName::Chiron,
-            'Fortune'   => PlanetName::Fortune,
+            'Sun'       => PlanetType::Sun,
+            'Moon'      => PlanetType::Moon,
+            'Mercury'   => PlanetType::Mercury,
+            'Venus'     => PlanetType::Venus,
+            'Mars'      => PlanetType::Mars,
+            'Jupiter'   => PlanetType::Jupiter,
+            'Saturn'    => PlanetType::Saturn,
+            'Uranus'    => PlanetType::Uranus,
+            'Neptune'   => PlanetType::Neptune,
+            'Pluto'     => PlanetType::Pluto,
+            'NorthNode' => PlanetType::NorthNode,
+            'SouthNode' => PlanetType::SouthNode,
+            'Lilith'    => PlanetType::Lilith,
+            'Chiron'    => PlanetType::Chiron,
+            'Fortune'   => PlanetType::Fortune,
 
             default =>
                 throw new \DomainException( "Unknown planet {$planet}" )
         };
     }
 
-    private static function mapSign(string $sign): SignName
+    private static function mapSign(string $sign): SignType
     {
-        return SignName::from( strtolower( $sign ) );
+        return SignType::from( strtolower( $sign ) );
     }
 
     private static function mapDominantSign(array $sign): DominantSign
     {
-        $dominantSignName = SignName::from( strtolower( $sign['sign'] ) );
+        $dominantSignName = SignType::from( strtolower( $sign['sign'] ) );
         $dominantSign = new DominantSign(
             signName: $dominantSignName,
             count: $sign['count']
@@ -181,21 +181,21 @@ final readonly class PythonResponseMapper
         return $dominantSign;
     }
 
-    private static function mapHouse(int $house): HouseName
+    private static function mapHouse(int $house): HouseType
     {
         return match($house) {
-            1   => HouseName::One,
-            2   => HouseName::Two,
-            3   => HouseName::Three,
-            4   => HouseName::Four,
-            5   => HouseName::Five,
-            6   => HouseName::Six,
-            7   => HouseName::Seven,
-            8   => HouseName::Eight,
-            9   => HouseName::Nine,
-            10  => HouseName::Ten,
-            11  => HouseName::Eleven,
-            12  => HouseName::Twelve,
+            1   => HouseType::One,
+            2   => HouseType::Two,
+            3   => HouseType::Three,
+            4   => HouseType::Four,
+            5   => HouseType::Five,
+            6   => HouseType::Six,
+            7   => HouseType::Seven,
+            8   => HouseType::Eight,
+            9   => HouseType::Nine,
+            10  => HouseType::Ten,
+            11  => HouseType::Eleven,
+            12  => HouseType::Twelve,
         };
     }
 }

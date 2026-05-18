@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import MainLayout from "@/Layouts/MainLayout.vue";
-import AstroProfile from "@/Components/Natal/AstroProfile.vue";
-import NatalCircle from "@/Components/Natal/NatalCircle.vue";
-import Cuspids from "@/Components/Natal/Cuspids.vue";
-import Elements from "@/Components/Natal/Elements.vue";
-import Dominant from "@/Components/Natal/Dominant.vue";
-import AspectsGrid from "@/Components/Natal/AspectsGrid.vue";
-import ZodiacCanvas from "@/Components/Natal/ZodiacCanvas.vue";
-import SinglePlanet from "@/Components/Natal/SinglePlanet.vue";
+import NatalCircle from "@/Modules/Natal/UI/Components/Organisms/NatalCircle.vue";
+import AspectsGrid from "@/Modules/Natal/UI/Components/Organisms/AspectsGrid.vue";
+import Elements from "@/Modules/Natal/UI/Components/Molecules/Elements.vue";
+import SinglePlanet from "@/Modules/Natal/UI/Components/Molecules/SinglePlanet.vue";
+import Cuspids from "@/Modules/Natal/UI/Components/Organisms/CuspidsGrid.vue";
+import MainLayout from "@/Resources/Layouts/MainLayout.vue";
+import AstroProfile from "@/Modules/Social/UI/Components/Molecules/AstroProfile.vue";
+import Dominant from "@/Modules/Natal/UI/Components/Molecules/Dominant.vue";
+import DispositorsGrid from "@/Modules/Natal/UI/Components/Organisms/DispositorsGrid.vue";
 
 const props = defineProps({
     navbar: Object,
@@ -36,7 +36,7 @@ const props = defineProps({
         </div>
         <div class="mt-10 p-5">
             <h2 class="text-center font-medium pb-5 text-surface-200">Натальный документ</h2>
-            <ZodiacCanvas :natal="natal" class="mb-5" />
+            <DispositorsGrid :natal="natal" class="mb-5" />
         </div>
         <div class="max-w-5xl pt-10 m-auto">
             <div class="grid grid-cols-[1fr_280px] gap-6">

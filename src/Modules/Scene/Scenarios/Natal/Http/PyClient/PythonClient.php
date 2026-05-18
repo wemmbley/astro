@@ -1,12 +1,11 @@
 <?php
 
-namespace Modules\Technical\Business\Natal\Http\PyClient;
+namespace Modules\Scene\Scenarios\Natal\Http\PyClient;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Modules\Business\Natal\ValueObjects\Birthday;
-use Modules\Business\Natal\ValueObjects\Natal;
-use Modules\Technical\Business\Natal\Http\PyClient\PythonResponseMapper;
+use Modules\Scenarios\Natal\ValueObjects\Birthday;
+use Modules\Scenarios\Natal\ValueObjects\Natal;
 
 class PythonClient
 {

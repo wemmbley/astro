@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Business\AI\DTO;
+namespace Modules\Scenarios\AI\DTO;
 
-use Modules\Business\AI\ValueObjects\Message;
-use Modules\Business\AI\ValueObjects\MessageBag;
+use Modules\Scenarios\AI\ValueObjects\Message;
+use Modules\Scenarios\AI\ValueObjects\MessageBag;
 
 final readonly class AIResponse
 {

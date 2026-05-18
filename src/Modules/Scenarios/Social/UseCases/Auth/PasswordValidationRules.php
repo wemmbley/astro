@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Social\UseCases\Auth;
+namespace Modules\Scenarios\Social\UseCases\Auth;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Validation\Rules\Password;

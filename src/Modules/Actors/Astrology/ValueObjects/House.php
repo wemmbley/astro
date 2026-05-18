@@ -1,23 +1,23 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\ValueObjects;
+namespace Modules\Actors\Astrology\ValueObjects;
 
-use Modules\Natal\Domain\Containers\AspectCollection;
-use Modules\Natal\Domain\Dictionary\HouseName;
-use Modules\Natal\Domain\Dictionary\SignName;
+use Modules\Actors\Astrology\Containers\AspectContainer;
+use Modules\Actors\Astrology\Types\HouseType;
+use Modules\Actors\Astrology\Types\SignType;
 
 final readonly class House
 {
     public function __construct(
-        public HouseName        $house,
-        public SignName         $sign,
-        public AspectCollection $aspects,
+        public HouseType        $house,
+        public SignType         $sign,
+        public AspectContainer  $aspects,
         public float            $degree,
         public string           $degreeFormatted,
         public float            $longitude,
     ) {}
 
-    public function getName(): HouseName
+    public function getName(): HouseType
     {
         return $this->house;
     }
@@ -25,8 +25,8 @@ final readonly class House
     public static function fromArray(array $data): self
     {
         return new self(
-            house:              HouseName::from($data['house']),
-            sign:               SignName::from($data['sign']),
+            house:              HouseType::from($data['house']),
+            sign:               SignType::from($data['sign']),
             aspects:            $data['aspects'],
             degree:             (float) $data['degree'],
             degreeFormatted:    (string) $data['degreeFormatted'],

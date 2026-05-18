@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\DeepSeek\Enums;
+namespace Modules\Scene\Scenarios\AI\Drivers\DeepSeek\Enums;
 
 enum DeepSeekRoles: string
 {

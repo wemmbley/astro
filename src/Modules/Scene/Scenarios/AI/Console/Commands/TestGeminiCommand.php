@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Console\Commands;
+namespace Modules\Scene\Scenarios\AI\Console\Commands;
 
 use Illuminate\Console\Command;
-use Modules\Business\AI\Enums\AIRequestMode;
-use Modules\Business\AI\ValueObjects\Message;
-use Modules\Business\AI\ValueObjects\MessageBag;
-use Modules\Technical\Business\AI\Drivers\Gemini\Gemini;
-use Modules\Technical\Business\AI\Drivers\Gemini\GeminiModeMapper;
+use Modules\Scenarios\AI\Enums\AIRequestMode;
+use Modules\Scenarios\AI\ValueObjects\Message;
+use Modules\Scenarios\AI\ValueObjects\MessageBag;
+use Modules\Scene\Scenarios\AI\Drivers\Gemini\Gemini;
+use Modules\Scene\Scenarios\AI\Drivers\Gemini\GeminiModeMapper;
 
 class TestGeminiCommand extends Command
 {

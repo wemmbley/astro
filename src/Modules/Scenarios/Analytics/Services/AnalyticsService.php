@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Analytics\Services;
+namespace Modules\Scenarios\Analytics\Services;
 
 use Database\Models\Analytics\PageView;
 use Illuminate\Database\Eloquent\Collection;

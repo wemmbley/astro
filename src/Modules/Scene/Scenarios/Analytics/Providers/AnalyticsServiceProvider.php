@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Technical\Business\Analytics\Providers;
+namespace Modules\Scene\Scenarios\Analytics\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\Business\Analytics\Contracts\GeoResolverContract;
-use Modules\Technical\Business\Analytics\Geo\MaxMindGeoResolver;
+use Modules\Scenarios\Analytics\Contracts\GeoResolverContract;
+use Modules\Scene\Scenarios\Analytics\Geo\MaxMindGeoResolver;
 
 class AnalyticsServiceProvider extends ServiceProvider
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Natal\Types;
+namespace Modules\Scenarios\Natal\Types;
 
 enum HouseSystemTypes: string
 {

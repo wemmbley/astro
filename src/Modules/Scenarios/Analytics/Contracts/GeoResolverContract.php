@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Business\Analytics\Contracts;
+namespace Modules\Scenarios\Analytics\Contracts;
 
-use Modules\Business\Analytics\ValueObjects\GeoLocation;
+use Modules\Scenarios\Analytics\ValueObjects\GeoLocation;
 
 interface GeoResolverContract
 {

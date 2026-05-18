@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Technical\Business\Geo\Console\Commands;
+namespace Modules\Scene\Scenarios\Geo\Console\Commands;
 
 use Illuminate\Console\Command;
-use Modules\Business\Geo\UseCases\ImportGeoCountries;
+use Modules\Scenarios\Geo\UseCases\ImportGeoCountries;
 
 class ImportCountriesCommand extends Command
 {

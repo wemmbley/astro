@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Technical\Business\AI\Drivers\Claude;
+namespace Modules\Scene\Scenarios\AI\Drivers\Claude;
 
 use App\Modules\AI\Core\Contracts\AIProvider;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Business\Natal\ValueObjects;
+namespace Modules\Actors\Astrology\ValueObjects;
 
-use Modules\Natal\Domain\Containers\AspectCollection;
-use Modules\Natal\Domain\Dictionary\HouseTypes;
-use Modules\Natal\Domain\Dictionary\PlanetTypes;
-use Modules\Natal\Domain\Dictionary\SignTypes;
+use Modules\Actors\Astrology\Containers\AspectCollection;
+use Modules\Actors\Astrology\Dictionary\HouseTypes;
+use Modules\Actors\Astrology\Dictionary\PlanetTypes;
+use Modules\Actors\Astrology\Dictionary\SignTypes;
 
 /**
  * Планета - это агрегат данных, внутри которого скрываются детали.

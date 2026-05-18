@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Business\Geo\Contracts;
+namespace Modules\Scenarios\Geo\Contracts;
 
 interface GeoCountryRepositoryContract
 {

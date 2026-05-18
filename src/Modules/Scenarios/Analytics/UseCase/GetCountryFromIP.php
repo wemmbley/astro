@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Business\Analytics\UseCase;
+namespace Modules\Scenarios\Analytics\UseCase;
 
-use Modules\Business\Analytics\Contracts\GeoResolverContract;
-use Modules\Business\Analytics\ValueObjects\GeoLocation;
+use Modules\Scenarios\Analytics\Contracts\GeoResolverContract;
+use Modules\Scenarios\Analytics\ValueObjects\GeoLocation;
 
 final readonly class GetCountryFromIP
 {

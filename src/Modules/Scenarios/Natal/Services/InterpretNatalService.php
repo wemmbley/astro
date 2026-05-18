@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Business\Natal\Services;
+namespace Modules\Actors\Astrology\Services;
 
-use Modules\Business\Natal\ValueObjects\Natal;
+use Modules\Actors\Astrology\ValueObjects\Natal;
 
 /**
  * Сервис интерпретации натальной карты.

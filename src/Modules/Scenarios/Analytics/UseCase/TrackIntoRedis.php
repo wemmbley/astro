@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\Business\Analytics\UseCase;
+namespace Modules\Scenarios\Analytics\UseCase;
 
 use Illuminate\Support\Facades\Redis;
-use Modules\Business\Analytics\DTO\PageViewDTO;
+use Modules\Scenarios\Analytics\DTO\PageViewDTO;
 
 final readonly class TrackIntoRedis
 {

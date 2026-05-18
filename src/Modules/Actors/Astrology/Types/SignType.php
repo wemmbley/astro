@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Esoteric\Astrology\Types;
+namespace Modules\Actors\Astrology\Types;
 
 enum SignType: string
 {

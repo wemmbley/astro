@@ -4,11 +4,11 @@ import {
     signTranslations,
     houseTranslations,
     planetTranslations,
-} from '@/Lang/NatalTypesLang'
-import PlanetIcon from '@/Icons/Zodiac/PlanetIcon.vue'
-import SignIcon from '@/Icons/Zodiac/SignIcon.vue'
-import HouseIcon from '@/Icons/Zodiac/HouseIcon.vue'
-import Tooltip from '@/Utils/Tooltip.vue'
+} from '@/Modules/Natal/Domain/Locale/ZodiacLocale'
+import PlanetIcon from "@/Resources/Icons/Zodiac/PlanetIcon.vue";
+import Tooltip from "@/Modules/Shared/Components/Tooltip.vue";
+import SignIcon from "@/Resources/Icons/Zodiac/SignIcon.vue";
+import HouseIcon from "@/Resources/Icons/Zodiac/HouseIcon.vue";
 
 const props = defineProps<{ natal: any }>()
 
