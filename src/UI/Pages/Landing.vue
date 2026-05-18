@@ -4,7 +4,6 @@ import News from "@/Modules/News/UI/News.vue";
 import HeroImage from "@/Resources/Assets/Home/Hero.png"
 import Background from "@/Resources/Assets/Home/Background.png"
 import Stars from "@/Resources/Assets/Home/Stars.png"
-import SolidIsland from "@/Bootstrap/Solid/SolidIsland.vue";
 
 const props = defineProps({
     navbar: Array
@@ -12,7 +11,6 @@ const props = defineProps({
 </script>
 
 <template>
-    <SolidIsland :loader="() => import('@/Solid/Test')" />
     <MainLayout :navbar="navbar" :hasContainer="false">
         <img :src=Stars alt="banner" class="absolute w-screen h-screen top-0" />
         <div class="flex mt-20 justify-center overflow-hidden ">

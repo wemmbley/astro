@@ -12,10 +12,10 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
-        vue(),
         solid({
             include: /\.tsx$/,
         }),
+        vue(),
     ],
     server: {
         watch: {

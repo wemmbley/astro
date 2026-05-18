@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
 const props = defineProps<{
     loader: () => Promise<any>
-    props?: any
+    props?: Record<string, any>
 }>()
 
 const solidRoot = ref<HTMLElement | null>(null)
+
+let disposeIsland: (() => void) | null = null
 
 onMounted(async () => {
     const mod = await props.loader()
@@ -15,9 +17,13 @@ onMounted(async () => {
 
     if (solidRoot.value) {
         const { mountSolid } = await import('@/Bootstrap/Solid/Solid')
-
-        mountSolid(mod.default, solidRoot.value, props.props)
+        disposeIsland = mountSolid(mod.default, solidRoot.value, props.props)
     }
+})
+
+onUnmounted(() => {
+    disposeIsland?.()
+    disposeIsland = null
 })
 </script>
 
