@@ -2,8 +2,8 @@
 
 namespace API\Http\Controllers\API\V1;
 
-use Natal\Domain\VO\Birthday;
-use Natal\Infrastructure\NatalApiClient\PythonClient;
+use Modules\Scenarios\Natal\ValueObjects\Birthday;
+use Modules\Scene\Scenarios\Natal\Http\PyClient\PythonClient;
 
 final readonly class NatalCircleChartSvg
 {
