@@ -5,5 +5,5 @@ const formatDate = (iso: string) =>
         year: 'numeric',
     });
 
-const isFresh = (dateStr: any): any =>
-    (Date.now() - new Date(dateStr)) / (1000 * 60 * 60 * 24) <= 3;
+const isFresh = (dateStr: string): boolean =>
+    (Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24) <= 3;
