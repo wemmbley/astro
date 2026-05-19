@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
-import { api } from '@/Libs/Fetcher'
-import { parseMarkdown, sectionsToBlocks } from '@/Libs/Marked'
-import Modal from '@/Utils/Modal.vue'
-import Markdown from '@/Utils/Markdown.vue'
-import PlanetIcon from '@/Icons/Zodiac/PlanetIcon.vue'
-import SignIcon from '@/Icons/Zodiac/SignIcon.vue'
-import HouseIcon from '@/Icons/Zodiac/HouseIcon.vue'
-import AspectIcon from '@/Icons/Zodiac/AspectIcon.vue'
-import { signTranslations, houseTranslations, planetTranslations, aspectTranslations } from '@/Lang/NatalTypesLang'
-import type { AspectType, SignType, HouseType, PlanetType } from '@/Types/NatalTypes'
-import AIIcon from "@/Icons/AIIcon.vue";
-import { getPlanetImage } from "@/Mappers/PlanetImages"
-import { getPlanetArchetypeImage } from "@/Mappers/PlanetArchetypeImages"
-import { getAspectColor } from "@/Mappers/AspectColor"
+import { api } from '@/Helpers/Fetcher'
+import { parseMarkdown, sectionsToBlocks } from '@/Helpers/Marked'
+import { signTranslations, houseTranslations, planetTranslations, aspectTranslations } from '@/Modules/Natal/Domain/Locale/ZodiacLocale'
+import type { AspectType, SignType, HouseType, PlanetType } from '@/Modules/Natal/Domain/Types/NatalTypes'
+import { getPlanetImage } from "@/Modules/Natal/Domain/Mappers/Planets"
+import { getAspectColor } from "@/Modules/Natal/Domain/Colors/AspectColor"
+import PlanetIcon from "@/Resources/Icons/Zodiac/PlanetIcon.vue";
+import AIIcon from "@/Resources/Icons/Other/AIIcon.vue";
+import SignIcon from "@/Resources/Icons/Zodiac/SignIcon.vue";
+import HouseIcon from "@/Resources/Icons/Zodiac/HouseIcon.vue";
+import AspectIcon from "@/Resources/Icons/Zodiac/AspectIcon.vue";
 
 type ParsedMd = ReturnType<typeof parseMarkdown>
 
@@ -106,123 +103,6 @@ const aspectKey = (name: string, target: string) => `${name.toLowerCase()}-${tar
 </script>
 
 <template>
-    <!-- ── Модалка: AI ───────────────────────────────────────────────── -->
-    <Modal ultrawide :title="entityTitle + ' AI Астролог'" :show="!!modals['ai']" @update:show="closeModal('ai')">
-        <div class="flow-root text-sm leading-relaxed text-pretty">
-            <img
-                :src="getPlanetArchetypeImage('astrologer')"
-                alt="astrologer"
-                class="float-left mr-6 mb-4 w-1/3 max-w-100 rounded-2xl shadow-lg ring-1 ring-white/10"
-            />
-            <div class="space-y-4">
-                <p class="font-medium text-base text-white/90">
-                    Получите возможность лично пообщаться с профессиональным
-                    AI-астрологом и задать любой вопрос о Вашей Планете.
-                </p>
-                <p>
-                    В отличие от кратких трактовок, диалог позволяет
-                    разбирать Вашу карту глубоко и целостно —
-                    с учётом Знака, Дома, аспектов и взаимосвязей
-                    со всеми остальными Планетами.
-                </p>
-                <ul class="list-disc pl-5 space-y-1 italic opacity-90">
-                    <li>любые вопросы без ограничений по теме;</li>
-                    <li>глубокие и связанные ответы вместо шаблонов;</li>
-                    <li>анализ психологических и событийных проявлений;</li>
-                    <li>разбор сильных сторон и внутренних противоречий;</li>
-                    <li>живой интерактивный формат общения.</li>
-                </ul>
-                <p>
-                    AI обучен на профессиональных авторских материалах
-                    и ведёт диалог на основе именно Вашей натальной карты.
-                </p>
-            </div>
-            <div class="mt-8 pt-4 border-t border-white/10 clear-both">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-sm opacity-60 uppercase tracking-wider">Доступ к AI-диалогу</span>
-                    <span class="text-2xl font-light tracking-tight">58 грн</span>
-                </div>
-                <button class="w-full py-4 rounded-2xl bg-linear-to-r from-accent/20 to-accent/10 border border-accent/50 text-accent hover:bg-accent/30 transition-all font-semibold uppercase tracking-widest text-xs">
-                    Начать диалог
-                </button>
-            </div>
-        </div>
-    </Modal>
-
-    <!-- ── Модалка: AI Collect Text ──────────────────────────────────────── -->
-    <Modal :title="entityTitle" :show="!!modals['aiFull']" @update:show="closeModal('aiFull')">
-        <div class="space-y-4 text-sm leading-6">
-            <p>
-                Получите целостную и глубокую трактовку Вашей Планеты,
-                созданную на основе профессиональной астрологической системы
-                и авторской базы интерпретаций.
-            </p>
-            <p>Анализ включает:</p>
-            <ul class="list-disc pl-5 space-y-1">
-                <li>положение Планеты в Знаке и Доме;</li>
-                <li>влияние всех аспектов и взаимосвязей;</li>
-                <li>психологические и событийные проявления;</li>
-                <li>сильные стороны, внутренние противоречия и потенциал реализации;</li>
-                <li>единое цельное описание без разрозненных фрагментов.</li>
-            </ul>
-            <p>
-                Текст генерируется персонально по Вашей натальной карте
-                и формирует полноценный связный портрет вместо набора
-                отдельных трактовок. Вам не придётся пытаться самостоятельно
-                собирать фрагментированную информацию - полная картина будет
-                перед Вами.
-            </p>
-            <p class="text-surface-300">
-                * Далее Вы сможете пообщаться с AI
-                в обычном формате вопрос-ответ, по цене 58грн за сообщение,
-                если у Вас будут уточняющие вопросы.
-            </p>
-            <div class="pt-2 border-t border-surface-500">
-                <div class="flex items-center justify-between">
-                    <span class="text-sm opacity-70">Полный разбор</span>
-                    <span class="text-lg font-semibold">71 грн</span>
-                </div>
-                <button class="text-accent border border-accent w-full mt-4 rounded-xl py-3 font-medium">
-                    Получить полный анализ
-                </button>
-            </div>
-        </div>
-    </Modal>
-
-    <!-- ── Модалка: entity ───────────────────────────────────────────────── -->
-    <Modal wide :title="entityTitle" :show="!!modals['entity']" @update:show="closeModal('entity')">
-        <Markdown :blocks="allBlocks(entityMd)" />
-    </Modal>
-
-    <!-- ── Модалка: знак ─────────────────────────────────────────────────── -->
-    <Modal wide
-        :title="signTranslations[planet.sign as SignType]"
-        :show="!!modals['sign']"
-        @update:show="closeModal('sign')"
-    >
-        <Markdown :blocks="allBlocks(signMd)" />
-    </Modal>
-
-    <!-- ── Модалка: дом ──────────────────────────────────────────────────── -->
-    <Modal wide
-        :title="houseTranslations[planet.house as HouseType]"
-        :show="!!modals['house']"
-        @update:show="closeModal('house')"
-    >
-        <Markdown :blocks="allBlocks(houseMd)" />
-    </Modal>
-
-    <!-- ── Модалки: аспекты ──────────────────────────────────────────────── -->
-    <template v-for="a in planet.aspects" :key="`modal-${a.name}-${a.target}`">
-        <Modal wide
-            :title="`${aspectTranslations[a.name as AspectType]} → ${planetTranslations[a.target as PlanetType]}`"
-            :show="!!modals[aspectKey(a.name, a.target)]"
-            @update:show="closeModal(aspectKey(a.name, a.target))"
-        >
-            <Markdown :blocks="allBlocks(aspectMdMap[aspectKey(a.name, a.target)] ?? null)" />
-        </Modal>
-    </template>
-
     <div class="mb-5">
         <div v-if="isLoading" class="h-40 w-full animate-pulse rounded-md bg-surface-700"/>
         <div v-else class="flex gap-5 items-stretch">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ElementIcon from "@/Icons/Zodiac/ElementIcon.vue";
+import ElementIcon from "@/Resources/Icons/Zodiac/ElementIcon.vue";
 
 const props = defineProps({
     elements: Object,
@@ -39,7 +39,3 @@ const props = defineProps({
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>

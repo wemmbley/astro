@@ -49,6 +49,7 @@ export type PlanetType =
     | 'fortune'
     | 'north_node'
     | 'south_node'
+    | 'asc'
 
 export type Natal = {
 

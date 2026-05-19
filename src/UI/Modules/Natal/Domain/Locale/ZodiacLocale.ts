@@ -3,7 +3,7 @@ import type {
     SignType,
     HouseType,
     PlanetType,
-} from '@/Types/NatalTypes'
+} from '@/Modules/Natal/Domain/Types/NatalTypes'
 
 export const aspectTranslations: Record<AspectType, string> = {
     conjunction: 'Соединение',
@@ -59,4 +59,5 @@ export const planetTranslations: Record<PlanetType, string> = {
     fortune: 'Парс Фортуны',
     north_node: 'Северный узел',
     south_node: 'Южный узел',
+    asc: 'Асцендент',
 }

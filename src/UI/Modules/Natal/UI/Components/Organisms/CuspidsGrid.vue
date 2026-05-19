@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import HouseIcon from "@/Icons/Zodiac/HouseIcon.vue";
-import SignIcon from "@/Icons/Zodiac/SignIcon.vue";
+import HouseIcon from "@/Resources/Icons/Zodiac/HouseIcon.vue";
+import SignIcon from "@/Resources/Icons/Zodiac/SignIcon.vue";
 
 defineProps({
     cusps: Object,
