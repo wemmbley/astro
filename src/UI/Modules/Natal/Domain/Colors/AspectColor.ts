@@ -16,5 +16,5 @@ const ASPECT_COLOR: Record<string, string> = {
 
 export function getAspectColor(name: string): string
 {
-    return ASPECT_COLOR.name;
+    return ASPECT_COLOR[name] ?? '#9ca3af';
 }

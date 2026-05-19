@@ -26,24 +26,34 @@ const props = defineProps({
 <template>
     <div class="max-w-4xl pt-10 m-auto">
         <Tabber v-model="activeTab" :tabs="tabs" />
-        <div class="grid grid-cols-[1fr_280px] gap-6">
+        <div
+            :class="[
+            'grid gap-6',
+            activeTab === 'dispositors'
+                ? 'grid-cols-1'
+                : 'grid-cols-[1fr_280px]'
+        ]">
             <div>
-                <h2 class="text-center font-medium mt-10 pb-5 text-surface-200">Натальный круг</h2>
-                <NatalCircle :coordinates="coordinates" />
-                <h2 class="text-center font-medium mt-10 text-surface-200">Аспекты</h2>
-                <AspectsGrid :planets="natal.planets" />
+                <div v-if="activeTab === 'natal'">
+                    <h2 class="text-center font-medium mt-10 pb-5 text-surface-200">Натальный круг</h2>
+                    <NatalCircle :coordinates="coordinates" />
+                </div>
+                <div v-else-if="activeTab === 'aspects'">
+                    <h2 class="text-center font-medium mt-10 text-surface-200 mb-4">Аспекты</h2>
+                    <AspectsGrid :planets="natal.planets" />
+                </div>
+                <div v-else-if="activeTab === 'dispositors'">
+                    <h2 class="text-center font-medium mt-10 text-surface-200 mb-10">Диспозиторы</h2>
+                    <DispositorsGrid :natal="natal" />
+                </div>
             </div>
-            <div class="sticky top-4 h-fit">
+            <div v-if="activeTab !== 'dispositors'" class="sticky top-4 self-start">
                 <SignsGrid :planets="natal.planets" />
                 <Cuspids :cusps="natal.cusps" class="mt-4" />
                 <Elements :elements="natal.elements" class="mt-4" />
                 <Dominant :dominant="natal.dominant_sign" class="mt-4" />
             </div>
         </div>
-    </div>
-    <div class="mt-10 p-5">
-        <h2 class="text-center font-medium pb-5 text-surface-200">Натальный документ</h2>
-        <DispositorsGrid :natal="natal" class="mb-5" />
     </div>
     <div class="max-w-5xl pt-10 m-auto">
         <div class="grid grid-cols-[1fr_280px] gap-6">
