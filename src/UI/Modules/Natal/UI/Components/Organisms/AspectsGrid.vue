@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import PlanetIcon from "@/Icons/Zodiac/PlanetIcon.vue"
-import AspectIcon from "@/Icons/Zodiac/AspectIcon.vue"
-import Tooltip from "@/Utils/Tooltip.vue";
-import { aspectTranslations, planetTranslations } from "@/Lang/NatalTypesLang"
-import { getAspectColor } from "@/Mappers/AspectColor"
+import PlanetIcon from "@/Resources/Icons/Zodiac/PlanetIcon.vue"
+import AspectIcon from "@/Resources/Icons/Zodiac/AspectIcon.vue"
+import Tooltip from "@/Modules/Shared/Components/Tooltip.vue";
+import { aspectTranslations, planetTranslations } from "@/Modules/Natal/Domain/Locale/ZodiacLocale"
+import { getAspectColor } from "@/Modules/Natal/Domain/Colors/AspectColor"
 
 const props = defineProps<{
     planets: Record<string, {

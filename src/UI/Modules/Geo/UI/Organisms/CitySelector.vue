@@ -6,7 +6,7 @@ import ArrowIcon from "@/Icons/ArrowIcon.vue";
 import { onClickOutside } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
-import { api } from '@/Libs/Fetcher'
+import { api } from '@/Helpers/Fetcher'
 
 const cityDropdownTarget = useTemplateRef('city-dropdown')
 

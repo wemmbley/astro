@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useQuery} from '@tanstack/vue-query'
-import {api} from '@/Libs/Fetcher'
+import {api} from '@/Helpers/Fetcher'
 import {ref, onMounted, onBeforeUnmount} from 'vue'
 
 const props = defineProps({
