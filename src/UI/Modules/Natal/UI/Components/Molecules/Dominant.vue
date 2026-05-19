@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import SignIcon from "@/Resources/Icons/Zodiac/SignIcon.vue";
+import { DominantSign } from "@/Modules/Natal/Domain/Types/NatalTypes"
 
-defineProps({
-    dominant: Object,
-});
+defineProps<{
+    dominant: DominantSign,
+}>();
 </script>
 
 <template>

@@ -52,5 +52,48 @@ export type PlanetType =
     | 'asc'
 
 export type Natal = {
+    planets: Planet[],
+    cusps: House[],
+    elements: Elements,
+    dominant_sign: DominantSign,
+};
 
+export type Planet = {
+    name: PlanetType,
+    sign: SignType,
+    house: HouseType,
+    aspects: Aspect[],
+    longitude: string,
+    degree: string,
+    degreeFormatted: string,
+    retrograde: boolean,
+    stationary: boolean,
+};
+
+export type House = {
+    house: HouseType,
+    sign: SignType,
+    aspects: Aspect[],
+    longitude: string,
+    degree: string,
+    degreeFormatted: string,
 }
+
+export type Elements = {
+    fire: number,
+    earth: number,
+    air: number,
+    water: number,
+}
+
+export type Aspect = {
+    name: string;
+    target: string;
+    orb: number;
+    orbFormatted: string
+};
+
+export type DominantSign = {
+    sign: SignType,
+    count: number,
+};

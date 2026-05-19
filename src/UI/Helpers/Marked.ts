@@ -1,3 +1,7 @@
+/**
+ * Здесь происходит работа с Маркдауном, пришедшим с сервера.
+ */
+
 import { marked } from 'marked'
 import fm from 'front-matter'
 
@@ -22,6 +26,7 @@ export interface ParsedMarkdown {
     byLevel: (level: number) => Section[]
 }
 
+// @ts-ignore
 function tokenToBlocks(tokens: marked.Token[]): Block[] {
     const blocks: Block[] = []
 
@@ -76,6 +81,8 @@ export function parseMarkdown(source: string): ParsedMarkdown {
     const allTokens = marked.lexer(parsed.body)
 
     const sections: Section[] = []
+
+    // @ts-ignore
     let current: { heading: string; level: number; tokens: marked.Token[] } = {
         heading: '',
         level: 0,

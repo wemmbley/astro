@@ -5,20 +5,9 @@ import AspectIcon from "@/Resources/Icons/Zodiac/AspectIcon.vue"
 import Tooltip from "@/Modules/Shared/Components/Tooltip.vue";
 import { aspectTranslations, planetTranslations } from "@/Modules/Natal/Domain/Locale/ZodiacLocale"
 import { getAspectColor } from "@/Modules/Natal/Domain/Colors/AspectColor"
-
-const props = defineProps<{
-    planets: Record<string, {
-        aspects: Array<{
-            name: string;
-            target: string;
-            orb: number;
-            orbFormatted: string
-        }>
-    }>
-}>()
+import { Planet } from "@/Modules/Natal/Domain/Types/NatalTypes"
 
 const list = computed(() => Object.keys(props.planets))
-
 const hovered = ref<{ ri: number; ci: number } | null>(null)
 
 const isHighlighted = (ri: number, ci: number): boolean => {
@@ -44,6 +33,10 @@ const getAspects = (row: string, col: string) => {
     }
     return result
 }
+
+const props = defineProps<{
+    planets: Planet[],
+}>()
 </script>
 
 <template>

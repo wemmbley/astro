@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Tabber from "@/Modules/Shared/Components/Tabber.vue";
 import {ref} from "vue";
+import Tabber from "@/Modules/Shared/Components/Tabber.vue";
 import Cuspids from "@/Modules/Natal/UI/Components/Organisms/CuspidsGrid.vue";
 import DispositorsGrid from "@/Modules/Natal/UI/Components/Organisms/DispositorsGrid.vue";
 import Elements from "@/Modules/Natal/UI/Components/Molecules/Elements.vue";
@@ -9,6 +9,7 @@ import Dominant from "@/Modules/Natal/UI/Components/Molecules/Dominant.vue";
 import NatalCircle from "@/Modules/Natal/UI/Components/Organisms/NatalCircle.vue";
 import AspectsGrid from "@/Modules/Natal/UI/Components/Organisms/AspectsGrid.vue";
 import SignsGrid from "@/Modules/Natal/UI/Components/Organisms/SignsGrid.vue";
+import { Natal } from "@/Modules/Natal/Domain/Types/NatalTypes"
 
 const activeTab = ref('natal')
 const tabs = [
@@ -17,10 +18,10 @@ const tabs = [
     { key: 'dispositors', label: 'Диспозиторы' },
 ];
 
-const props = defineProps({
-    natal: Object,
-    coordinates: Object,
-});
+const props = defineProps<{
+    natal: Natal,
+    coordinates: object,
+}>();
 </script>
 
 <template>
@@ -47,7 +48,7 @@ const props = defineProps({
                     <DispositorsGrid :natal="natal" />
                 </div>
             </div>
-            <div v-if="activeTab !== 'dispositors'" class="sticky top-4 self-start">
+            <div v-if="activeTab !== 'dispositors'" class="sticky top-4 self-start mt-8">
                 <SignsGrid :planets="natal.planets" />
                 <Cuspids :cusps="natal.cusps" class="mt-4" />
                 <Elements :elements="natal.elements" class="mt-4" />

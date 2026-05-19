@@ -9,9 +9,7 @@ final readonly class ElementContainer
         public int $earth,
         public int $air,
         public int $water,
-    )
-    {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {
