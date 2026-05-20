@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import Modal from "@/Utils/Modal.vue";
 import {MapPinIcon, MapIcon, CircleOffIcon} from "lucide-vue-next";
-import ArrowIcon from "@/Icons/ArrowIcon.vue";
 import { onClickOutside } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
 import { api } from '@/Helpers/Fetcher'
+import Modal from "@/Modules/Shared/Components/Modal.vue";
+import ArrowIcon from "@/Resources/Icons/Other/ArrowIcon.vue";
 
 const cityDropdownTarget = useTemplateRef('city-dropdown')
 

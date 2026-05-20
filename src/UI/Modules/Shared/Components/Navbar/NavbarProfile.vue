@@ -34,42 +34,34 @@ onClickOutside(containerRef, () => (isOpen.value = false))
         >
             <User size="20" />
         </button>
-
         <transition
             enter-active-class="transition ease-out duration-150"
             enter-from-class="opacity-0 translate-y-1"
             enter-to-class="opacity-100 translate-y-0"
             leave-active-class="transition ease-in duration-100"
             leave-from-class="opacity-100 translate-y-0"
-            leave-to-class="opacity-0 translate-y-1"
-        >
-            <div
-                v-if="isOpen"
-                class="absolute right-0 mt-2 w-48 z-20
+            leave-to-class="opacity-0 translate-y-1">
+            <div v-if="isOpen"
+                 class="absolute right-0 mt-2 w-48 z-20
                        bg-surface-600 border border-surface-500
-                       rounded-lg shadow-lg overflow-hidden"
-            >
+                       rounded-lg shadow-lg overflow-hidden">
                 <Link
                     href="/profile"
                     class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
-                    @click="close"
-                >
+                    @click="close">
                     Профиль
                 </Link>
-
                 <Link
                     href="/astrobase"
                     class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
-                    @click="close"
-                >
-                    Личная база астрокарт
+                    @click="close">
+                    База данных
                 </Link>
-
+                <hr class="text-surface-500 mt-1 mb-1" />
                 <button
                     @click="logout"
                     class="w-full flex items-center gap-2 px-4 py-2 text-sm
-                           hover:bg-surface-500 text-red-400"
-                >
+                           hover:bg-surface-500 text-red-400">
                     <LogOut size="16" />
                     Выйти
                 </button>
