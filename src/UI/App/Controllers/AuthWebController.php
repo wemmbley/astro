@@ -4,7 +4,7 @@ namespace UI\App\Controllers;
 
 use Inertia\Inertia;
 
-final readonly class uthWebController
+final readonly class AuthWebController
 {
     public function __construct() {}
 

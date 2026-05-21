@@ -43,6 +43,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'navbar' => $this->navbar->getByName(NavbarRepository::MAIN_NAVBAR),
+            'role' => 'guest',
         ];
     }
 }

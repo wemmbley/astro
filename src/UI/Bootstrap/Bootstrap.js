@@ -3,6 +3,9 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import './App.css';
+import { createPinia } from 'pinia'
+
+const pinia = createPinia()
 
 createInertiaApp({
     resolve: name =>
@@ -17,6 +20,7 @@ createInertiaApp({
         })
         .use(plugin)
         .use(VueQueryPlugin)
+        .use(pinia)
         .mount(el)
     },
 })

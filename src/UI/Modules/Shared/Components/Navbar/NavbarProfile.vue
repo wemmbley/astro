@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import { Link, useForm } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3'
 import { User, LogOut } from 'lucide-vue-next'
 import {onClickOutside} from "@vueuse/core";
 
@@ -10,13 +10,9 @@ const containerRef = ref(null)
 function toggle() {
     isOpen.value = !isOpen.value
 }
-
 function close() {
     isOpen.value = false
 }
-
-const form = useForm()
-
 function logout() {
 
 }

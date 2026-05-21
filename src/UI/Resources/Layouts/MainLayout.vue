@@ -2,16 +2,13 @@
 import Navbar from "@/Modules/Shared/Components/Navbar/Navbar.vue";
 
 const { hasContainer = true } = defineProps({
-    navbar: Array,
     background: String,
     hasContainer: Boolean,
 });
 </script>
 
 <template>
-    <div
-        :class="background ? '' : 'bg-surface-800'"
-    >
+    <div :class="background ? '' : 'bg-surface-800'">
         <template v-if="background">
             <div
                 class="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
@@ -19,9 +16,7 @@ const { hasContainer = true } = defineProps({
             />
             <div class="fixed inset-0 -z-10 bg-surface-800/40" />
         </template>
-
-        <Navbar :navbar="navbar" />
-
+        <Navbar />
         <div v-if="hasContainer">
             <div class="max-w-4xl pt-10 m-auto">
                 <slot />

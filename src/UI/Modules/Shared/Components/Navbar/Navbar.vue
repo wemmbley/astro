@@ -1,12 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import NavbarLogo from "@/Modules/Shared/Components/Navbar/NavbarLogo.vue";
 import NavbarItems from "@/Modules/Shared/Components/Navbar/NavbarItems.vue";
 import NavbarProfile from "@/Modules/Shared/Components/Navbar/NavbarProfile.vue";
 import NavbarNotifications from "@/Modules/Shared/Components/Navbar/NavbarNotifications.vue";
+import {usePage} from "@inertiajs/vue3";
 
-defineProps({
-    navbar: Array
-})
+const page = usePage()
 </script>
 
 <template>
@@ -14,11 +13,13 @@ defineProps({
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center">
             <div class="flex items-center flex-1 gap-4">
                 <NavbarLogo />
-                <NavbarItems :navbar="navbar" />
+                <NavbarItems />
             </div>
             <div class="flex items-center gap-2">
-                <NavbarNotifications />
-                <NavbarProfile />
+                <div v-if="page.role !== 'guest'">
+                    <NavbarNotifications />
+                </div>
+                <NavbarProfile/>
             </div>
         </div>
     </header>

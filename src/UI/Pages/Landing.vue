@@ -4,14 +4,10 @@ import News from "@/Modules/News/UI/News.vue";
 import HeroImage from "@/Resources/Assets/Home/Hero.png"
 import Background from "@/Resources/Assets/Home/Background.png"
 import Stars from "@/Resources/Assets/Home/Stars.png"
-
-const props = defineProps({
-    navbar: Array
-});
 </script>
 
 <template>
-    <MainLayout :navbar="navbar" :hasContainer="false">
+    <MainLayout :hasContainer="false">
         <img :src=Stars alt="banner" class="absolute w-screen h-screen top-0" />
         <div class="flex mt-20 justify-center overflow-hidden ">
             <div class="flex flex-col z-10">
@@ -24,10 +20,7 @@ const props = defineProps({
             </div>
             <div class="relative">
                 <News />
-                <img
-                    :src=Background
-                    alt="banner"
-                    class="absolute opacity-50 z-2" />
+                <img :src=Background alt="banner" class="absolute opacity-50 z-2" />
             </div>
         </div>
     </MainLayout>
