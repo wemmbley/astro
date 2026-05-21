@@ -1,15 +1,23 @@
 <script setup lang="ts">
+const model = defineModel<string>({ required: true });
 
+const props = withDefaults(defineProps<{
+    label?: string,
+    showRecover?: boolean,
+}>(), {
+    label: 'Пароль',
+    showRecover: false,
+});
 </script>
 
 <template>
     <div class="mb-2 flex items-center justify-between">
         <label for="password" class="block text-sm font-medium text-surface-300">
-            Пароль
+            {{ props.label }}
         </label>
-        <a href="#" class="text-sm text-accent transition hover:text-accent-300">
-            Восстановить?
-        </a>
+        <div v-if="showRecover">
+            <a href="/auth/recover" class="text-sm text-accent transition hover:text-accent-300">Восстановить?</a>
+        </div>
     </div>
     <div class="relative">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
@@ -18,7 +26,7 @@
             </svg>
         </div>
         <input
-            id="password"
+            v-model="model"
             type="password"
             placeholder="••••••••"
             class="w-full rounded-2xl border border-surface-600 bg-surface-700/80

@@ -3,6 +3,10 @@ import PasswordField from "@/Modules/Auth/UI/Components/Atoms/PasswordField.vue"
 import EnterButton from "@/Modules/Auth/UI/Components/Atoms/EnterButton.vue";
 import BlockIcon from "@/Modules/Auth/UI/Components/Atoms/BlockIcon.vue";
 import EmailField from "@/Modules/Auth/UI/Components/Atoms/EmailField.vue";
+import {ref} from "vue";
+
+const password = ref<string>('');
+const email = ref<string>('');
 </script>
 
 <template>
@@ -17,12 +21,12 @@ import EmailField from "@/Modules/Auth/UI/Components/Atoms/EmailField.vue";
             </p>
         </div>
         <form class="space-y-5">
-            <EmailField />
-            <PasswordField />
-            <a href="/auth/registration" class="text-sm text-accent transition hover:text-accent-300">
+            <EmailField v-model="email" />
+            <PasswordField v-model="password" />
+            <a href="/auth/register" class="text-sm text-accent transition hover:text-accent-300">
                 Может, зарегестрируемся? Это бесплатно!
             </a>
-            <EnterButton />
+            <EnterButton label="Войти" />
         </form>
     </div>
 </template>

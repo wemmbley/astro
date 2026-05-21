@@ -1,10 +1,15 @@
 <script setup lang="ts">
-
+const model = defineModel<string>({ required: true });
+const props = withDefaults(defineProps<{
+    label?: string,
+}>(), {
+    label: 'Email',
+});
 </script>
 
 <template>
     <label for="email" class="mb-2 block text-sm font-medium text-surface-300">
-        Email
+        {{ props.label }}
     </label>
     <div class="relative">
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
@@ -13,7 +18,7 @@
             </svg>
         </div>
         <input
-            id="email"
+            v-model="model"
             type="email"
             placeholder="you@example.com"
             class="w-full rounded-2xl border border-surface-600 bg-surface-700/80
