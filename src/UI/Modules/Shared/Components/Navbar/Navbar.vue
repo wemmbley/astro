@@ -3,7 +3,7 @@ import NavbarLogo from "@/Modules/Shared/Components/Navbar/NavbarLogo.vue";
 import NavbarItems from "@/Modules/Shared/Components/Navbar/NavbarItems.vue";
 import NavbarProfile from "@/Modules/Shared/Components/Navbar/NavbarProfile.vue";
 import NavbarNotifications from "@/Modules/Shared/Components/Navbar/NavbarNotifications.vue";
-import {usePage} from "@inertiajs/vue3";
+import {Link, usePage} from "@inertiajs/vue3";
 
 const page = usePage()
 </script>
@@ -16,10 +16,20 @@ const page = usePage()
                 <NavbarItems />
             </div>
             <div class="flex items-center gap-2">
-                <div v-if="page.role !== 'guest'">
+                <div v-if="page.props.role !== 'guest'">
                     <NavbarNotifications />
+                    <NavbarProfile/>
                 </div>
-                <NavbarProfile/>
+                <div v-else class="flex gap-2">
+                    <Link href="/auth/register" class="block px-4 py-2 text-sm transition border rounded-md
+                    hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
+                        Зарегестрироваться
+                    </Link>
+                    <Link href="/auth/login" class="block px-4 py-2 text-sm transition border rounded-md
+                    hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
+                        Войти
+                    </Link>
+                </div>
             </div>
         </div>
     </header>

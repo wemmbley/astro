@@ -3,18 +3,19 @@
 namespace UI\App\Controllers;
 
 use Inertia\Inertia;
+use Inertia\Response;
 
 final readonly class AuthWebController
 {
     public function __construct() {}
 
-    public function auth()
+    public function auth(): Response
     {
-        return Inertia::render('Auth/Authorization', []);
+        return Inertia::render('Authorization', []);
     }
 
-    public function reg()
+    public function reg(): Response
     {
-        return Inertia::render('Auth/Registration', []);
+        return Inertia::render('Registration', []);
     }
 }

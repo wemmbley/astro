@@ -3,7 +3,9 @@ import { ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import { User, LogOut } from 'lucide-vue-next'
 import {onClickOutside} from "@vueuse/core";
+import {usePage} from "@inertiajs/vue3";
 
+const page = usePage()
 const isOpen = ref(false)
 const containerRef = ref(null)
 
@@ -41,26 +43,28 @@ onClickOutside(containerRef, () => (isOpen.value = false))
                  class="absolute right-0 mt-2 w-48 z-20
                        bg-surface-600 border border-surface-500
                        rounded-lg shadow-lg overflow-hidden">
-                <Link
-                    href="/profile"
-                    class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
-                    @click="close">
-                    Профиль
-                </Link>
-                <Link
-                    href="/astrobase"
-                    class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
-                    @click="close">
-                    База данных
-                </Link>
-                <hr class="text-surface-500 mt-1 mb-1" />
-                <button
-                    @click="logout"
-                    class="w-full flex items-center gap-2 px-4 py-2 text-sm
+                <div>
+                    <Link
+                        href="/profile"
+                        class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
+                        @click="close">
+                        Профиль
+                    </Link>
+                    <Link
+                        href="/astrobase"
+                        class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
+                        @click="close">
+                        База данных
+                    </Link>
+                    <hr class="text-surface-500 mt-1 mb-1" />
+                    <button
+                        @click="logout"
+                        class="w-full flex items-center gap-2 px-4 py-2 text-sm
                            hover:bg-surface-500 text-red-400">
-                    <LogOut size="16" />
-                    Выйти
-                </button>
+                        <LogOut size="16" />
+                        Выйти
+                    </button>
+                </div>
             </div>
         </transition>
     </div>

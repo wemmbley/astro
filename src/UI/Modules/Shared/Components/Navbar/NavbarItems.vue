@@ -1,16 +1,12 @@
 <script setup>
 import {Link, usePage} from "@inertiajs/vue3";
 const page = usePage()
-
-defineProps({
-    navbar: Array
-})
 </script>
 
 <template>
     <nav class="flex items-center gap-1 ml-6">
         <Link
-            v-for="navItem in navbar"
+            v-for="navItem in page.props.navbar"
             :key="navItem.id"
             :href="navItem.link"
             :class="[
