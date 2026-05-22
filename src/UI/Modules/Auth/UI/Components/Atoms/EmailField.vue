@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const model = defineModel<string>({ required: true });
+const model = defineModel<string>({ required: false });
 const props = withDefaults(defineProps<{
     label?: string,
+    name?: string,
 }>(), {
     label: 'Email',
+    name: 'email',
 });
 </script>
 
@@ -20,6 +22,7 @@ const props = withDefaults(defineProps<{
         <input
             v-model="model"
             type="email"
+            :name="props.name"
             placeholder="you@example.com"
             class="w-full rounded-2xl border border-surface-600 bg-surface-700/80
                    py-3.5 pl-12 pr-4 text-surface-200 placeholder:text-surface-500

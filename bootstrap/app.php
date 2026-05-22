@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../workers/Timers/console.php',
         channels: __DIR__.'/../routes/channels.php',
     )
+    ->withProviders([
+        Providers\FortifyServiceProvider::class,
+    ])
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
             HandleInertiaRequests::class,

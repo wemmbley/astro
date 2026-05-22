@@ -1,11 +1,9 @@
 <?php
 
-use Modules\Isolated\AI\Infrastructure\Providers\AIServiceProvider;
-
 return [
-    AIServiceProvider::class,
-    \Modules\Isolated\Analytics\Infrastructure\Providers\AnalyticsServiceProvider::class,
-    \Matrix\Infrastructure\Providers\MatrixServiceProvider::class,
+    Modules\Scene\Scenarios\AI\Providers\AIServiceProvider::class,
+    Modules\Scene\Scenarios\Analytics\Providers\AnalyticsServiceProvider::class,
+    Modules\Technical\Esoteric\Matrix\Providers\MatrixServiceProvider::class,
     Providers\FortifyServiceProvider::class,
     Providers\AppServiceProvider::class,
 ];

@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use database\Models\Interpretations\InterpretCuspidSign;
-use database\Models\Interpretations\InterpretEntity;
-use database\Models\Interpretations\InterpretPlanetAspect;
-use database\Models\Interpretations\InterpretPlanetHouse;
-use database\Models\Interpretations\InterpretPlanetSign;
-use database\Models\Interpretations\InterpretRepository;
-use database\Models\Navbar;
-use database\Models\Post;
-use database\Models\Social\User;
+use Database\Models\Interpretations\InterpretCuspidSign;
+use Database\Models\Interpretations\InterpretEntity;
+use Database\Models\Interpretations\InterpretPlanetAspect;
+use Database\Models\Interpretations\InterpretPlanetHouse;
+use Database\Models\Interpretations\InterpretPlanetSign;
+use Database\Models\Interpretations\InterpretRepository;
+use Database\Models\Navbar;
+use Database\Models\Post;
+use Database\Models\Social\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;

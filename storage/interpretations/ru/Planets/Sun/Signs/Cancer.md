@@ -66,3 +66,14 @@
 Учитель
 Логист
 Нянька
+
+# Семантический код 
+
+[![Татьяна Снежина - Мой старый дом](https://img.youtube.com/vi/JaPPCNDMYcg/mqdefault.jpg)](https://www.youtube.com/watch?v=JaPPCNDMYcg&list=RD-t2izIrr5vM&index=3)
+
+Дом - это живая Душа. Он чувствует, дышит, зовёт, скучает.
+
+[![Анжелика Варум - Городок](https://img.youtube.com/vi/2DfWc2ZHjsc/mqdefault.jpg)](https://www.youtube.com/watch?v=2DfWc2ZHjsc&list=RD-t2izIrr5vM&index=4)
+
+Улица ощущается как живой дом, большой душевный организм, где все друг-друга знают. Все такое знакомое, и приятное.
+В этом доме происхот и рождение и смерть.

@@ -1,6 +1,6 @@
 <?php
 
-use database\Models\Social\User;
+use Database\Models\Social\User;
 
 return [
 

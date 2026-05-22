@@ -2,6 +2,7 @@
 
 namespace Database\Models\Social;
 
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,10 +22,14 @@ use WendellAdriel\Lift\Lift;
 #[HasMany(UserBlock::class,          'blockedBy',             'blocked_id')]
 final class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Lift, HasRoles;
+    use HasFactory,
+        Notifiable,
+        Lift,
+        HasRoles,
+        MustVerifyEmail;
 
     #[Fillable]
-    public string $name;
+    public ?string $name;
 
     #[Fillable]
     public string $email;
@@ -38,5 +43,5 @@ final class User extends Authenticatable
     public ?string $remember_token = null;
 
     #[Cast('datetime')]
-    public string $email_verified_at;
+    public ?string $email_verified_at;
 }

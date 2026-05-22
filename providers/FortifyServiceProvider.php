@@ -2,47 +2,75 @@
 
 namespace Providers;
 
-use Auth\CreateNewUser;
-use Auth\ResetUserPassword;
-use Auth\UpdateUserPassword;
-use Auth\UpdateUserProfileInformation;
+use Inertia\Inertia;
+use Modules\Scene\Scenarios\Auth\UseCases\CreateNewUser;
+use Modules\Scene\Scenarios\Auth\UseCases\ResetUserPassword;
+use Modules\Scene\Scenarios\Auth\UseCases\UpdateUserPassword;
+use Modules\Scene\Scenarios\Auth\UseCases\UpdateUserProfileInformation;
+
+use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
+use Laravel\Fortify\Fortify;
+
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
-use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
+    public function register(): void {}
+
+    public function boot(): void
     {
-        //
+        $this->registerFortifyActions();
+        $this->setRateLimitForLoginAttempts();
+        $this->setRateLimitForTwoFactorAuthentication();
+        $this->setEmailVerificationVuePage();
     }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    public function setEmailVerificationVuePage(): void
+    {
+        Fortify::verifyEmailView(function () {
+            return Inertia::render('VerifyEmail', []);
+        });
+    }
+
+    private function setRateLimitForLoginAttempts(): void
+    {
+        RateLimiter::for('login', function (Request $request) {
+            $username = Fortify::username();
+            $username = $request->input($username);
+            $username = Str::lower($username);
+
+            $ip = $request->ip();
+
+            $uniqueId = $username . '|' . $ip;
+
+            $throttleKey = Str::transliterate($uniqueId);
+
+            return Limit::perMinute(5)
+                ->by($throttleKey);
+        });
+    }
+
+    private function setRateLimitForTwoFactorAuthentication(): void
+    {
+        RateLimiter::for('two-factor', function (Request $request) {
+            $sessionLoginId = $request->session()
+                ->get('login.id');
+
+            return Limit::perMinute(5)
+                ->by($sessionLoginId);
+        });
+    }
+
+    private function registerFortifyActions(): void
     {
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
         Fortify::redirectUserForTwoFactorAuthenticationUsing(RedirectIfTwoFactorAuthenticatable::class);
-
-        RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
-
-            return Limit::perMinute(5)->by($throttleKey);
-        });
-
-        RateLimiter::for('two-factor', function (Request $request) {
-            return Limit::perMinute(5)->by($request->session()->get('login.id'));
-        });
     }
 }

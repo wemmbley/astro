@@ -9,7 +9,7 @@ const page = usePage()
 </script>
 
 <template>
-    <header class="relative bg-surface-700 border-b border-surface-600 text-cream z-9">
+    <header class="relative bg-surface-700 border-b border-surface-600 text-surface-100 z-9">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center">
             <div class="flex items-center flex-1 gap-4">
                 <NavbarLogo />

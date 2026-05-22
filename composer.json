@@ -43,6 +43,7 @@
             "API\\": "src/API",
             "Modules\\": "src/Modules",
             "UI\\": "src/UI",
+            "Providers\\": "providers/",
             "Database\\Models\\": "database/models/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"

@@ -1,12 +1,14 @@
 <script setup lang="ts">
-const model = defineModel<string>({ required: true });
+const model = defineModel<string>({ required: false });
 
 const props = withDefaults(defineProps<{
     label?: string,
     showRecover?: boolean,
+    name?: string,
 }>(), {
     label: 'Пароль',
     showRecover: false,
+    name: 'email',
 });
 </script>
 
