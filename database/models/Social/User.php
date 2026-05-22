@@ -2,6 +2,7 @@
 
 namespace Database\Models\Social;
 
+use Carbon\Carbon;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,5 +44,5 @@ final class User extends Authenticatable
     public ?string $remember_token = null;
 
     #[Cast('datetime')]
-    public ?string $email_verified_at;
+    public ?Carbon $email_verified_at;
 }

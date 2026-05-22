@@ -40,10 +40,16 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = $request->user();
+
         return [
             ...parent::share($request),
             'navbar' => $this->navbar->getByName(NavbarRepository::MAIN_NAVBAR),
-            'role' => 'guest',
+            'auth' => [
+                'user' => $user,
+                'roles' => 'guest',
+                'permissions' => [],
+            ],
         ];
     }
 }
