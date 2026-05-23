@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Link } from '@inertiajs/vue3'
+import {Link, router} from '@inertiajs/vue3'
 import { User, LogOut } from 'lucide-vue-next'
 import {onClickOutside} from "@vueuse/core";
 import {usePage} from "@inertiajs/vue3";
+import {CircleUserIcon} from "lucide-vue-next";
 
 const page = usePage()
 const isOpen = ref(false)
@@ -16,8 +17,10 @@ function close() {
     isOpen.value = false
 }
 function logout() {
-
+    router.post('/logout');
 }
+
+const username = page.props.auth.user.name ?? 'Аноним';
 
 onClickOutside(containerRef, () => (isOpen.value = false))
 </script>
@@ -44,6 +47,11 @@ onClickOutside(containerRef, () => (isOpen.value = false))
                        bg-surface-600 border border-surface-500
                        rounded-lg shadow-lg overflow-hidden">
                 <div>
+                    <p class="px-4 py-2 text-sm text-surface-50 flex">
+                        <CircleUserIcon class="text-surface-200 pt-1" />
+                        <span class="ml-2 mt-1">Привет, <b>{{ username }}</b>!</span>
+                    </p>
+                    <hr class="text-surface-500 mt-1 mb-1" />
                     <Link
                         href="/profile"
                         class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
@@ -60,7 +68,7 @@ onClickOutside(containerRef, () => (isOpen.value = false))
                     <button
                         @click="logout"
                         class="w-full flex items-center gap-2 px-4 py-2 text-sm
-                           hover:bg-surface-500 text-red-400">
+                           hover:bg-surface-500 text-red-400 cursor-pointer">
                         <LogOut size="16" />
                         Выйти
                     </button>

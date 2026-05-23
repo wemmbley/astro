@@ -4,6 +4,7 @@ namespace UI\App\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Modules\Actors\Auth\AuthRole;
 use Modules\Scene\Shared\Repositories\NavbarRepository;
 
 class HandleInertiaRequests extends Middleware
@@ -41,15 +42,26 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
+        $authCreds = [];
+
+        if(!empty($user)) {
+            $authCreds = [
+                'user' => $user->toArray(),
+                'roles' => $user->getRoleNames()->toArray(),
+                'permissions' => $user->getAllPermissions()->toArray(),
+            ];
+        } else {
+            $authCreds = [
+                'user' => 'anonymous',
+                'roles' => [AuthRole::Guest->value],
+                'permissions' => [],
+            ];
+        }
 
         return [
             ...parent::share($request),
             'navbar' => $this->navbar->getByName(NavbarRepository::MAIN_NAVBAR),
-            'auth' => [
-                'user' => $user,
-                'roles' => 'guest',
-                'permissions' => [],
-            ],
+            'auth' => $authCreds,
         ];
     }
 }

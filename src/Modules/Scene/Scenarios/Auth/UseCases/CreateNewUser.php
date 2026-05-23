@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Modules\Actors\Auth\AuthRole;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -31,9 +32,32 @@ class CreateNewUser implements CreatesNewUsers
             ]
         )->validate();
 
-        return User::create([
+        $user = User::create([
+            'name' => $this->generateAnonymousName(),
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $user->assignRole(AuthRole::User->name);
+
+        return $user;
+    }
+
+    /**
+     * Генерирует уникальное имя через количество существующих пользователей.
+     */
+    private function generateAnonymousName(): string
+    {
+        $count = User::count();
+        $nextNumber = $count + 1;
+
+        $name = "Anonymous{$nextNumber}";
+
+        while (User::where('name', $name)->exists()) {
+            $nextNumber++;
+            $name = "Anonymous{$nextNumber}";
+        }
+
+        return $name;
     }
 }

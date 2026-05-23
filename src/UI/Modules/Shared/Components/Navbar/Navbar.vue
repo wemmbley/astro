@@ -4,8 +4,11 @@ import NavbarItems from "@/Modules/Shared/Components/Navbar/NavbarItems.vue";
 import NavbarProfile from "@/Modules/Shared/Components/Navbar/NavbarProfile.vue";
 import NavbarNotifications from "@/Modules/Shared/Components/Navbar/NavbarNotifications.vue";
 import {Link, usePage} from "@inertiajs/vue3";
+import {computed} from "vue";
 
 const page = usePage()
+const isAuthenticated = computed(() => !!page.props.auth.user);
+const isGuest = computed(() => !page.props.auth.user);
 </script>
 
 <template>
@@ -16,7 +19,7 @@ const page = usePage()
                 <NavbarItems />
             </div>
             <div class="flex items-center gap-2">
-                <div v-if="page.props.role !== 'guest'">
+                <div v-if="isAuthenticated" class="flex gap-2">
                     <NavbarNotifications />
                     <NavbarProfile/>
                 </div>
@@ -25,7 +28,7 @@ const page = usePage()
                     hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
                         Зарегестрироваться
                     </Link>
-                    <Link href="/auth/login" class="block px-4 py-2 text-sm transition border rounded-md
+                    <Link href="/logout" class="block px-4 py-2 text-sm transition border rounded-md
                     hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
                         Войти
                     </Link>
