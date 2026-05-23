@@ -9,6 +9,8 @@ final readonly class FeedController
 {
     public function index(): Response
     {
+        seo()->title('Новости');
+
         return Inertia::render('Feed', []);
     }
 }

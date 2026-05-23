@@ -1,14 +1,14 @@
 <script setup>
-import MainLayout from "@/Layouts/MainLayout.vue";
-import DefaultBanner from "@/../img/Profile/default_banner.jpg";
-import DefaultAvatarMan from "@/../img/Profile/no_avatar_man_xs.jpg";
-import { Mail, ShieldBan, UserRoundPlus } from 'lucide-vue-next'
-import Modal from "@/Utils/Modal.vue";
+import DefaultBanner from "@/Resources/Assets/Profile/DefaultBanner.jpg";
+import DefaultAvatarMan from "@/Resources/Assets/Profile/NoAvatarManXS.jpg";
+import { Mail, ShieldBan, UserRoundPlus, ZodiacCapricorn } from 'lucide-vue-next'
 import { ref } from 'vue'
-import Tooltip from "@/Utils/Tooltip.vue";
-import Posts from "@/Components/Profile/Posts.vue";
-import MiniProfileAstro from "@/Components/Profile/MiniProfileAstro.vue";
-import AvatarGrid from "@/Components/Profile/AvatarGrid.vue";
+import MainLayout from "@/Resources/Layouts/MainLayout.vue";
+import Modal from "@/Modules/Shared/Components/Modal.vue";
+import Tooltip from "@/Modules/Shared/Components/Tooltip.vue";
+import AvatarGrid from "@/Modules/Social/UI/Components/Molecules/AvatarGrid.vue";
+import Posts from "@/Modules/Social/UI/Components/Organisms/Posts.vue";
+import AstroProfile from "@/Modules/Social/UI/Components/Molecules/AstroProfile.vue";
 
 const friends = ref([
     { id: 1, name: 'Каролина Дарк', lastSeen: 'online',    avatar: 'https://i.pinimg.com/736x/f0/2e/c5/f02ec5df4ecc74356b9300151cb069f4.jpg' },
@@ -61,10 +61,10 @@ const props = defineProps({
                     />
                     <div class="pb-1">
                         <h2 class="text-white text-2xl font-semibold tracking-wide">
-                            <div class="flex">
+                            <span class="flex">
                                 <ZodiacCapricorn size="30" />
                                 <span class="ms-1">Holiev Rustam</span>
-                            </div>
+                            </span>
                         </h2>
                         <p class="text-gray-200 text-sm italic">
                             Потомственный маг и экстрасенс
@@ -90,7 +90,7 @@ const props = defineProps({
                 </div>
             </div>
 
-            <MiniProfileAstro />
+            <AstroProfile />
 
             <div class="flex flex-col gap-6">
                 <div class="grid grid-cols-2 gap-4 mt-2">

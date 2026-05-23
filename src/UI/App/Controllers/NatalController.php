@@ -11,11 +11,15 @@ final readonly class NatalController
 {
     public function index(): Response
     {
+        seo()->title('Натальный Карта Матрица Судьбы Астросик Онлайн.');
+
         return Inertia::render('Natal', []);
     }
 
     public function single(GenerateNatal $natal): Response
     {
+        seo()->title('Натальный Карта Матрица Судьбы Астросик Онлайн.');
+
         $birthday = new Birthday()->fromRoute(
             lat: (float)request('lat'),
             lon: (float)request('lon'),

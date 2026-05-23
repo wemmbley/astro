@@ -9,7 +9,7 @@ final readonly class HomeController
 {
     public function index(): Response
     {
-        seo()->title('Натальный Расчёт Матрицы Судьбы Онлайн Бесплатно.');
+        seo()->title('Натальный Карта Матрица Судьбы Астросик Онлайн.');
 
         return Inertia::render('Landing', []);
     }

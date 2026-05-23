@@ -28,6 +28,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->setRateLimitForTwoFactorAuthentication();
         $this->setEmailVerificationVuePage();
         $this->setLoginVueView();
+        Fortify::redirects('register', '/register');
     }
 
     public function setLoginVueView(): void

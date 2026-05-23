@@ -9,6 +9,8 @@ final readonly class ProfileController
 {
     public function index(): Response
     {
+        seo()->title('Профиль');
+
         return Inertia::render('Profile', []);
     }
 }

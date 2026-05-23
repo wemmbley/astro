@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import Post from "@/Components/Feed/Post.vue";
+import Post from "@/Modules/Social/UI/Components/Molecules/Post.vue";
 
 const posts = ref([
     {
