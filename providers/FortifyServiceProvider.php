@@ -27,6 +27,14 @@ class FortifyServiceProvider extends ServiceProvider
         $this->setRateLimitForLoginAttempts();
         $this->setRateLimitForTwoFactorAuthentication();
         $this->setEmailVerificationVuePage();
+        $this->setLoginVueView();
+    }
+
+    public function setLoginVueView(): void
+    {
+        Fortify::loginView(function () {
+            return Inertia::render('Authorization', []);
+        });
     }
 
     public function setEmailVerificationVuePage(): void

@@ -3,10 +3,12 @@ import PasswordField from "@/Modules/Auth/UI/Components/Atoms/PasswordField.vue"
 import EnterButton from "@/Modules/Auth/UI/Components/Atoms/EnterButton.vue";
 import BlockIcon from "@/Modules/Auth/UI/Components/Atoms/BlockIcon.vue";
 import EmailField from "@/Modules/Auth/UI/Components/Atoms/EmailField.vue";
-import {ref} from "vue";
+import {useForm} from "@inertiajs/vue3";
 
-const password = ref<string>('');
-const email = ref<string>('');
+const form = useForm({
+    email: '',
+    password: '',
+})
 </script>
 
 <template>
@@ -20,12 +22,22 @@ const email = ref<string>('');
                 Введите свои данные для продолжения.
             </p>
         </div>
-        <form class="space-y-5">
-            <EmailField v-model="email" />
-            <PasswordField v-model="password" />
+        <form @submit.prevent="form.post('/login')" class="space-y-5">
+
+            <EmailField v-model="form.email" />
+            <p class="text-red-500" v-if="form.errors.email">
+                * {{ form.errors.email }}
+            </p>
+
+            <PasswordField v-model="form.password" />
+            <p class="text-red-500" v-if="form.errors.password">
+                * {{ form.errors.password }}
+            </p>
+
             <a href="/auth/register" class="text-sm text-accent transition hover:text-accent-300">
                 Может, зарегестрируемся? Это бесплатно!
             </a>
+
             <EnterButton label="Войти" />
         </form>
     </div>

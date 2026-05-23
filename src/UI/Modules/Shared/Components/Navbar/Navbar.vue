@@ -28,7 +28,7 @@ const isGuest = computed(() => !page.props.auth.user);
                     hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
                         Зарегестрироваться
                     </Link>
-                    <Link href="/logout" class="block px-4 py-2 text-sm transition border rounded-md
+                    <Link href="/auth/login" class="block px-4 py-2 text-sm transition border rounded-md
                     hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
                         Войти
                     </Link>

@@ -21,9 +21,13 @@ Route::get('/matrix', [MatrixController::class, 'index'])->name('matrix');
 Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 
 Route::prefix('auth')->name('auth.')->group(function () {
-    Route::get('/login', [AuthWebController::class, 'auth'])->name('login');
-    Route::get('/register', [AuthWebController::class, 'reg'])->name('register');
+    Route::get('/login', [AuthWebController::class, 'auth']);
+    Route::get('/register', [AuthWebController::class, 'reg']);
 });
+
+Route::get('/login', function () {
+    return redirect()->route('home');
+})->name('login');
 
 Route::prefix('natal')->name('natal.')->group(function () {
     Route::get('/', [NatalController::class, 'index'])->name('index');

@@ -52,7 +52,7 @@ class HandleInertiaRequests extends Middleware
             ];
         } else {
             $authCreds = [
-                'user' => 'anonymous',
+                'user' => null,
                 'roles' => [AuthRole::Guest->value],
                 'permissions' => [],
             ];
