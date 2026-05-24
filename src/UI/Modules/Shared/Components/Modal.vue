@@ -16,7 +16,7 @@ const emit = defineEmits([
 function getWideClasses() {
     if(props.ultrawide) return 'max-w-4xl h-[90vh]';
     if(props.wide) return 'max-w-lg max-h-[90vh]';
-    return 'max-w-3xl h-[90vh]';
+    return 'max-w-md';
 }
 
 const close = () => emit('update:show', false)
@@ -27,16 +27,14 @@ const close = () => emit('update:show', false)
         <div
             v-if="show"
             class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-4 py-6"
-            @click="close"
-        >
+            @click="close">
             <transition name="modal-scale">
                 <div
                     v-if="show"
                     class="relative flex flex-col text-white bg-surface-700 border
                     border-surface-500 rounded-2xl shadow-2xl transition-all duration-300"
-                    :class="'w-full' + getWideClasses()"
-                    @click.stop
-                >
+                    :class="`w-full ${getWideClasses()}`"
+                    @click.stop>
                     <div class="shrink-0 flex items-center justify-between px-7 pt-6
                     pb-4 border-b border-surface-500">
                         <h2 v-if="title" class="text-xl font-semibold pr-4">{{ title }}</h2>
@@ -44,8 +42,7 @@ const close = () => emit('update:show', false)
                             class="cursor-pointer ml-auto shrink-0 w-7 h-7 flex
                             items-center justify-center rounded-full text-gray-400
                             hover:text-white hover:bg-surface-500 transition"
-                            @click="close"
-                        >
+                            @click="close">
                             ✕
                         </button>
                     </div>
@@ -55,20 +52,17 @@ const close = () => emit('update:show', false)
                     </div>
                     <div
                         v-if="confirm"
-                        class="shrink-0 flex justify-end gap-3 px-7 py-5 border-t border-surface-500"
-                    >
+                        class="shrink-0 flex justify-end gap-3 px-7 py-5 border-t border-surface-500">
                         <button
                             class="cursor-pointer px-5 py-2.5 rounded-xl text-sm font-medium
                             text-gray-300 bg-surface-600 hover:bg-surface-500 transition"
-                            @click="emit('cancel'); close()"
-                        >
+                            @click="emit('cancel'); close()">
                             Отмена
                         </button>
                         <button
                             class="cursor-pointer px-5 py-2.5 rounded-xl text-sm font-medium
                             bg-blue-600 hover:bg-blue-500 active:scale-95 transition text-white"
-                            @click="emit('confirm'); close()"
-                        >
+                            @click="emit('confirm'); close()">
                             Подтвердить
                         </button>
                     </div>

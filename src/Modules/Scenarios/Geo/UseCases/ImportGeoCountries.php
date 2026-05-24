@@ -2,12 +2,12 @@
 
 namespace Modules\Scenarios\Geo\UseCases;
 
-use Modules\Geo\Domain\Contracts\GeoCountryRepository;
+use Modules\Scenarios\Geo\Contracts\GeoCountryRepositoryContract;
 
 class ImportGeoCountries
 {
     public function __construct(
-        private GeoCountryRepository $repository
+        private GeoCountryRepositoryContract $repository
     ) {}
 
     public function execute(string $country, string $filePath): void

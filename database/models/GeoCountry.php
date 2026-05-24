@@ -12,7 +12,8 @@ use WendellAdriel\Lift\Lift;
 
 class GeoCountry extends Authenticatable
 {
-    use HasFactory, Lift;
+    use HasFactory,
+        Lift;
 
     #[PrimaryKey]
     public int $id;

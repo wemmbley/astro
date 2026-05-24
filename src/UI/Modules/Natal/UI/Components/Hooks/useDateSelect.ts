@@ -18,9 +18,9 @@ interface UseDateSelectOptions {
 export function useDateSelect(options: UseDateSelectOptions = {}) {
     const selectedYear = ref(options.year ?? 2000)
     const selectedMonth = ref(options.month ?? 12)
-    const selectedDay = ref(options.day ?? 31)
-    const selectedHour = ref(options.hour ?? 23)
-    const selectedMinute = ref(options.minute ?? 59)
+    const selectedDay = ref(options.day ?? 1)
+    const selectedHour = ref(options.hour ?? 12)
+    const selectedMinute = ref(options.minute ?? 0)
 
     const years = computed(() => range(1900, 2100))
     const months = computed(() => range(1, 12))

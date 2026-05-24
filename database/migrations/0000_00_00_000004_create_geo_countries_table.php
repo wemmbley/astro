@@ -10,7 +10,6 @@ return new class extends Migration
     {
         Schema::create('geo_countries', function (Blueprint $table) {
             $table->id();
-            $table->string('geo', 5);
             $table->string('name');
             $table->text('terms');
             $table->double('lat')->nullable();
@@ -20,7 +19,7 @@ return new class extends Migration
             $table->string('country_code', 10)->nullable();
             $table->timestamps();
             $table->index(['country_code']);
-            $table->index(['geo']);
+            $table->index(['name']);
         });
     }
 

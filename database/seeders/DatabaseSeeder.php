@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SeedInterpretations::class,
             SeedNavbarItems::class,
             SeedUserRoles::class,
+            SeedGeoCountries::class,
         ]);
     }
 }

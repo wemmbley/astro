@@ -10,5 +10,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/track', [TrackAnalytics::class, 'track']);
     Route::post('/natal/svg', [NatalCircleChartSvg::class, 'generate']);
     Route::post('/natal/interpret/planet/{planetName}', [NatalInterpreter::class, 'planet']);
-    Route::get('/city/find/{query}', [CityFinder::class, 'find']);
+    Route::get('/city/find/{query}/{page?}', [CityFinder::class, 'find']);
 });
