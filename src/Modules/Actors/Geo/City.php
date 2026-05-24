@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Scenarios\Geo\ValueObjects;
+namespace Modules\Actors\Geo;
 
 final readonly class City
 {
