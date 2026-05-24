@@ -99,6 +99,16 @@ function applyManual() {
     manualMode.value = false;
 }
 
+function manualSelectCity()
+{
+    selectCity({
+        name: 'custom',
+        lat: manualLat,
+        lon: manualLon,
+    })
+    manualMode.value = false;
+}
+
 onClickOutside(cityDropdownTarget, () => open.value = false)
 </script>
 
@@ -111,6 +121,11 @@ onClickOutside(cityDropdownTarget, () => open.value = false)
             <input v-model="manualLon" placeholder="Долгота (36.0567)"
                    class="bg-surface-700 border border-surface-600 rounded-md px-3
                    py-2 text-sm outline-none focus:border-primary-400 text-white" />
+            <button @click="manualSelectCity"
+                class="border border-surface-500 mb-2
+            hover:bg-surface-500 rounded p-1 cursor-pointer">
+                Сохранить
+            </button>
         </div>
     </Modal>
 

@@ -3,6 +3,7 @@ import {useDateSelect} from "@/Modules/Natal/UI/Components/Hooks/useDateSelect";
 import CitySelector from "@/Modules/Geo/UI/Organisms/CitySelector.vue";
 import ArrowIcon from "@/Resources/Icons/Other/ArrowIcon.vue";
 import {useForm} from "@inertiajs/vue3";
+import {computed} from "vue";
 
 const {
     selectedYear,
@@ -22,6 +23,31 @@ const form = useForm({
     lat: '',
     lon: '',
     cityName: '',
+    year: selectedYear,
+    month: selectedMonth,
+    day: selectedDay,
+    hour: selectedHour,
+    minute: selectedMinute,
+});
+
+function handleCitySelect(city: any) {
+    form.lat = city.lat;
+    form.lon = city.lon;
+    form.cityName = city.name;
+}
+
+const natalUrl = computed(() => {
+    // Хелпер для добавления ведущего нуля: 5 -> "05", 12 -> "12"
+    const pad = (num: string | number) => String(num).padStart(2, '0');
+
+    const d = pad(selectedDay.value);
+    const m = pad(selectedMonth.value);
+    const y = selectedYear.value;
+
+    const h = pad(selectedHour.value);
+    const min = pad(selectedMinute.value);
+
+    return `/natal/${form.lat}/${form.lon}/${d}-${m}-${y}/${h}-${min}`;
 });
 </script>
 
@@ -31,7 +57,7 @@ const form = useForm({
         <label class="block mb-3 text-md mt-5 text-gray-400">
             Город рождения
         </label>
-        <CitySelector />
+        <CitySelector @select="handleCitySelect" />
         <label class="block mb-3 text-md mt-5 text-gray-400">
             Дата рождения
         </label>
@@ -93,11 +119,11 @@ const form = useForm({
             </div>
         </div>
         <div class="w-full pt-4">
-            <button class="pl-5 pr-5 pt-2 pb-2 mt-5 bg-accent rounded-md w-full
-                                hover:bg-accent/50 transition cursor-pointer"
-            >
+            <a :href="natalUrl" class="flex justify-center pl-5 pr-5 pt-2 pb-2 mt-5
+                                bg-accent rounded-md w-full
+                                hover:bg-accent/50 transition cursor-pointer">
                 Произвести расчёт
-            </button>
+            </a>
         </div>
     </div>
 </template>
