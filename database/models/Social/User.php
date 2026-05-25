@@ -7,6 +7,8 @@ use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 use WendellAdriel\Lift\Attributes\Cast;
 use WendellAdriel\Lift\Attributes\Fillable;
@@ -21,13 +23,14 @@ use WendellAdriel\Lift\Lift;
 #[HasMany(UserFriendRequest::class,  'receivedFriendRequests','receiver_id')]
 #[HasMany(UserBlock::class,          'blockedUsers',          'blocker_id')]
 #[HasMany(UserBlock::class,          'blockedBy',             'blocked_id')]
-final class User extends Authenticatable
+final class User extends Authenticatable implements HasMedia
 {
     use HasFactory,
         Notifiable,
         Lift,
         HasRoles,
-        MustVerifyEmail;
+        MustVerifyEmail,
+        InteractsWithMedia;
 
     #[Fillable]
     public ?string $name;

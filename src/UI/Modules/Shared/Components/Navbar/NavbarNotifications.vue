@@ -50,7 +50,8 @@ onClickOutside(containerRef, () => (open.value = false))
 
 <template>
     <div class="relative" ref="containerRef">
-        <button @click="toggle" class="relative p-2 rounded-lg hover:bg-surface-600 transition-colors">
+        <button @click="toggle" class="cursor-pointer relative p-2 rounded-lg
+        hover:bg-surface-600 transition-colors">
             <Bell class="w-5 h-5" />
             <span
                 v-if="unreadCount > 0"

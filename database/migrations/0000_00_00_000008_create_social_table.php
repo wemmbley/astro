@@ -19,8 +19,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
-            $table->enum('status', ['pending', 'accepted', 'declined', 'cancelled'])
-                ->default('pending');
+            $table->enum('status', ['pending', 'accepted', 'declined', 'cancelled'])->default('pending');
             $table->timestamps();
             $table->unique(['sender_id', 'receiver_id']);
             $table->index('status');
@@ -36,7 +35,7 @@ return new class extends Migration {
             $table->index('user_id');
         });
 
-        Schema::create('user_blocks', function (Blueprint $table) {
+        Schema::create('user_blacklist', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('blocker_id');
             $table->unsignedBigInteger('blocked_id');

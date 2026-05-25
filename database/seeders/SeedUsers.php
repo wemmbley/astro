@@ -15,7 +15,7 @@ class SeedUsers extends Seeder
             'name' => fake()->name(),
             'email' => 'admin@admin.admin',
             'email_verified_at' => now(),
-            'password' => Hash::make(Str::random()),
+            'password' => Hash::make('admin@admin.admin'),
             'remember_token' => Str::random(10),
         ]);
 
@@ -23,7 +23,7 @@ class SeedUsers extends Seeder
             'name' => fake()->name(),
             'email' => 'editor@editor.editor',
             'email_verified_at' => now(),
-            'password' => Hash::make(Str::random()),
+            'password' => Hash::make('editor@editor.editor'),
             'remember_token' => Str::random(10),
         ]);
     }

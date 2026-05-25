@@ -18,7 +18,18 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->unsignedBigInteger('balance')->nullable();
             $table->string('description')->nullable();
-            $table->string('banner')->nullable();
+
+            // Astro mini-profile cached.
+            $table->string('sign_sun', 10)->nullable();
+            $table->string('sign_moon', 10)->nullable();
+            $table->string('sign_asc', 10)->nullable();
+            $table->string('arcane', 10)->nullable();
+
+            $table->dateTime('last_online')->nullable();
+            $table->dateTime('birthday')->nullable();
+            $table->text('two_factor_secret')->nullable();
+            $table->text('two_factor_recovery_codes')->nullable();
+            $table->timestamp('two_factor_confirmed_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

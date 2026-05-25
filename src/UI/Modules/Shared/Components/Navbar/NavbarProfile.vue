@@ -21,6 +21,7 @@ function logout() {
 }
 
 const username = page.props.auth.user.name ?? 'Аноним';
+const profileLink = page.props.auth.user.id ? `/profile/${page.props.auth.user.id}` : '/profile/';
 
 onClickOutside(containerRef, () => (isOpen.value = false))
 </script>
@@ -29,10 +30,9 @@ onClickOutside(containerRef, () => (isOpen.value = false))
     <div class="relative" ref="containerRef">
         <button
             @click="toggle"
-            class="p-2 rounded-lg transition-all
+            class="p-2 rounded-lg transition-all cursor-pointer
                    hover:bg-surface-600 text-gray-300
-                   hover:text-white"
-        >
+                   hover:text-white">
             <User size="20" />
         </button>
         <transition
@@ -53,7 +53,7 @@ onClickOutside(containerRef, () => (isOpen.value = false))
                     </p>
                     <hr class="text-surface-500 mt-1 mb-1" />
                     <Link
-                        href="/profile"
+                        :href="profileLink"
                         class="block px-4 py-2 text-sm hover:bg-surface-500 text-gray-200"
                         @click="close">
                         Профиль

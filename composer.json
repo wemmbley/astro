@@ -23,6 +23,7 @@
         "predis/predis": "^3.4",
         "romanzipp/laravel-seo": "^2.9",
         "spatie/laravel-data": "^4.23",
+        "spatie/laravel-medialibrary": "^11.22",
         "spatie/laravel-permission": "^7.4",
         "spatie/laravel-typescript-transformer": "^3.2",
         "spatie/typescript-transformer": "^3.2",

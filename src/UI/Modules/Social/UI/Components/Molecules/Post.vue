@@ -33,7 +33,7 @@ const props = defineProps<{
                     <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10"/>
                 </div>
                 <div class="flex flex-col gap-1 min-w-0">
-                    <span class="text-[14px] font-semibold text-cream/85 truncate">
+                    <span class="text-[14px] font-semibold text-surface-100/85 truncate">
                         {{ post.author.name }}
                     </span>
                     <div class="flex items-center gap-1.5">
@@ -42,8 +42,8 @@ const props = defineProps<{
                                      px-2 py-0.5 rounded-md">
                             {{ post.tag }}
                         </span>
-                        <span class="text-cream/20 text-[10px]">·</span>
-                        <span class="text-[12px] text-cream/28 shrink-0">{{ post.date }}</span>
+                        <span class="text-surface-100/20 text-[10px]">·</span>
+                        <span class="text-[12px] text-surface-100/28 shrink-0">{{ post.date }}</span>
                     </div>
                 </div>
             </div>
@@ -53,18 +53,18 @@ const props = defineProps<{
                                px-3 py-1.5 rounded-lg transition-colors duration-200 whitespace-nowrap">
                     Подписаться
                 </button>
-                <button class="text-[11px] font-medium text-cream/55 hover:text-cream/90
+                <button class="text-[11px] font-medium text-surface-100/55 hover:text-surface-100/90
                                border border-white/7 hover:border-white/15 cursor-pointer
                                px-2.5 py-1.5 rounded-lg transition-all duration-200 whitespace-nowrap">
                     Скрыть
                 </button>
             </div>
         </div>
-        <h2 class="text-[20px] font-semibold text-cream/95 leading-snug mb-2.5
+        <h2 class="text-[20px] font-semibold text-surface-100/95 leading-snug mb-2.5
                    transition-colors duration-300 line-clamp-2">
             {{ post.title }}
         </h2>
-        <p class="text-[14px] text-cream/55 leading-relaxed line-clamp-2 mb-3.5">
+        <p class="text-[14px] text-surface-100/55 leading-relaxed line-clamp-2 mb-3.5">
             {{ post.excerpt }}
         </p>
         <div class="rounded-2xl overflow-hidden h-56">
@@ -74,20 +74,20 @@ const props = defineProps<{
         </div>
         <div class="flex items-center justify-between pt-2.5 pb-1">
             <div class="flex items-center gap-1">
-                <button class="flex items-center gap-1.5 text-cream/28 hover:text-accent text-[13px]
+                <button class="flex items-center gap-1.5 text-surface-100/28 hover:text-accent text-[13px]
                                font-medium hover:bg-accent/10 px-2.5 py-1.5 rounded-xl
                                transition-all duration-200 group/like">
                     <Heart :size="20" class="transition-transform duration-200 group-hover/like:scale-110"/>
                     <span class="tabular-nums">{{ post.likes }}</span>
                 </button>
-                <button class="flex items-center gap-1.5 text-cream/28 hover:text-accent text-[13px]
+                <button class="flex items-center gap-1.5 text-surface-100/28 hover:text-accent text-[13px]
                                font-medium hover:bg-accent/10 px-2.5 py-1.5 rounded-xl
                                transition-all duration-200">
                     <MessageCircle :size="20"/>
                     <span class="tabular-nums">{{ post.comments }}</span>
                 </button>
             </div>
-            <button class="p-2 text-cream/20 hover:text-cream/55 rounded-xl
+            <button class="p-2 text-surface-100/20 hover:text-surface-100/55 rounded-xl
                            hover:bg-white/6 transition-all duration-200">
                 <Share2 :size="20"/>
             </button>

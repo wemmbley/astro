@@ -5,6 +5,7 @@ use UI\App\Controllers\AuthWebController;
 use UI\App\Controllers\FeedController;
 use UI\App\Controllers\HomeController;
 use UI\App\Controllers\MatrixController;
+use UI\App\Controllers\MessagesController;
 use UI\App\Controllers\NatalController;
 use UI\App\Controllers\ProfileController;
 use UI\App\Controllers\RepositoryController;
@@ -43,9 +44,13 @@ Route::prefix('natal')->name('natal.')->group(function () {
 # |
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/{id}', [ProfileController::class, 'index'])->name('index');
     });
-    Route::prefix('repository')->name('repository.')->group(function () {
-        Route::get('/edit/{key}', [RepositoryController::class, 'edit'])->name('edit');
+    Route::get('/messages', [MessagesController::class, 'index'])->name('messages');
+
+    Route::middleware(['admin'])->group(function () {
+        Route::prefix('repository')->name('repository.')->group(function () {
+            Route::get('/edit/{key}', [RepositoryController::class, 'edit'])->name('edit');
+        });
     });
 });

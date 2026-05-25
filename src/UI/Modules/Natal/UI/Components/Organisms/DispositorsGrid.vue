@@ -154,7 +154,7 @@ const houseChains = computed(() =>
 <!--                        <HouseIcon :house="planet.house" width="18" height="18" />-->
 <!--                        <Tooltip>{{ houseTranslations[planet.house] }}</Tooltip>-->
 <!--                    </div>-->
-<!--                    <span class="text-[9px] text-cream/50 leading-none">{{ planet.degreeFormatted }}</span>-->
+<!--                    <span class="text-[9px] text-surface-100/50 leading-none">{{ planet.degreeFormatted }}</span>-->
                 </div>
             </template>
             <div v-else class="text-xs opacity-20 select-none">·</div>

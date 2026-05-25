@@ -5,6 +5,7 @@ import NavbarProfile from "@/Modules/Shared/Components/Navbar/NavbarProfile.vue"
 import NavbarNotifications from "@/Modules/Shared/Components/Navbar/NavbarNotifications.vue";
 import {Link, usePage} from "@inertiajs/vue3";
 import {computed} from "vue";
+import NavbarMessages from "@/Modules/Shared/Components/Navbar/NavbarMessages.vue";
 
 const page = usePage()
 const isAuthenticated = computed(() => !!page.props.auth.user);
@@ -20,6 +21,7 @@ const isGuest = computed(() => !page.props.auth.user);
             </div>
             <div class="flex items-center gap-2">
                 <div v-if="isAuthenticated" class="flex gap-2">
+                    <NavbarMessages />
                     <NavbarNotifications />
                     <NavbarProfile/>
                 </div>

@@ -13,7 +13,7 @@ defineProps({
     <div class="rounded-xl pt-2 pl-4 pb-4 ">
         <p class="mb-2 text-center font-medium text-surface-200">Знаки</p>
         <div v-for="planet in planets" :key="planet.name">
-            <div class="grid grid-cols-5 text-cream pb-[0.5px]">
+            <div class="grid grid-cols-5 text-surface-100 pb-[0.5px]">
                 <PlanetIcon :planet="planet.name" width="26" height="26" />
                 <SignIcon :sign="planet.sign" width="26" height="26" />
                 <p class="text-surface-100">{{ planet.degreeFormatted }}</p>

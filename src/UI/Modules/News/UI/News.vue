@@ -8,7 +8,7 @@ const props = defineProps();
     <div class="border border-surface-500 rounded-xl w-110 h-140 ml-15
         bg-surface-700/50 z-10 flex flex-col overflow-hidden">
         <div class="px-5 pt-5 pb-4 border-b border-surface-600 shrink-0">
-            <h2 class="text-cream text-base font-semibold">
+            <h2 class="text-surface-100 text-base font-semibold">
                 Новости
             </h2>
         </div>
@@ -25,7 +25,7 @@ const props = defineProps();
                 <time class="block text-xs text-surface-400 mb-1.5 tracking-wide">
                     {{ item.date }}
                 </time>
-                <h3 class="text-sm font-semibold text-cream leading-snug mb-2 pr-5">
+                <h3 class="text-sm font-semibold text-surface-100 leading-snug mb-2 pr-5">
                     {{ item.title }}
                 </h3>
                 <p class="text-xs text-surface-300 leading-relaxed line-clamp-2">
