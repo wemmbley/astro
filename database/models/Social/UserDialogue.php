@@ -1,7 +1,6 @@
 <?php
 namespace Database\Models\Social;
 
-use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use WendellAdriel\Lift\Attributes\Cast;
@@ -15,10 +14,10 @@ final class UserDialogue extends Model
     use Lift;
 
     #[Cast('immutable_datetime')]
-    public CarbonImmutable $created_at;
+    public $created_at;
 
     #[Cast('immutable_datetime')]
-    public CarbonImmutable $updated_at;
+    public $updated_at;
 
     public function lastMessage(): HasOne
     {

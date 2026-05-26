@@ -24,13 +24,13 @@ final class UserDialogueMessage extends Model
     public string $user_message;
 
     #[Cast('immutable_datetime')]
-    public ?CarbonImmutable $read_at;
+    public $read_at;
 
     #[Cast('immutable_datetime')]
-    public CarbonImmutable $created_at;
+    public $created_at;
 
     #[Cast('immutable_datetime')]
-    public ?CarbonImmutable $updated_at;
+    public $updated_at;
 
     public function isRead(): bool
     {

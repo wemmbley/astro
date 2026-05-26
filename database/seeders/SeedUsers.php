@@ -6,63 +6,49 @@ use Database\Models\Social\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Modules\Scene\Scenarios\Auth\UseCases\SetUserAvatar;
+use Modules\Scene\Scenarios\Auth\UseCases\SetUserBanner;
 
 class SeedUsers extends Seeder
 {
+    public function __construct(
+        private readonly SetUserAvatar $setUserAvatar,
+        private readonly SetUserBanner $setUserBanner,
+    ) {}
+
     public function run(): void
     {
-        User::create([
-            'name' => fake()->name(),
-            'email' => 'admin@admin.admin',
-            'email_verified_at' => now(),
-            'password' => Hash::make('admin@admin.admin'),
-            'remember_token' => Str::random(10),
-            'sex' => 'm',
-        ]);
+        $this->createRegularUsers();
+    }
 
-        User::create([
-            'name' => fake()->name(),
-            'email' => 'editor@editor.editor',
-            'email_verified_at' => now(),
-            'password' => Hash::make('editor@editor.editor'),
-            'remember_token' => Str::random(10),
-            'sex' => 'f',
-        ]);
+    private function createRegularUsers(): void
+    {
+        $users = [
+            ['email' => 'admin@admin.admin',    'sex' => 'm'],
+            ['email' => 'editor@editor.editor', 'sex' => 'm'],
+            ['email' => 'test@test.test',       'sex' => 'm'],
+            ['email' => 'nika@nika.nika',       'sex' => 'f'],
+            ['email' => 'nataly@nataly.nataly', 'sex' => 'f'],
+            ['email' => 'alina@alina.alina',    'sex' => 'f'],
+        ];
 
-        User::create([
-            'name' => fake()->name(),
-            'email' => 'test@test.test',
-            'email_verified_at' => now(),
-            'password' => Hash::make('test@test.test'),
-            'remember_token' => Str::random(10),
-            'sex' => 'm',
-        ]);
+        foreach ($users as $userData) {
+            $user = User::create([
+                'name' => fake()->name(),
+                'email' => $userData['email'],
+                'email_verified_at' => now(),
+                'password' => Hash::make($userData['email']),
+                'remember_token' => Str::random(10),
+                'sex' => $userData['sex'],
+            ]);
 
-        User::create([
-            'name' => fake()->name(),
-            'email' => 'nika@nika.nika',
-            'email_verified_at' => now(),
-            'password' => Hash::make('nika@nika.nika'),
-            'remember_token' => Str::random(10),
-            'sex' => 'f',
-        ]);
+            $this->setUserAssets($user);
+        }
+    }
 
-        User::create([
-            'name' => fake()->name(),
-            'email' => 'nataly@nataly.nataly',
-            'email_verified_at' => now(),
-            'password' => Hash::make('nataly@nataly.nataly'),
-            'remember_token' => Str::random(10),
-            'sex' => 'f',
-        ]);
-
-        User::create([
-            'name' => fake()->name(),
-            'email' => 'alina@alina.alina',
-            'email_verified_at' => now(),
-            'password' => Hash::make('alina@alina.alina'),
-            'remember_token' => Str::random(10),
-            'sex' => 'f',
-        ]);
+    private function setUserAssets(User $user): void
+    {
+        ($this->setUserAvatar)($user);
+        ($this->setUserBanner)($user);
     }
 }

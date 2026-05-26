@@ -13,6 +13,11 @@ class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
+    public function __construct(
+        private readonly SetUserAvatar $setUserAvatar,
+        private readonly SetUserBanner $setUserBanner,
+    ) {}
+
     public function create(array $input): User
     {
         Validator::make(
@@ -37,6 +42,9 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        ($this->setUserAvatar)($user);
+        ($this->setUserBanner)($user);
 
         $user->assignRole(AuthRole::User->name);
 

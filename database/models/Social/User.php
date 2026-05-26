@@ -2,7 +2,6 @@
 
 namespace Database\Models\Social;
 
-use Carbon\Carbon;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,10 +49,10 @@ final class User extends Authenticatable implements HasMedia
     public ?string $remember_token = null;
 
     #[Cast('datetime')]
-    public ?Carbon $email_verified_at;
+    public $email_verified_at;
 
     #[Cast('datetime')]
-    public ?Carbon $last_online;
+    public $last_online;
 
     public function getOnlineStatus(): string
     {
