@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SeedUsers::class,
+            SeedMessenger::class,
             SeedPosts::class,
             SeedInterpretations::class,
             SeedNavbarItems::class,

@@ -9,7 +9,7 @@ use WendellAdriel\Lift\Lift;
 
 #[BelongsTo(User::class, 'blocker', 'blocker_id')]
 #[BelongsTo(User::class, 'blocked', 'blocked_id')]
-final class UserBlock extends Model
+final class UserBlacklist extends Model
 {
     use Lift;
 

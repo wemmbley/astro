@@ -14,15 +14,18 @@ use WendellAdriel\Lift\Attributes\Cast;
 use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\Hidden;
 use WendellAdriel\Lift\Attributes\Relations\HasMany;
+use WendellAdriel\Lift\Attributes\Relations\HasManyThrough;
 use WendellAdriel\Lift\Lift;
 
-#[HasMany(UserFollow::class,         'following',             'follower_id')]
-#[HasMany(UserFollow::class,         'followers',             'following_id')]
-#[HasMany(UserFriend::class,         'friends',               'user_id')]
-#[HasMany(UserFriendRequest::class,  'sentFriendRequests',    'sender_id')]
-#[HasMany(UserFriendRequest::class,  'receivedFriendRequests','receiver_id')]
-#[HasMany(UserBlock::class,          'blockedUsers',          'blocker_id')]
-#[HasMany(UserBlock::class,          'blockedBy',             'blocked_id')]
+#[HasMany(UserFollow::class,              'following',              'follower_id')]
+#[HasMany(UserFollow::class,              'followers',              'following_id')]
+#[HasMany(UserFriend::class,              'friends',                'user_id')]
+#[HasMany(UserFriendRequest::class,       'sentFriendRequests',     'sender_id')]
+#[HasMany(UserFriendRequest::class,       'receivedFriendRequests', 'receiver_id')]
+#[HasMany(UserBlacklist::class,           'blockedUsers',           'blocker_id')]
+#[HasMany(UserBlacklist::class,           'blockedBy',              'blocked_id')]
+#[HasMany(UserDialogueParticipant::class, 'dialogueParticipations', 'user_id')]
+#[HasManyThrough(UserDialogue::class, UserDialogueParticipant::class, 'user_id', 'id', 'id', 'dialogue_id')]
 final class User extends Authenticatable implements HasMedia
 {
     use HasFactory,
@@ -48,4 +51,20 @@ final class User extends Authenticatable implements HasMedia
 
     #[Cast('datetime')]
     public ?Carbon $email_verified_at;
+
+    #[Cast('datetime')]
+    public ?Carbon $last_online;
+
+    public function getOnlineStatus(): string
+    {
+        if (!$this->last_online) {
+            return 'never';
+        }
+
+        return $this->last_online->greaterThanOrEqualTo(
+            now()->subMinutes(5)
+        )
+            ? 'online'
+            : $this->last_online->format('d.m.Y H:i');
+    }
 }

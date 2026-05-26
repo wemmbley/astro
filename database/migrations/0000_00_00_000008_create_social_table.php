@@ -7,6 +7,30 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration {
     public function up(): void
     {
+        Schema::create('user_dialogues', function (Blueprint $table) {
+            $table->id();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+        });
+
+        Schema::create('user_dialogue_participants', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('dialogue_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unique(['dialogue_id', 'user_id']);
+            $table->timestamp('created_at')->useCurrent();
+        });
+
+        Schema::create('user_dialogue_messages', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('dialogue_id')->index();
+            $table->unsignedBigInteger('author_id')->index();
+            $table->text('user_message');
+            $table->dateTime('read_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
+        });
+
         Schema::create('user_follows', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('follower_id');
@@ -47,6 +71,9 @@ return new class extends Migration {
 
     public function down(): void
     {
+        Schema::dropIfExists('user_dialogues');
+        Schema::dropIfExists('user_dialogue_participants');
+        Schema::dropIfExists('user_dialogue_messages');
         Schema::dropIfExists('user_follows');
         Schema::dropIfExists('user_friend_requests');
         Schema::dropIfExists('user_friends');
