@@ -2,6 +2,7 @@
 
 namespace UI\App\Middleware;
 
+use Database\Models\Notification;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Modules\Actors\Auth\AuthRole;
@@ -42,26 +43,42 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = $request->user();
-        $authCreds = [];
 
         if(!empty($user)) {
-            $authCreds = [
+            $authInfo = [
                 'user' => $user->toArray(),
                 'roles' => $user->getRoleNames()->toArray(),
                 'permissions' => $user->getAllPermissions()->toArray(),
             ];
         } else {
-            $authCreds = [
+            $authInfo = [
                 'user' => null,
                 'roles' => [AuthRole::Guest->value],
                 'permissions' => [],
             ];
         }
 
+        if (!empty($user))
+        {
+            $notificationsQuery = Notification::where('user_id', $user->getKey());
+            $notificationsCount = (clone $notificationsQuery)->where('read', false)->count();
+            $notificationsData = $notificationsQuery
+                ->latest()
+                ->simplePaginate(5)
+                ->toArray();
+        } else {
+            $notificationsCount = 0;
+            $notificationsData = [];
+        }
+
         return [
             ...parent::share($request),
-            'navbar' => $this->navbar->getByName(NavbarRepository::MAIN_NAVBAR),
-            'auth' => $authCreds,
+            'navbar' => $this->navbar->getByName(
+                NavbarRepository::MAIN_NAVBAR
+            ),
+            'notifications' => $notificationsData,
+            'notificationsCount' => $notificationsCount,
+            'auth' => $authInfo,
         ];
     }
 }

@@ -5,6 +5,7 @@
     @vite('src/UI/Bootstrap/Bootstrap.js')
     {{ seo()->render() }}
     <x-inertia::head />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <x-inertia::app />
