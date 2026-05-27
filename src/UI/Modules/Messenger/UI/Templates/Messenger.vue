@@ -339,7 +339,7 @@ const props = defineProps<{
                         rows="2"
                         class="flex-1 p-2 rounded-md resize-none text-sm
                                focus:outline-1 focus:outline-offset-2
-                               focus:outline-solid"
+                               focus:outline-solid scrollbar-surface"
                         placeholder="Введите сообщение…"/>
 <!--                    <SmileBox :insertSmilesTo="insertSmile" />-->
                     <button @click="sendMessage"
