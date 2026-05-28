@@ -3,6 +3,7 @@
 namespace UI\App\Middleware;
 
 use Database\Models\Notification;
+use Database\Models\Social\UserDialogue;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Modules\Actors\Auth\AuthRole;
@@ -66,9 +67,22 @@ class HandleInertiaRequests extends Middleware
                 ->latest()
                 ->simplePaginate(5)
                 ->toArray();
-        } else {
-            $notificationsCount = 0;
-            $notificationsData = [];
+        }
+
+        $userKey = $user->getKey();
+
+        if (!empty($user))
+        {
+            $messagesCount = UserDialogue::query()
+                ->whereHas('participants', function ($query) use ($userKey) {
+                    $query->where('user_id', $userKey);
+                })
+                ->whereHas('messages', function ($query) use ($userKey) {
+                    $query->whereNull('read_at')
+                        ->where('author_id', '!=', $userKey);
+                })
+                ->distinct()
+                ->count('user_dialogues.id');
         }
 
         return [
@@ -76,8 +90,9 @@ class HandleInertiaRequests extends Middleware
             'navbar' => $this->navbar->getByName(
                 NavbarRepository::MAIN_NAVBAR
             ),
-            'notifications' => $notificationsData,
-            'notificationsCount' => $notificationsCount,
+            'unreadMessagesCount' => $messagesCount ?? 0,
+            'notifications' => $notificationsData ?? [],
+            'notificationsCount' => $notificationsCount ?? 0,
             'auth' => $authInfo,
         ];
     }
