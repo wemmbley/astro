@@ -18,7 +18,6 @@ use UI\App\Controllers\RepositoryController;
 # |
 # |
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/matrix', [MatrixController::class, 'index'])->name('matrix');
 Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 
 Route::prefix('auth')->name('auth.')->group(function () {
@@ -31,8 +30,13 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::prefix('natal')->name('natal.')->group(function () {
-    Route::get('/', [NatalController::class, 'index'])->name('index');
-    Route::get('/{lat}/{lon}/{date}/{time}', [NatalController::class, 'single'])->name('single');
+    Route::get('/', [NatalController::class, 'index'])->name('natal-index');
+    Route::get('/{lat}/{lon}/{date}/{time}', [NatalController::class, 'single'])->name('natal-single');
+});
+
+Route::prefix('matrix')->name('natal.')->group(function () {
+    Route::get('/', [MatrixController::class, 'index'])->name('matrix-index');
+    Route::get('/{date}', [MatrixController::class, 'single'])->name('matrix-single');
 });
 
 # +-----------------------------------------------------------------------------------------------

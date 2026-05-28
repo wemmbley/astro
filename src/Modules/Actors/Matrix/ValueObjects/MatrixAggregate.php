@@ -30,4 +30,13 @@ final readonly class MatrixAggregate
             $this->base->earth(),
         ];
     }
+
+    public function toArray(): array
+    {
+        return [
+            'basePoints' => $this->base->toArray(),
+            'diagonalPoints' => $this->diagonal->toArray(),
+            'chakras' => $this->chakras->toArray(),
+        ];
+    }
 }

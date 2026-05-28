@@ -21,4 +21,17 @@ final readonly class DiagonalPoints
     public function o(): ArcanePoint { return $this->o; }
     public function p(): ArcanePoint { return $this->p; }
     public function r(): ArcanePoint { return $this->r; }
+
+    public function toArray(): array
+    {
+        return [
+            'k' => $this->k->getValue(),
+            'l' => $this->l->getValue(),
+            'm' => $this->m->getValue(),
+            'n' => $this->n->getValue(),
+            'o' => $this->o->getValue(),
+            'p' => $this->p->getValue(),
+            'r' => $this->r->getValue(),
+        ];
+    }
 }

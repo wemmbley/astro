@@ -17,13 +17,19 @@ final readonly class DiagonalPointsCalculator
         $earth = new EarthCalculator($this->birthday)->calculate();
         $sky = new SkyCalculator($this->birthday)->calculate();
 
+        $base  = new BaseArcaneCalculator($this->birthday);
+        $day   = $base->getDayArcane();
+        $month = $base->getMonthArcane();
+        $year  = $base->getYearArcane();
+        $background = $day->add($earth);
+
         $k = $baseArcane->getDayArcane()->add($sky);
-        $l = $baseArcane->getMonthArcane()->add($sky);
-        $m = $sky->add($baseArcane->getYearArcane());
-        $n = $sky->add($earth);
-        $o = $m->add($n);
+        $l = $day->add($background);
+        $m = $month->add($sky);
+        $n = $day->add($year);
+        $o = $year->add($sky);
         $p = $n->add($earth);
-        $r = $m->add($baseArcane->getYearArcane());
+        $r = $earth->add($sky);
 
         $diagonalPoints = new DiagonalPoints(
             $k, $l, $m, $n,

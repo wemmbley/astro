@@ -39,13 +39,41 @@ final readonly class ChakrasBag
     public function toArray(): array
     {
         return [
-            1 => $this->muladhara,
-            2 => $this->svadhisthana,
-            3 => $this->manipura,
-            4 => $this->anahata,
-            5 => $this->vishuddha,
-            6 => $this->ajna,
-            7 => $this->sahasrara,
+            'sahasrara' => [
+                'physics' => $this->sahasrara()->getPhysics()->getValue(),
+                'energy' => $this->sahasrara()->getEnergy()->getValue(),
+                'emotion' => $this->sahasrara()->getEmotion()->getValue(),
+            ],
+            'ajna' => [
+                'physics' => $this->ajna()->getPhysics()->getValue(),
+                'energy' => $this->ajna()->getEnergy()->getValue(),
+                'emotion' => $this->ajna()->getEmotion()->getValue(),
+            ],
+            'vishuddha' => [
+                'physics' => $this->vishuddha()->getPhysics()->getValue(),
+                'energy' => $this->vishuddha()->getEnergy()->getValue(),
+                'emotion' => $this->vishuddha()->getEmotion()->getValue(),
+            ],
+            'anahata' => [
+                'physics' => $this->anahata()->getPhysics()->getValue(),
+                'energy' => $this->anahata()->getEnergy()->getValue(),
+                'emotion' => $this->anahata()->getEmotion()->getValue(),
+            ],
+            'manipura' => [
+                'physics' => $this->manipura()->getPhysics()->getValue(),
+                'energy' => $this->manipura()->getEnergy()->getValue(),
+                'emotion' => $this->manipura()->getEmotion()->getValue(),
+            ],
+            'svadhisthana' => [
+                'physics' => $this->svadhisthana()->getPhysics()->getValue(),
+                'energy' => $this->svadhisthana()->getEnergy()->getValue(),
+                'emotion' => $this->svadhisthana()->getEmotion()->getValue(),
+            ],
+            'muladhara' => [
+                'physics' => $this->muladhara()->getPhysics()->getValue(),
+                'energy' => $this->muladhara()->getEnergy()->getValue(),
+                'emotion' => $this->muladhara()->getEmotion()->getValue(),
+            ],
         ];
     }
 

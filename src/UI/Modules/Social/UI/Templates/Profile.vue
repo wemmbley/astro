@@ -48,7 +48,7 @@ const showBlockModal = ref(false)
                     </p>
                 </div>
             </div>
-            <div class="absolute bottom-5 right-6 flex items-end gap-2 z-10 text-surface-200 bg-surface-700">
+            <div class="absolute bottom-5 right-6 flex items-end gap-2 z-5 text-surface-400 bg-surface-700">
                 <div class="relative group border-1 flex pl-2 pr-2 pt-1 pb-1 transition rounded-sm items-center cursor-pointer hover:text-accent">
                     <Mail size="20" />
                     <Tooltip>Написать сообщение</Tooltip>

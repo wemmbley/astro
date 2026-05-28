@@ -8,7 +8,7 @@ use Modules\Actors\Matrix\Fabric\ChakrasCalculatorFactory;
 use Modules\Actors\Matrix\ValueObjects\Birthday;
 use Modules\Actors\Matrix\ValueObjects\MatrixAggregate;
 
-class Matrix
+final readonly class Matrix
 {
     public function __construct(
         private Birthday $birthday,
