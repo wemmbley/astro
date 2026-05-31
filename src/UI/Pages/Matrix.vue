@@ -5,32 +5,75 @@ import {House, Flame, Sun, Quote} from "lucide-vue-next";
 import {
     Anahata, Ajna, Manipura, Muladhara, Sahasrara, Svadhistana, Vishudha
 } from "@/Modules/Matrix/Domain/ChakraImages"
+import {useForm} from "@inertiajs/vue3";
+import ArrowIcon from "@/Resources/Icons/Other/ArrowIcon.vue";
 
 const {
     selectedYear,
     selectedMonth,
     selectedDay,
-    selectedHour,
-    selectedMinute,
 
     years,
     months,
     days,
-    hours,
-    minutes
 } = useDateSelect()
 
+const form = useForm({
+    year: selectedYear,
+    month: selectedMonth,
+    day: selectedDay,
+});
 </script>
 
 <template>
     <MainLayout :hasContainer="false">
         <div class="max-w-xl m-auto w-auto mt-12">
             <form>
-                <div class="bg-surface-700 border border-surface-600 p-5">
-                    <h2 class="font-medium">Введите дату рождения</h2>
-                    <input type="text" name="day" placeholder="День" class="bg-surface-600 border border-surface-500 focus-accent">
-                    <input type="text" name="month">
-                    <input type="text" name="year">
+                <div class="max-w-150 m-auto mt-20 rounded-xl border border-surface-500 bg-surface-700
+                px-15 pt-5 pb-10 mb-20">
+                    <h1 class="text-[19px] text-center mt-2">Расчёт Матрицы Судьбы</h1>
+                    <label class="block mb-3 text-md mt-5 text-gray-400">
+                        Дата рождения
+                    </label>
+                    <div class="w-full flex justify-between gap-2">
+                        <div class="relative w-[33%]">
+                            <select v-model="selectedYear" class="surface-ui scrollbar-surface w-full appearance-none px-4 py-2.5 pr-10">
+                                <option v-for="year in years" :key="year" :value="year" class="bg-surface-900 text-surface-100">
+                                    {{ year }}
+                                </option>
+                            </select>
+                            <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                                <ArrowIcon to="down" class="w-4 h-4 text-surface-400" />
+                            </div>
+                        </div>
+                        <div class="relative w-[33%]">
+                            <select v-model="selectedMonth" class="surface-ui scrollbar-surface w-full appearance-none px-4 py-2.5 pr-10">
+                                <option v-for="month in months" :key="month" :value="month" class="bg-surface-900 text-surface-100">
+                                    {{ month }}
+                                </option>
+                            </select>
+                            <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                                <ArrowIcon to="down" class="w-4 h-4 text-surface-400" />
+                            </div>
+                        </div>
+                        <div class="relative w-[33%]">
+                            <select v-model="selectedDay" class="surface-ui scrollbar-surface w-full appearance-none px-4 py-2.5 pr-10">
+                                <option v-for="day in days" :key="day" :value="day" class="bg-surface-900 text-surface-100">
+                                    {{ day }}
+                                </option>
+                            </select>
+                            <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                                <ArrowIcon to="down" class="w-4 h-4 text-surface-400" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full pt-4">
+                        <a :href="natalUrl" class="flex justify-center pl-5 pr-5 pt-2 pb-2 mt-5
+                                bg-accent rounded-md w-full
+                                hover:bg-accent/50 transition cursor-pointer">
+                            Произвести расчёт
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>
