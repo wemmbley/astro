@@ -7,6 +7,8 @@ import {
 } from "@/Modules/Matrix/Domain/ChakraImages"
 import {useForm} from "@inertiajs/vue3";
 import ArrowIcon from "@/Resources/Icons/Other/ArrowIcon.vue";
+import Chakra from "@/Modules/Matrix/UI/Chakra.vue";
+import ChakraList from "@/Modules/Matrix/UI/ChakraList.vue";
 
 const {
     selectedYear,
@@ -183,84 +185,8 @@ const form = useForm({
                 </div>
             </section>
             <section>
-                <h2 class="text-xl font-bold">Семь чакр в Матрице Судьбы</h2>
-                <div class="border border-[#E53935]/70 bg-[#E53935]/10 p-5 rounded-t-lg mt-6 flex mb-[0.4px]">
-                    <img :src="Muladhara" alt="Muladhara" class="w-48 h-48" />
-                    <div>
-                        <h3 class="mb-2 text-[#E53935] font-medium">Муладхара — корень</h3>
-                        <p><strong>Тема:</strong> выживание, безопасность, род, материальная опора.</p>
-                        <p class="mt-2">
-                            Аркан показывает базовую родовую программу, полученные от предков
-                            установки и фундамент жизненной устойчивости.
-                        </p>
-                    </div>
-                </div>
-                <div class="border border-[#FB8C00]/70 bg-[#FB8C00]/10 p-5 flex mb-[0.4px]">
-                    <img :src="Svadhistana" alt="Svadhistana" class="w-48 h-48" />
-                    <div>
-                        <h3 class="mb-2 text-[#FB8C00] font-medium">Свадхистхана — крестец</h3>
-                        <p><strong>Тема:</strong> удовольствие, сексуальность, творчество, отношения.</p>
-                        <p class="mt-2">
-                            Показывает сценарии близости, взаимодействия с партнёром
-                            и способность принимать радость жизни.
-                        </p>
-                    </div>
-                </div>
-                <div class="border border-[#FDD835]/70 bg-[#FDD835]/10 p-5 flex mb-[0.4px]">
-                    <img :src="Manipura" alt="Manipura" class="w-48 h-48" />
-                    <div>
-                        <h3 class="mb-2 text-[#FDD835] font-medium">Манипура — солнечное сплетение</h3>
-                        <p><strong>Тема:</strong> сила воли, самооценка, лидерство, социальная реализация.</p>
-                        <p class="mt-2">
-                            Отражает отношение человека к власти, ответственности,
-                            личным границам и достижению целей.
-                        </p>
-                    </div>
-                </div>
-                <div class="border border-[#43A047]/70 bg-[#43A047]/10 p-5 flex mb-[0.4px]">
-                    <img :src="Anahata" alt="Anahata" class="w-48 h-48" />
-                    <div>
-                        <h3 class="mb-2 text-[#43A047] font-medium">Анахата — сердце</h3>
-                        <p><strong>Тема:</strong> любовь, принятие, сострадание, связь с собой и окружающими.</p>
-                        <p class="mt-2">
-                            Часто именно здесь раскрывается главный жизненный урок,
-                            связанный с любовью и гармонией.
-                        </p>
-                    </div>
-                </div>
-                <div class="border border-[#29B6F6]/70 bg-[#29B6F6]/10 p-5 flex mb-[0.4px]">
-                    <img :src="Vishudha" alt="Anahata" class="w-48 h-48" />
-                    <div>
-                        <h3 class="mb-2 text-[#29B6F6] font-medium">Вишудха — горло</h3>
-                        <p><strong>Тема:</strong> речь, самовыражение, творчество, коммуникация.</p>
-                        <p class="mt-2">
-                            Показывает, насколько свободно человек выражает свои мысли,
-                            идеи и внутреннюю истину.
-                        </p>
-                    </div>
-                </div>
-                <div class="border border-[#8000FF]/70 bg-[#8000FF]/10 p-5 flex mb-[0.4px]">
-                    <img :src="Ajna" alt="Ajna" class="w-48 h-48" />
-                    <div>
-                        <h3 class="mb-2 text-[#8000FF] font-medium">Аджна — третий глаз</h3>
-                        <p><strong>Тема:</strong> интуиция, мировоззрение, убеждения и восприятие реальности.</p>
-                        <p class="mt-2">
-                            Показывает фильтры восприятия, через которые человек
-                            интерпретирует происходящее вокруг.
-                        </p>
-                    </div>
-                </div>
-                <div class="border border-[#C827F5]/70 bg-[#C827F5]/10 p-5 rounded-b-lg flex">
-                    <img :src="Sahasrara" alt="Sahasrara" class="w-48 h-48" />
-                    <div>
-                        <h3 class="mb-2 text-[#C827F5] font-medium">Сахасрара — корона</h3>
-                        <p><strong>Тема:</strong> предназначение, смысл жизни, связь с высшими уровнями бытия.</p>
-                        <p class="mt-2">
-                            Отражает глобальное направление пути и задачи,
-                            которые раскрываются через жизненный опыт.
-                        </p>
-                    </div>
-                </div>
+                <h2 class="text-xl font-bold mb-4">Семь чакр в Матрице Судьбы</h2>
+                <ChakraList />
             </section>
             <section class="mb-12">
                 <h2 class="text-xl font-bold mb-4">Коротко</h2>
