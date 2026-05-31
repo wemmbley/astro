@@ -3,6 +3,7 @@
 namespace Modules\Actors\Matrix;
 
 use Modules\Actors\Matrix\Calculators\BasePointsCalculator;
+use Modules\Actors\Matrix\Calculators\DestinyNumberCalculator;
 use Modules\Actors\Matrix\Calculators\DiagonalPointsCalculator;
 use Modules\Actors\Matrix\Fabric\ChakrasCalculatorFactory;
 use Modules\Actors\Matrix\ValueObjects\Birthday;
@@ -23,7 +24,8 @@ final readonly class Matrix
             $diagonalPoints,
         );
         $chakrasBag = $chakrasService->calculateAll();
+        $destinyNumber = new DestinyNumberCalculator($this->birthday)->calculate();
 
-        return new MatrixAggregate($basePoints, $diagonalPoints, $chakrasBag);
+        return new MatrixAggregate($destinyNumber, $basePoints, $diagonalPoints, $chakrasBag);
     }
 }

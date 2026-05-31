@@ -5,6 +5,7 @@ namespace Modules\Actors\Matrix\ValueObjects;
 final readonly class MatrixAggregate
 {
     public function __construct(
+        private int $destinyNumber,
         private BasePoints $base,
         private DiagonalPoints $diagonal,
         private ChakrasBag $chakras,
@@ -34,6 +35,7 @@ final readonly class MatrixAggregate
     public function toArray(): array
     {
         return [
+            'destinyNumber' => $this->destinyNumber,
             'basePoints' => $this->base->toArray(),
             'diagonalPoints' => $this->diagonal->toArray(),
             'chakras' => $this->chakras->toArray(),

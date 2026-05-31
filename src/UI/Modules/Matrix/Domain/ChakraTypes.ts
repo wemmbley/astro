@@ -5,15 +5,16 @@ import {
 } from "@/Modules/Matrix/Domain/ChakraImages"
 
 type ChakraName =
-    | "Muladhara"
-    | "Svadhistana"
-    | "Manipura"
-    | "Anahata"
-    | "Vishudha"
-    | "Ajna"
-    | "Sahasrara";
+    | "muladhara"
+    | "svadhisthana"
+    | "manipura"
+    | "anahata"
+    | "vishuddha"
+    | "ajna"
+    | "sahasrara";
 
 type Chakra = {
+    name: string,
     color: string;
     imageChakra: string;
     imageArchetype: string;
@@ -22,37 +23,44 @@ type Chakra = {
 type ChakraBag = Record<ChakraName, Chakra>;
 
 const ChakraMap: ChakraBag = {
-    Muladhara: {
+    muladhara: {
+        name: 'Муладхара',
         color: "#E53935",
         imageChakra: Muladhara,
         imageArchetype: MuladharaArchetype,
     },
-    Svadhistana: {
+    svadhisthana: {
+        name: 'Свадхистана',
         color: "#FB8C00",
         imageChakra: Svadhistana,
         imageArchetype: SvadhistanaArchetype,
     },
-    Manipura: {
+    manipura: {
+        name: 'Манипура',
         color: "#FDD835",
         imageChakra: Manipura,
         imageArchetype: ManipuraArchetype,
     },
-    Anahata: {
+    anahata: {
+        name: 'Анахата',
         color: "#43A047",
         imageChakra: Anahata,
         imageArchetype: AnahataArchetype,
     },
-    Vishudha: {
+    vishuddha: {
+        name: 'Вишудха',
         color: "#29B6F6",
         imageChakra: Vishudha,
         imageArchetype: VishudhaArchetype,
     },
-    Ajna: {
+    ajna: {
+        name: 'Аджна',
         color: "#8000FF",
         imageChakra: Ajna,
         imageArchetype: AjnaArchetype,
     },
-    Sahasrara: {
+    sahasrara: {
+        name: 'Сахасрара',
         color: "#C827F5",
         imageChakra: Sahasrara,
         imageArchetype: SahasraraArchetype,
@@ -60,13 +68,13 @@ const ChakraMap: ChakraBag = {
 };
 
 const ChakraOrder: ChakraName[] = [
-    "Muladhara",
-    "Svadhistana",
-    "Manipura",
-    "Anahata",
-    "Vishudha",
-    "Ajna",
-    "Sahasrara",
+    "muladhara",
+    "svadhisthana",
+    "manipura",
+    "anahata",
+    "vishuddha",
+    "ajna",
+    "sahasrara",
 ];
 
 export {ChakraMap, ChakraOrder};

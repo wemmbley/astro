@@ -11,7 +11,7 @@ final readonly class MatrixController
 {
     public function index(): Response
     {
-        seo()->title('Натальный Карта Матрица Судьбы Астросик Онлайн.');
+        seo()->title('Матрица Судьбы Онлайн.');
 
         return Inertia::render('Matrix', []);
     }
@@ -19,6 +19,8 @@ final readonly class MatrixController
     public function single(): Response
     {
         $date = (string) request('date');
+
+        seo()->title('Матрица Судьбы ' . $date);
 
         [$day, $month, $year] = explode('-', $date);
 

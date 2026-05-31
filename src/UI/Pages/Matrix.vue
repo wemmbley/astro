@@ -2,13 +2,9 @@
 import MainLayout from "@/Resources/Layouts/MainLayout.vue";
 import {useDateSelect} from "@/Modules/Natal/UI/Components/Hooks/useDateSelect";
 import {House, Flame, Sun, Quote} from "lucide-vue-next";
-import {
-    Anahata, Ajna, Manipura, Muladhara, Sahasrara, Svadhistana, Vishudha
-} from "@/Modules/Matrix/Domain/ChakraImages"
-import {useForm} from "@inertiajs/vue3";
 import ArrowIcon from "@/Resources/Icons/Other/ArrowIcon.vue";
-import Chakra from "@/Modules/Matrix/UI/Chakra.vue";
 import ChakraList from "@/Modules/Matrix/UI/ChakraList.vue";
+import {computed} from "vue";
 
 const {
     selectedYear,
@@ -20,11 +16,9 @@ const {
     days,
 } = useDateSelect()
 
-const form = useForm({
-    year: selectedYear,
-    month: selectedMonth,
-    day: selectedDay,
-});
+const matrixUrl = computed(() =>
+    `/matrix/${selectedDay.value}-${selectedMonth.value}-${selectedYear.value}`
+);
 </script>
 
 <template>
@@ -70,7 +64,7 @@ const form = useForm({
                         </div>
                     </div>
                     <div class="w-full pt-4">
-                        <a :href="natalUrl" class="flex justify-center pl-5 pr-5 pt-2 pb-2 mt-5
+                        <a :href="matrixUrl" class="flex justify-center pl-5 pr-5 pt-2 pb-2 mt-5
                                 bg-accent rounded-md w-full
                                 hover:bg-accent/50 transition cursor-pointer">
                             Произвести расчёт

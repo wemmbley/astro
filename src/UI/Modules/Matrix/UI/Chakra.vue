@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChakraName, ChakraMap, ChakraOrder } from "@/Modules/Matrix/Domain/ChakraTypes";
+import { ChakraName, ChakraMap } from "@/Modules/Matrix/Domain/ChakraTypes";
 import {computed} from "vue";
 import ChakraBg from "./ChakraBg.png"
 
@@ -19,43 +19,43 @@ type ChakraDescription = {
 };
 
 const descriptionMap: Record<ChakraName, ChakraDescription> = {
-    Muladhara: {
+    muladhara: {
         core: "корень",
         tags: "выживание, безопасность, род, материальная опора",
         description:
             "Аркан показывает базовую родовую программу, полученные от предков установки и фундамент жизненной устойчивости.",
     },
-    Svadhistana: {
+    svadhisthana: {
         core: "крестец",
         tags: "удовольствие, сексуальность, творчество, отношения",
         description:
             "Показывает сценарии близости, взаимодействия с партнёром и способность принимать радость жизни.",
     },
-    Manipura: {
+    manipura: {
         core: "солнечное сплетение",
         tags: "сила воли, самооценка, лидерство, социальная реализация",
         description:
             "Отражает отношение человека к власти, ответственности, личным границам и достижению целей.",
     },
-    Anahata: {
+    anahata: {
         core: "сердце",
         tags: "любовь, принятие, сострадание, связь с собой и окружающими",
         description:
             "Часто именно здесь раскрывается главный жизненный урок, связанный с любовью и гармонией.",
     },
-    Vishudha: {
+    vishuddha: {
         core: "горло",
         tags: "речь, самовыражение, творчество, коммуникация",
         description:
             "Показывает, насколько свободно человек выражает свои мысли, идеи и внутреннюю истину.",
     },
-    Ajna: {
+    ajna: {
         core: "третий глаз",
         tags: "интуиция, мировоззрение, убеждения и восприятие реальности",
         description:
             "Показывает фильтры восприятия, через которые человек интерпретирует происходящее вокруг.",
     },
-    Sahasrara: {
+    sahasrara: {
         core: "корона",
         tags: "предназначение, смысл жизни, связь с высшими уровнями бытия",
         description:
@@ -82,7 +82,7 @@ const info = descriptionMap[props.name];
             <img :src="chakra.imageChakra" :alt="name" class="w-48 h-48"/>
             <div>
                 <h3 class="mb-2 font-medium" :style="{ color: chakra.color }">
-                    {{ name }} — {{ info.core }}
+                    {{ chakra.name }} — {{ info.core }}
                 </h3>
                 <p><strong>Тема:</strong> {{ info.tags }}.</p>
                 <p class="mt-2">{{ info.description }}</p>
@@ -93,5 +93,6 @@ const info = descriptionMap[props.name];
             alt="chakra background"
             class="absolute inset-0 w-full h-full object-cover brightness-12 -z-10"
         />
+        <slot/>
     </div>
 </template>
