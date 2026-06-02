@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import MainLayout from "@/Resources/Layouts/MainLayout.vue";
 import {useDateSelect} from "@/Modules/Natal/UI/Components/Hooks/useDateSelect";
-import {House, Flame, Sun, Quote} from "lucide-vue-next";
+import {House, Flame, Sun} from "lucide-vue-next";
 import ArrowIcon from "@/Resources/Icons/Other/ArrowIcon.vue";
 import ChakraList from "@/Modules/Matrix/UI/ChakraList.vue";
 import {computed} from "vue";
 import Footer from "@/Modules/Shared/Components/Footer.vue";
+import Quote from "@/Modules/Shared/Components/Quote.vue";
 
 const {
     selectedYear,
@@ -26,8 +27,8 @@ const matrixUrl = computed(() =>
     <MainLayout :hasContainer="false">
         <div class="max-w-xl m-auto w-auto mt-12">
             <form>
-                <div class="max-w-150 m-auto mt-20 rounded-xl border border-surface-500 bg-surface-700
-                px-15 pt-5 pb-10 mb-20">
+                <div class="max-w-150 m-auto mt-20 rounded-2xl border border-surface-600 bg-surface-700
+                px-15 pt-5 pb-10 mb-20 glow-10 glow-accent/30">
                     <h1 class="text-[19px] text-center mt-2">Расчёт Матрицы Судьбы</h1>
                     <label class="block mb-3 text-md mt-5 text-gray-400">
                         Дата рождения

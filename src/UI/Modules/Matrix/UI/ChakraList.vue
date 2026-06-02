@@ -36,7 +36,7 @@ const props = defineProps<{
                     <img :src="getArcaneImage(props.detailedChakras[name]?.physics)"
                          class="h-80 w-50 m-auto rounded-xl" alt="arcane" />
                     <a href="" class="text-center mt-2 italic"
-                       :class="`text-[${ChakraMap[name].color}]`">
+                       :style="{ color: ChakraMap[name].color }">
                         ...читать подробнее
                     </a>
                 </div>
@@ -49,7 +49,7 @@ const props = defineProps<{
                     <img :src="getArcaneImage(props.detailedChakras[name]?.energy)"
                          class="h-80 w-50 m-auto rounded-xl" alt="arcane" />
                     <a href="" class="text-center mt-2 italic"
-                       :class="`text-[${ChakraMap[name].color}]`">
+                       :style="{ color: ChakraMap[name].color }">
                         ...читать подробнее
                     </a>
                 </div>
@@ -62,7 +62,7 @@ const props = defineProps<{
                     <img :src="getArcaneImage(props.detailedChakras[name]?.emotion)"
                          class="h-80 w-50 m-auto rounded-xl" alt="arcane" />
                     <a href="" class="text-center mt-2 italic"
-                       :class="`text-[${ChakraMap[name].color}]`">
+                       :style="{ color: ChakraMap[name].color }">
                         ...читать подробнее
                     </a>
                 </div>
