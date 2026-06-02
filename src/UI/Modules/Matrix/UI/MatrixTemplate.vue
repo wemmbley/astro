@@ -5,6 +5,8 @@ import {ArcaneNames} from "@/Modules/Matrix/Domain/ArcaneTypes";
 
 const props = defineProps<{
     destinyNumber: number,
+    basePoints: object,
+    diagonalPoints: object,
     chakras: Record<string, {
         physics: number
         energy: number
@@ -53,11 +55,31 @@ const props = defineProps<{
     display: inline-block;
     overflow: hidden;
     border-radius: 1rem;
+    transform-style: preserve-3d;
+    animation: cardFloat 6s ease-in-out infinite;
 }
+
 .main-img {
     height: 22.5rem;
     border-radius: 1rem;
     display: block;
+}
+@keyframes cardFloat {
+    0% {transform:
+            perspective(1200px)
+            rotateX(-10deg)
+            rotateY(11deg)
+            translateZ(20px);}
+    50% {transform:
+            perspective(1200px)
+            rotateX(8deg)
+            rotateY(-11deg)
+            translateZ(-26px);}
+    100% {transform:
+            perspective(1200px)
+            rotateX(-10deg)
+            rotateY(11deg)
+            translateZ(20px);}
 }
 .glass-sheen {
     position: absolute;
@@ -75,12 +97,21 @@ const props = defineProps<{
     );
     transform: rotate(25deg);
     filter: blur(2px);
-    animation: sheenMove 2.5s ease-in-out infinite alternate;
+    animation: sheenMove 6s ease-in-out infinite alternate;
     pointer-events: none;
 }
 @keyframes sheenMove {
-    0%   { left: -60%; opacity: 0; }
-    50%  { opacity: 0.7;           }
-    100% { left: 120%; opacity: 0; }
+    0% {
+        left: -60%;
+        opacity: 0;
+    }
+    50% {
+        left: 90%;
+        opacity: 0.7;
+    }
+    100% {
+        left: -60%;
+        opacity: 0;
+    }
 }
 </style>

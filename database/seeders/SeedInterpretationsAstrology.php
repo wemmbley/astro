@@ -11,7 +11,7 @@ use Database\Models\Interpretations\InterpretRepository;
 use Database\Models\Social\User;
 use Illuminate\Database\Seeder;
 
-class SeedInterpretations extends Seeder
+class SeedInterpretationsAstrology extends Seeder
 {
     private array $aspects = [
         'Conjunction', 'Opposition', 'Sextile',

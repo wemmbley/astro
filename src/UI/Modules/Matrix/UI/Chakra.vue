@@ -68,14 +68,13 @@ const info = descriptionMap[props.name];
 </script>
 
 <template>
-    <div class="border p-5 relative z-5 overflow-hidden"
+    <div class="p-5 relative z-5 overflow-hidden"
          :class="{
-            'rounded-t-lg': isFirst,
-            'rounded-b-lg': isLast,
+            'rounded-t-4xl': isFirst,
+            'rounded-b-4xl': isLast,
             'mb-[0.4px]': !isLast,
          }"
          :style="{
-            borderColor: chakra.color + 'B3',
             backgroundColor: chakra.color + '1A',
          }">
         <div class="z-9 flex">

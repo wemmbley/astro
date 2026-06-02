@@ -5,6 +5,7 @@ import {House, Flame, Sun, Quote} from "lucide-vue-next";
 import ArrowIcon from "@/Resources/Icons/Other/ArrowIcon.vue";
 import ChakraList from "@/Modules/Matrix/UI/ChakraList.vue";
 import {computed} from "vue";
+import Footer from "@/Modules/Shared/Components/Footer.vue";
 
 const {
     selectedYear,
@@ -91,9 +92,7 @@ const matrixUrl = computed(() =>
                     Пифагора и 22 старших арканах Таро. Система распределяется в индуистическом
                     символизме, на основании 7 Чакр.
                 </p>
-                <div class="bg-surface-700 px-8 py-6 space-y-4 mt-10 rounded-xl text-surface-100
-                            border border-surface-600 relative">
-                    <Quote class="absolute -top-5 -left-5 text-surface-500" :size="46" />
+                <Quote>
                     <p>
                         Дата рождения переводится в числа от 1 до 22, где каждое число
                         соответствует определённому архетипу. Из этих значений строится
@@ -112,7 +111,7 @@ const matrixUrl = computed(() =>
                         наглядно отображать различные уровни проявления энергии —
                         от материального до духовного.
                     </p>
-                </div>
+                </Quote>
             </section>
             <section class="space-y-4 mb-15 mt-10">
                 <h2 class="text-xl font-bold">Три уровня каждой точки матрицы</h2>
@@ -207,4 +206,5 @@ const matrixUrl = computed(() =>
             </section>
         </div>
     </MainLayout>
+    <Footer />
 </template>

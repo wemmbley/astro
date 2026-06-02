@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import MainLayout from "@/Resources/Layouts/MainLayout.vue";
 import MatrixTemplate from "@/Modules/Matrix/UI/MatrixTemplate.vue";
+import Footer from "@/Modules/Shared/Components/Footer.vue";
 
 const props = defineProps<{
     destinyNumber: number,
+    basePoints: object,
+    diagonalPoints: object,
     chakras: Record<string, {
         physics: number
         energy: number
@@ -14,6 +17,11 @@ const props = defineProps<{
 
 <template>
     <MainLayout>
-        <MatrixTemplate :destiny-number="destinyNumber" :chakras="chakras" />
+        <MatrixTemplate
+            :destinyNumber="destinyNumber"
+            :basePoints="basePoints"
+            :diagonalPoints="diagonalPoints"
+            :chakras="chakras" />
     </MainLayout>
+    <Footer />
 </template>

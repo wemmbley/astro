@@ -4,40 +4,50 @@ namespace Database\Seeders;
 
 use Database\Models\Navbar;
 use Illuminate\Database\Seeder;
+use Modules\Actors\Auth\AuthRole;
 
 class SeedNavbarItems extends Seeder
 {
     public function run(): void
     {
-        $ifTableExists = Navbar::where('name', 'navbar_main')
-            ->exists();
+        $ifTableExists = Navbar::where('name', 'navbar_main')->exists();
 
-        if ($ifTableExists) {
-            return;
-        }
+        if ($ifTableExists) return;
 
-        $navItems = [];
-        $navItems[] = [
+        Navbar::create([
             'name' => 'navbar_main',
             'link' => '/',
             'label' => 'Главная',
-        ];
-        $navItems[] = [
+        ])->assignRole(AuthRole::Guest->name);
+
+        Navbar::create([
             'name' => 'navbar_main',
             'link' => '/matrix',
             'label' => 'Матрица',
-        ];
-        $navItems[] = [
+        ])->assignRole(AuthRole::Guest->name);
+
+        Navbar::create([
             'name' => 'navbar_main',
             'link' => '/natal',
             'label' => 'Натал',
-        ];
-        $navItems[] = [
+        ])->assignRole(AuthRole::Guest->name);
+
+        Navbar::create([
+            'name' => 'navbar_main',
+            'link' => '/glossary',
+            'label' => 'Глосаррий',
+        ])->assignRole(AuthRole::Guest->name);
+
+        Navbar::create([
             'name' => 'navbar_main',
             'link' => '/feed',
             'label' => 'Лента',
-        ];
+        ])->assignRole(AuthRole::Guest->name);
 
-        Navbar::insert($navItems);
+        Navbar::create([
+            'name' => 'navbar_main',
+            'link' => '/subscriptions',
+            'label' => 'Подписки',
+        ])->assignRole(AuthRole::User->name);
     }
 }

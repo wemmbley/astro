@@ -30,10 +30,14 @@ final readonly class MatrixController
             year: $year
         );
 
-        $matrix = new Matrix($birthday);
+        $matrix = new Matrix($birthday)->calculate()->toArray();
 
         return Inertia::render('MatrixSingle', [
-            ...$matrix->calculate()->toArray(),
+            'interpretations' => [
+                'arcanes' => [],
+                'chakras' => [],
+            ],
+            ...$matrix
         ]);
     }
 }
