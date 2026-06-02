@@ -9,7 +9,7 @@ import {CopyrightIcon} from "lucide-vue-next";
             <div class="ml-2">Астрологический движок v1.21</div>
         </div>
     </div>
-    <div class="text-surface-200 text-center py-10">
+    <div class="text-surface-200 text-center py-10 bg-surface-700 border-t-surface-600 border-t">
         Подключайтесь к нам в <a href="#" class="text-accent">Telegram</a>. У нас весело ;)
     </div>
 </template>

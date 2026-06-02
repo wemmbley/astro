@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @tailwind utilities;
+@plugin "./tailwind-glow-plugin.ts";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -62,7 +63,7 @@
         @apply focus:outline-none focus:ring-2 focus:ring-accent/60 focus:border-accent;
     }
     .surface-ui {
-        @apply cursor-pointer text-surface-100 transition-all rounded-md shadow-inner shadow-black/20 border border-surface-600 bg-surface-700 hover:bg-surface-600 hover:border-surface-500 focus:outline-none focus:ring-2 focus:ring-accent/60 focus:border-accent;
+        @apply cursor-pointer text-surface-100 transition-all rounded-xl shadow-inner shadow-black/20 border border-surface-600 bg-surface-700 hover:bg-surface-600 hover:border-surface-500 focus:outline-none focus:ring-2 focus:ring-accent/60 focus:border-accent;
     }
 }
 

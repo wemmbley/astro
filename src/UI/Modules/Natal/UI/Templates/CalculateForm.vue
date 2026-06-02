@@ -52,7 +52,7 @@ const natalUrl = computed(() => {
 </script>
 
 <template>
-    <div class="max-w-150 m-auto mt-20 rounded-xl border border-surface-500 bg-surface-700 px-15 pt-5 pb-10">
+    <div class="max-w-150 m-auto mt-20 rounded-4xl border border-surface-600 bg-surface-700 px-15 pt-5 pb-10">
         <h1 class="text-[19px] text-center mt-2">Расчёт натальной карты</h1>
         <label class="block mb-3 text-md mt-5 text-gray-400">
             Город рождения
