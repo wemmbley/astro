@@ -13,7 +13,9 @@ final readonly class MatrixController
     {
         seo()->title('Матрица Судьбы Онлайн.');
 
-        return Inertia::render('Matrix', []);
+        return Inertia::render('Matrix', [
+            'seo' => view('UI::Pages/SEO/Matrix')->render(),
+        ]);
     }
 
     public function single(): Response
@@ -36,6 +38,10 @@ final readonly class MatrixController
             'interpretations' => [
                 'arcanes' => [],
                 'chakras' => [],
+            ],
+            'seo' => [
+                'title' => '123',
+                'content' => '222223',
             ],
             ...$matrix
         ]);

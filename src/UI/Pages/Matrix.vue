@@ -29,7 +29,7 @@ const matrixUrl = computed(() =>
             <form>
                 <div class="max-w-150 m-auto mt-20 rounded-2xl border border-surface-600 bg-surface-700
                 px-15 pt-5 pb-10 mb-20 glow-10 glow-accent/30">
-                    <h1 class="text-[19px] text-center mt-2">Расчёт Матрицы Судьбы</h1>
+                    <h2 class="text-[19px] text-center mt-2">Расчёт Матрицы Судьбы</h2>
                     <label class="block mb-3 text-md mt-5 text-gray-400">
                         Дата рождения
                     </label>
@@ -77,9 +77,9 @@ const matrixUrl = computed(() =>
         </div>
         <div class="max-w-3xl space-y-8 m-auto w-full mt-12">
             <header class="space-y-4">
-                <h1 class="text-4xl font-bold tracking-tight">
+                <h2 class="text-4xl font-bold tracking-tight">
                     Матрица Судьбы. Расчёт онлайн.
-                </h1>
+                </h2>
                 <p class="text-lg text-muted-foreground">
                     На нашем сайте Вы можете бесплатно произвести расчёт своей Матрицы Судьбы бесплатно.
                     Система интерпретации личности и жизненных сценариев через числа, архетипы и

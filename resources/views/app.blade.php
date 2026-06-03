@@ -8,6 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
+    @isset($page['props']['seo'])
+        <article style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">
+            {!! $page['props']['seo'] !!}
+        </article>
+    @endisset
     <x-inertia::app />
 </body>
 </html>
