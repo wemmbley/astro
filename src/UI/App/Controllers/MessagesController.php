@@ -10,7 +10,7 @@ use Inertia\Response;
 use Modules\Actors\Messenger\Message;
 use Modules\Actors\Messenger\Participant;
 
-class MessagesController
+final readonly class MessagesController
 {
     public function index(): Response
     {

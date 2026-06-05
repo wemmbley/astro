@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             SeedUsers::class,
             SeedNotifications::class,
             SeedMessenger::class,
+            SeedPages::class,
             SeedPosts::class,
             SeedInterpretationsMatrix::class,
             SeedInterpretationsAstrology::class,
