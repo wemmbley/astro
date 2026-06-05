@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use UI\App\Controllers\AuthWebController;
 use UI\App\Controllers\FeedController;
+use UI\App\Controllers\GlossaryController;
 use UI\App\Controllers\HomeController;
 use UI\App\Controllers\MatrixController;
 use UI\App\Controllers\MessagesController;
@@ -20,15 +21,6 @@ use UI\App\Controllers\RepositoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/feed', [FeedController::class, 'index'])->name('feed');
 
-Route::prefix('auth')->name('auth.')->group(function () {
-    Route::get('/login', [AuthWebController::class, 'auth']);
-    Route::get('/register', [AuthWebController::class, 'reg']);
-});
-
-Route::get('/login', function () {
-    return redirect()->route('home');
-})->name('login');
-
 Route::prefix('natal')->name('natal.')->group(function () {
     Route::get('/', [NatalController::class, 'index'])->name('natal-index');
     Route::get('/{lat}/{lon}/{date}/{time}', [NatalController::class, 'single'])->name('natal-single');
@@ -38,6 +30,20 @@ Route::prefix('matrix')->name('natal.')->group(function () {
     Route::get('/', [MatrixController::class, 'index'])->name('matrix-index');
     Route::get('/{date}', [MatrixController::class, 'single'])->name('matrix-single');
 });
+
+Route::prefix('/glossary')->group(function() {
+    Route::get('/', [GlossaryController::class, 'index'])->name('glossary');
+    Route::get('/{type}/{name}', [GlossaryController::class, 'entity'])->name('glossary-entity');
+});
+
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::get('/login', [AuthWebController::class, 'auth']);
+    Route::get('/register', [AuthWebController::class, 'reg']);
+});
+
+Route::get('/login', function () {
+    return redirect()->route('home');
+})->name('login');
 
 # +-----------------------------------------------------------------------------------------------
 # |
