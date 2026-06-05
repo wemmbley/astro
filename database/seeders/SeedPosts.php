@@ -6,7 +6,7 @@ use Database\Models\Post;
 use Database\Models\Social\User;
 use Illuminate\Database\Seeder;
 
-class SeedPosts extends Seeder
+final class SeedPosts extends Seeder
 {
     public function run(): void
     {

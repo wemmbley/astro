@@ -4,17 +4,18 @@ namespace UI\App\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Actors\Markdown\MDParser;
 use Modules\Actors\Matrix\Matrix;
 use Modules\Actors\Matrix\ValueObjects\Birthday;
+use Modules\Actors\SEO\Seo;
+use Modules\Actors\SEO\SeoSitePages;
 
 final readonly class MatrixController
 {
-    public function index(): Response
+    public function index(MDParser $parser): Response
     {
-        seo()->title('Матрица Судьбы Онлайн.');
-
         return Inertia::render('Matrix', [
-            'seo' => view('UI::Pages/SEO/Matrix')->render(),
+            'seo' => Seo::get(SeoSitePages::MATRIX_HOME),
         ]);
     }
 

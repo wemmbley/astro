@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Modules\Scene\Scenarios\Auth\UseCases\SetUserAvatar;
 use Modules\Scene\Scenarios\Auth\UseCases\SetUserBanner;
 
-class SeedUsers extends Seeder
+final class SeedUsers extends Seeder
 {
     public function __construct(
         private readonly SetUserAvatar $setUserAvatar,

@@ -6,7 +6,7 @@ use Database\Models\Navbar;
 use Illuminate\Database\Seeder;
 use Modules\Actors\Auth\AuthRole;
 
-class SeedNavbarItems extends Seeder
+final class SeedNavbarItems extends Seeder
 {
     public function run(): void
     {

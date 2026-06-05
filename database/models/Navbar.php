@@ -3,31 +3,20 @@
 namespace Database\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use WendellAdriel\Lift\Attributes\Fillable;
-use WendellAdriel\Lift\Attributes\PrimaryKey;
-use WendellAdriel\Lift\Attributes\Rules;
-use WendellAdriel\Lift\Lift;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
-class Navbar extends Authenticatable
+class Navbar extends Model
 {
-    use HasFactory, Lift;
+    use HasFactory, HasRoles;
 
-    #[PrimaryKey]
-    public int $id;
+    public $fillable = [
+        'id',
+        'name',
+        'link',
+        'label',
+        'icon'
+    ];
 
-    #[Rules(['required', 'string'])]
-    #[Fillable]
-    public string $name;
-
-    #[Rules(['required', 'string'])]
-    #[Fillable]
-    public string $link;
-
-    #[Rules(['required', 'string'])]
-    #[Fillable]
-    public string $label;
-
-    #[Fillable]
-    public ?string $icon;
+    protected string $guard_name = 'web';
 }

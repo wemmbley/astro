@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Database\Models\GeoCountry;
 use Illuminate\Database\Seeder;
 
-class SeedGeoCountries extends Seeder
+final class SeedGeoCountries extends Seeder
 {
     public function run()
     {

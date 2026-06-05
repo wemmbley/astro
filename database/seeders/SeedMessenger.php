@@ -8,7 +8,7 @@ use Database\Models\Social\UserDialogueParticipant;
 use Database\Models\Social\UserDialogueMessage;
 use Illuminate\Database\Seeder;
 
-class SeedMessenger extends Seeder
+final class SeedMessenger extends Seeder
 {
     public function run(): void
     {

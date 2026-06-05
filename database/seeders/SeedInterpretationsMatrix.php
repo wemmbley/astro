@@ -6,7 +6,7 @@ use Database\Models\Interpretations\InterpretEntity;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-class SeedInterpretationsMatrix extends Seeder
+final class SeedInterpretationsMatrix extends Seeder
 {
     private string $repoKey;
 

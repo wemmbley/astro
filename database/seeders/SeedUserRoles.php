@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Modules\Actors\Auth\AuthRole;
 use Spatie\Permission\Models\Role;
 
-class SeedUserRoles extends Seeder
+final class SeedUserRoles extends Seeder
 {
     use WithoutModelEvents;
 

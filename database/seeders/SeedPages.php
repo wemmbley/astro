@@ -6,29 +6,29 @@ use Database\Models\Post;
 use Database\Models\SEO\Page;
 use Database\Models\Social\User;
 use Illuminate\Database\Seeder;
+use Modules\Actors\SEO\SeoSitePages;
 
 final class SeedPages extends Seeder
 {
     public function run(): void
     {
         Page::create([
+            'name'        => SeoSitePages::HOME->value,
             'title'       => 'Натальная Карта, Матрица Судьбы, расчёт онлайн. Астрэ.',
-
             'description' => 'На нашем сайте Вы можете бесплатно получить расчёт и описание своей
                               Натальной Карты, а так же - Матрицы Судьбы. Узнайте свою Судьбу!',
-
             'slug'        => 'home',
         ]);
 
         Page::create([
+            'name'        => SeoSitePages::MATRIX_HOME->value,
             'title'       => 'Матрица Судьбы. Онлайн расчёт с описанием. Астрэ.',
-
             'description' => 'Матрица Судьбы — система анализа личности, основанная на числах даты рождения,
                               22 архетипах Старших Арканов и распределении энергии через 7 чакр.
                               Она показывает структуру потенциала человека, его сильные стороны,
                               внутренние конфликты и направление развития.',
 
-                'content' => '# Что такое Матрица Судьбы [:faq]
+            'content'     => '# Что такое Матрица Судьбы [:faq]
 
                               Матрица Судьбы представляет собой структуру, где дата рождения преобразуется в числа
                               от 1 до 22. Каждое число соответствует определённому архетипу, отражающему сценарий
@@ -110,8 +110,8 @@ final class SeedPages extends Seeder
         ]);
 
         Page::create([
+            'name'        => SeoSitePages::NATAL_HOME->value,
             'title'       => 'Натальная Карта. Онлайн расчёт с расшифровкой. Астрэ.',
-
             'description' => 'Натальная Карта — астрологическая система анализа личности, основанная на
                               положении Солнца, Луны и планет в момент рождения. Она показывает особенности
                               характера, таланты, внутренние противоречия, жизненные задачи и потенциал
@@ -209,33 +209,38 @@ final class SeedPages extends Seeder
         ]);
 
         Page::create([
-            'title' => 'Астрэ | Мировая лента новостей',
-            'description' => 'Здесь Вы можете ознакомиться с мировыми постами наших пользователей.',
-            'slug' => 'feed',
+            'name'        => SeoSitePages::FEED->value,
+            'title'         => 'Астрэ | Мировая лента новостей',
+            'description'   => 'Здесь Вы можете ознакомиться с мировыми постами наших пользователей.',
+            'slug'          => 'feed',
         ]);
 
         Page::create([
-            'title' => 'Астрэ | Знаменитости, Натальная Карта',
+            'name'        => SeoSitePages::CELEBRITIES->value,
+            'title'       => 'Астрэ | Знаменитости, Натальная Карта',
             'description' => 'Здесь Вы можете ознакомиться с мировыми знаменитостями и их Натальной Картой.',
-            'slug' => 'celebrities',
+            'slug'        => 'celebrities',
         ]);
 
         Page::create([
-            'title' => 'Астрэ | Глассарий слов и понятий.',
+            'name'        => SeoSitePages::GLOSSARY->value,
+            'title'       => 'Астрэ | Глассарий слов и понятий.',
             'description' => 'Здесь собран весь базовый эзотерический словарь Astre.',
-            'slug' => 'glossary',
+            'slug'        => 'glossary',
         ]);
 
         Page::create([
-            'title' => 'Астрэ | Вход',
+            'name'        => SeoSitePages::LOGIN->value,
+            'title'       => 'Астрэ | Вход',
             'description' => 'Авторизация, вход на сайт Астрэ.',
-            'slug' => 'login',
+            'slug'        => 'login',
         ]);
 
         Page::create([
-            'title' => 'Астрэ | Регистрация',
+            'name'        => SeoSitePages::REGISTER->value,
+            'title'       => 'Астрэ | Регистрация',
             'description' => 'Регистрация на сайте Астрэ.',
-            'slug' => 'register',
+            'slug'        => 'register',
         ]);
     }
 }

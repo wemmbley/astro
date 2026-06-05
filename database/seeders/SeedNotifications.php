@@ -6,7 +6,7 @@ use Database\Models\Notification;
 use Database\Models\Social\User;
 use Illuminate\Database\Seeder;
 
-class SeedNotifications extends Seeder
+final class SeedNotifications extends Seeder
 {
     public function run()
     {
