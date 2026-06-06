@@ -34,6 +34,7 @@ Route::prefix('matrix')->name('natal.')->group(function () {
 Route::prefix('/glossary')->group(function() {
     Route::get('/', [GlossaryController::class, 'index'])->name('glossary');
     Route::get('/{type}/{name}', [GlossaryController::class, 'entity'])->name('glossary-entity');
+    Route::get('/astrology/{type}/{name}', [GlossaryController::class, 'astrology'])->name('glossary-astrology');
 });
 
 Route::prefix('auth')->name('auth.')->group(function () {

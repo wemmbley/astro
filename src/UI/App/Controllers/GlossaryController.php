@@ -22,4 +22,15 @@ final readonly class GlossaryController
 
             ->first();
     }
+
+    public function astrology(string $type, string $name)
+    {
+        if($type === 'planet') {
+
+        }
+
+        if($type === 'cuspid') {
+
+        }
+    }
 }

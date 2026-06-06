@@ -113,7 +113,10 @@ final class SeedInterpretationsAstrology extends Seeder
 
     private function seedHouses(): void
     {
-        $houses = array_map(fn($n) => str_pad($n, 2, '0', STR_PAD_LEFT), range(1, 12));
+        $houses = array_map(fn($n) =>
+            str_pad($n, 2, '0', STR_PAD_LEFT),
+            range(1, 12)
+        );
 
         foreach ($houses as $house) {
             $houseDir = "{$this->basePath}/Houses/{$house}";
