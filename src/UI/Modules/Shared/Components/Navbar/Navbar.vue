@@ -20,6 +20,14 @@ const isGuest = computed(() => !page.props.auth.user);
                 <NavbarItems />
             </div>
             <div class="flex items-center gap-2">
+                <Link href="/transits" class="block px-4 py-2 text-sm transition
+                    hover:bg-surface-500 text-surface-100 font-medium ">
+                    Транзиты
+                </Link>
+                <Link href="/transits" class="block px-4 py-2 text-sm transition
+                    hover:bg-surface-500 text-surface-100 font-medium ">
+                    Полнолуние
+                </Link>
                 <div v-if="isAuthenticated" class="flex gap-2">
                     <NavbarMessages />
                     <NavbarNotifications />
