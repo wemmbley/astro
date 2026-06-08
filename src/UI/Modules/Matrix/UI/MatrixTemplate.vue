@@ -33,12 +33,12 @@ const props = defineProps<{
             <div class="text-md text-center font-medium mb-4">{{ ArcaneNames[destinyNumber] }}</div>
             <div class="max-w-xl ml-6">
                 <p><b>Тема:</b> Судьба, Фатум, Бытие, Предназначение, Миссия.</p>
-                <p class="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum nemo pr
-                    aesentium soluta? Aperiam assumenda cumque dolore ex explicabo facere od
-                    io quam vero voluptates voluptatibus. Deleniti dolores optio quasi saepe tenetur?
-                </p>
-                <a href="" class="text-surface-200 font-medium ml-auto w-full">Читать далее...</a>
+<!--                <p class="mt-2">-->
+<!--                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum nemo pr-->
+<!--                    aesentium soluta? Aperiam assumenda cumque dolore ex explicabo facere od-->
+<!--                    io quam vero voluptates voluptatibus. Deleniti dolores optio quasi saepe tenetur?-->
+<!--                </p>-->
+<!--                <a href="" class="text-surface-200 font-medium ml-auto w-full">Читать далее...</a>-->
             </div>
         </div>
     </div>

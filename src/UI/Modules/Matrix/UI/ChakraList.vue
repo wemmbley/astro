@@ -35,10 +35,10 @@ const props = defineProps<{
                     </span>
                     <img :src="getArcaneImage(props.detailedChakras[name]?.physics)"
                          class="h-80 w-50 m-auto rounded-xl" alt="arcane" />
-                    <a href="" class="text-center mt-2 italic"
-                       :style="{ color: ChakraMap[name].color }">
-                        ...читать подробнее
-                    </a>
+<!--                    <a href="" class="text-center mt-2 italic"-->
+<!--                       :style="{ color: ChakraMap[name].color }">-->
+<!--                        ...читать подробнее-->
+<!--                    </a>-->
                 </div>
                 <div class="flex flex-col w-[32%] border rounded-md p-2" :style="getStyle(name)">
                     <span class="text-center">Духовная энергичность</span>
@@ -48,10 +48,10 @@ const props = defineProps<{
                     </span>
                     <img :src="getArcaneImage(props.detailedChakras[name]?.energy)"
                          class="h-80 w-50 m-auto rounded-xl" alt="arcane" />
-                    <a href="" class="text-center mt-2 italic"
-                       :style="{ color: ChakraMap[name].color }">
-                        ...читать подробнее
-                    </a>
+<!--                    <a href="" class="text-center mt-2 italic"-->
+<!--                       :style="{ color: ChakraMap[name].color }">-->
+<!--                        ...читать подробнее-->
+<!--                    </a>-->
                 </div>
                 <div class="flex flex-col w-[32%] border rounded-md p-2" :style="getStyle(name)">
                     <span class="text-center">Чувства</span>
@@ -61,10 +61,10 @@ const props = defineProps<{
                     </span>
                     <img :src="getArcaneImage(props.detailedChakras[name]?.emotion)"
                          class="h-80 w-50 m-auto rounded-xl" alt="arcane" />
-                    <a href="" class="text-center mt-2 italic"
-                       :style="{ color: ChakraMap[name].color }">
-                        ...читать подробнее
-                    </a>
+<!--                    <a href="" class="text-center mt-2 italic"-->
+<!--                       :style="{ color: ChakraMap[name].color }">-->
+<!--                        ...читать подробнее-->
+<!--                    </a>-->
                 </div>
             </div>
         </div>

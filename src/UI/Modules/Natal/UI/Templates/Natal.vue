@@ -10,7 +10,7 @@ import NatalCircle from "@/Modules/Natal/UI/Components/Organisms/NatalCircle.vue
 import AspectsGrid from "@/Modules/Natal/UI/Components/Organisms/AspectsGrid.vue";
 import SignsGrid from "@/Modules/Natal/UI/Components/Organisms/SignsGrid.vue";
 import { Natal } from "@/Modules/Natal/Domain/Types/NatalTypes"
-import { MessageCircleQuestionMarkIcon } from 'lucide-vue-next'
+import {MessageCircleQuestionMarkIcon, ArrowRight, ArrowLeft, Save} from 'lucide-vue-next'
 import Tooltip from "@/Modules/Shared/Components/Tooltip.vue";
 import AIIcon from "@/Resources/Icons/Other/AIIcon.vue";
 
@@ -56,15 +56,37 @@ const props = defineProps<{
                     <DispositorsGrid :natal="natal" />
                 </div>
             </div>
-            <div v-if="activeTab !== 'dispositors'" class="sticky top-4 self-start mt-8">
-                <SignsGrid :planets="natal.planets" />
+            <div v-if="activeTab !== 'dispositors'" class="sticky top-4 self-start mt-0">
+                <div class="flex">
+                    <button class="ui-button"><ArrowLeft /></button>
+                    <select name="" id="" class="surface-ui w-40">
+                        <option>1 минута</option>
+                        <option>5 минут</option>
+                        <option>10 минут</option>
+                        <option>1 час</option>
+                        <option>12 часов</option>
+                        <option>1 день</option>
+                        <option>Неделя</option>
+                        <option>Месяц</option>
+                        <option>Год</option>
+                        <option>9 лет</option>
+                    </select>
+                    <button class="ui-button"><ArrowRight /></button>
+                </div>
+                <div class="font-medium uppercase text-xs flex justify-center
+                        text-accent/80 border border-surface-600 bg-surface-700 rounded p-1.5
+                        hover:bg-surface-600 transition cursor-pointer">
+                    <Save />
+                    <p class="pl-2">Сохранить карту</p>
+                </div>
                 <div class="font-medium uppercase text-xs flex justify-center
                         text-accent/80 border border-surface-600 bg-surface-700 rounded p-1.5
                         hover:bg-surface-600 transition cursor-pointer"
                      @click="openModal('aiFull')">
                     <AIIcon :width="20" :height="20" />
-                    <p class="pl-2">Собрать всю карту воедино</p>
+                    <p class="pl-2">Задать вопрос</p>
                 </div>
+                <SignsGrid :planets="natal.planets" />
                 <Cuspids :cusps="natal.cusps" class="mt-4" />
                 <Elements :elements="natal.elements" class="mt-4" />
                 <Dominant :dominant="natal.dominant_sign" class="mt-4" />

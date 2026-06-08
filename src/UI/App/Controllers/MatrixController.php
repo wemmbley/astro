@@ -40,10 +40,7 @@ final readonly class MatrixController
                 'arcanes' => [],
                 'chakras' => [],
             ],
-            'seo' => [
-                'title' => '123',
-                'content' => '222223',
-            ],
+            'seo' => '',
             ...$matrix
         ]);
     }
