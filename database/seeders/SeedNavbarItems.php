@@ -32,22 +32,22 @@ final class SeedNavbarItems extends Seeder
             'label' => 'Натал',
         ])->assignRole(AuthRole::Guest->name);
 
-        Navbar::create([
-            'name' => 'navbar_main',
-            'link' => '/glossary',
-            'label' => 'Глосаррий',
-        ])->assignRole(AuthRole::Guest->name);
-
-        Navbar::create([
-            'name' => 'navbar_main',
-            'link' => '/feed',
-            'label' => 'Лента',
-        ])->assignRole(AuthRole::Guest->name);
-
-        Navbar::create([
-            'name' => 'navbar_main',
-            'link' => '/subscriptions',
-            'label' => 'Подписки',
-        ])->assignRole(AuthRole::User->name);
+//        Navbar::create([
+//            'name' => 'navbar_main',
+//            'link' => '/glossary',
+//            'label' => 'Глосаррий',
+//        ])->assignRole(AuthRole::Guest->name);
+//
+//        Navbar::create([
+//            'name' => 'navbar_main',
+//            'link' => '/feed',
+//            'label' => 'Лента',
+//        ])->assignRole(AuthRole::Guest->name);
+//
+//        Navbar::create([
+//            'name' => 'navbar_main',
+//            'link' => '/subscriptions',
+//            'label' => 'Подписки',
+//        ])->assignRole(AuthRole::User->name);
     }
 }

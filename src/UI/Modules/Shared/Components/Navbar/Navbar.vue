@@ -28,21 +28,21 @@ const isGuest = computed(() => !page.props.auth.user);
                     hover:bg-surface-500 text-surface-100 font-medium ">
                     Полнолуние
                 </Link>
-                <div v-if="isAuthenticated" class="flex gap-2">
-                    <NavbarMessages />
-                    <NavbarNotifications />
-                    <NavbarProfile/>
-                </div>
-                <div v-else class="flex gap-2">
-                    <Link href="/auth/register" class="block px-4 py-2 text-sm transition border rounded-md
-                    hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
-                        Зарегестрироваться
-                    </Link>
-                    <Link href="/auth/login" class="block px-4 py-2 text-sm transition border rounded-md
-                    hover:bg-surface-500 text-surface-100 font-medium border-surface-500">
-                        Войти
-                    </Link>
-                </div>
+<!--                <div v-if="isAuthenticated" class="flex gap-2">-->
+<!--                    <NavbarMessages />-->
+<!--                    <NavbarNotifications />-->
+<!--                    <NavbarProfile/>-->
+<!--                </div>-->
+<!--                <div v-else class="flex gap-2">-->
+<!--                    <Link href="/auth/register" class="block px-4 py-2 text-sm transition border rounded-md-->
+<!--                    hover:bg-surface-500 text-surface-100 font-medium border-surface-500">-->
+<!--                        Зарегестрироваться-->
+<!--                    </Link>-->
+<!--                    <Link href="/auth/login" class="block px-4 py-2 text-sm transition border rounded-md-->
+<!--                    hover:bg-surface-500 text-surface-100 font-medium border-surface-500">-->
+<!--                        Войти-->
+<!--                    </Link>-->
+<!--                </div>-->
             </div>
         </div>
     </header>
